@@ -270,6 +270,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .badge-nome{font-weight:800;font-size:13px}
 .badge-cambia{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.55}
 .badge-utente:hover .badge-cambia{opacity:.9}
+.pallino-sync{font-family:var(--mono);font-size:10.5px;color:rgba(255,253,246,.6);white-space:nowrap;align-self:center}
 
 /* ---------- INSTALLA L'APP ---------- */
 .btn-installa{background:var(--limone);border:2px solid var(--ink);color:var(--ink);border-radius:999px;padding:7px 15px;font-weight:800;font-size:13px;box-shadow:var(--ombra);display:flex;align-items:center;gap:6px}
@@ -350,6 +351,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
       <div class="comandi">
         <div class="campo"><label for="dataInizio">Si parte il</label><input type="date" id="dataInizio"></div>
         <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
+        <span class="pallino-sync" id="statoSync">🔄 Sincronizzo…</span>
         <button class="btn btn-limone" id="btnRimescola">🔀 Rimescola la settimana</button>
         <button class="btn" id="btnSpesa">🛒 Lista della spesa</button>
         <button class="btn btn-fantasma" id="btnCopia">💬 Copia per WhatsApp</button>
@@ -1314,31 +1316,106 @@ function isoDi(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,
 function dataDelGiorno(i){ const d=new Date(stato.inizio+'T12:00:00'); d.setDate(d.getDate()+i); return d; }
 
 /* =======================================================
-   MEMORIA (window.storage se disponibile)
+   MEMORIA CONDIVISA (JSONBin: stesso planogramma per tutti)
    ======================================================= */
 const CHIAVE_DATI_LOCALI = 'casa-al-mare-dati';
+const JSONBIN_ID = '6a7df609f5f4af5e29120591';
+const JSONBIN_KEY = '$2a$10$CCZR/5pVlNe2WSD33x3lNedUHITPLs3puJTSoxzBqF5RPfj0z3gdS';
+const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_ID;
+
+function statoSync(s){
+  const el = document.getElementById('statoSync');
+  if(!el) return;
+  const mappa = {
+    sync:   {t:'🔄 Sincronizzo…', c:''},
+    ok:     {t:'🟢 Sincronizzato', c:''},
+    offline:{t:'📡 Offline · dati locali', c:''},
+    errore: {t:'⚠️ Salvo solo su questo telefono', c:''}
+  };
+  const m = mappa[s] || mappa.offline;
+  el.textContent = m.t;
+}
+
 const memoria = {
+  ultimoTesto: null,
   async carica(){
+    statoSync('sync');
     try{
-      if(window.storage){
-        const r = await window.storage.get('casa-al-mare');
-        if(r) return JSON.parse(r.value);
+      const r = await fetch(JSONBIN_URL + '/latest', {
+        headers: { 'X-Master-Key': JSONBIN_KEY, 'X-Bin-Meta': 'false' }
+      });
+      if(r.ok){
+        const dati = await r.json();
+        const testo = JSON.stringify(dati);
+        localStorage.setItem(CHIAVE_DATI_LOCALI, testo);
+        memoria.ultimoTesto = testo;
+        statoSync('ok');
+        return dati;
       }
-    }catch(e){}
+      statoSync('errore');
+    }catch(e){
+      statoSync('offline');
+    }
     try{
-      const r = localStorage.getItem(CHIAVE_DATI_LOCALI);
-      return r ? JSON.parse(r) : null;
+      const r2 = localStorage.getItem(CHIAVE_DATI_LOCALI);
+      return r2 ? JSON.parse(r2) : null;
     }catch(e){ return null; }
   },
   async salva(){
-    const pacco = JSON.stringify({
-      inizio:stato.inizio, persone:stato.persone, settimana:stato.settimana,
-      cuochi:stato.cuochi, spesa:stato.spesa
-    });
-    try{ if(window.storage) await window.storage.set('casa-al-mare', pacco); }catch(e){}
-    try{ localStorage.setItem(CHIAVE_DATI_LOCALI, pacco); }catch(e){}
+    const u = leggiUtente();
+    const pacco = {
+      inizio: stato.inizio, persone: stato.persone, settimana: stato.settimana,
+      cuochi: stato.cuochi, spesa: stato.spesa,
+      aggiornatoDa: u ? u.nome : '', aggiornatoIl: new Date().toISOString()
+    };
+    const testo = JSON.stringify(pacco);
+    localStorage.setItem(CHIAVE_DATI_LOCALI, testo);
+    memoria.ultimoTesto = testo;
+    try{
+      const r = await fetch(JSONBIN_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+        body: testo
+      });
+      statoSync(r.ok ? 'ok' : 'errore');
+    }catch(e){
+      statoSync('offline');
+    }
   }
 };
+
+// applica dati arrivati dal foglio condiviso (al primo avvio o durante il polling)
+function applicaDatiCondivisi(dati){
+  stato.inizio = dati.inizio || stato.inizio;
+  stato.persone = dati.persone || stato.persone;
+  stato.cuochi = (dati.cuochi && dati.cuochi.length===7) ? dati.cuochi : stato.cuochi;
+  stato.spesa = dati.spesa || {};
+  stato.settimana = (dati.settimana && dati.settimana.length===7) ? dati.settimana : stato.settimana;
+  if(inpData){ inpData.value = stato.inizio; }
+  if(inpPers){ inpPers.value = stato.persone; }
+}
+
+// ricontrolla il foglio condiviso ogni tanto, solo se la scheda è visibile
+// e nessuno sta scrivendo in un campo, per non interrompere chi sta digitando
+let pollingSync = null;
+function avviaPollingSync(){
+  if(pollingSync) clearInterval(pollingSync);
+  pollingSync = setInterval(async () => {
+    if(document.hidden) return;
+    const cheScrive = document.activeElement && ['INPUT','TEXTAREA'].includes(document.activeElement.tagName);
+    if(cheScrive) return;
+    const dati = await memoria.carica();
+    if(dati && JSON.stringify(dati) !== memoria.ultimoTesto){
+      // già aggiornato ultimoTesto dentro carica(); confronto fatto prima della sovrascrittura
+    }
+    if(dati){ applicaDatiCondivisi(dati); disegnaSettimana(); }
+  }, 45000);
+}
+document.addEventListener('visibilitychange', () => {
+  if(!document.hidden){
+    memoria.carica().then(dati => { if(dati){ applicaDatiCondivisi(dati); disegnaSettimana(); } });
+  }
+});
 
 /* =======================================================
    GENERAZIONE DELLA SETTIMANA
@@ -1912,17 +1989,20 @@ async function avviaApp(){
   if(salvato){
     stato.inizio=salvato.inizio||stato.inizio;
     stato.persone=salvato.persone||stato.persone;
-    stato.cuochi=salvato.cuochi||stato.cuochi;
+    stato.cuochi=(salvato.cuochi&&salvato.cuochi.length===7)?salvato.cuochi:stato.cuochi;
     stato.spesa=salvato.spesa||{};
     stato.settimana=(salvato.settimana&&salvato.settimana.length===7)?salvato.settimana:[];
   }
-  if(!stato.settimana.length) generaSettimana();
+  let primaVolta = false;
+  if(!stato.settimana.length){ generaSettimana(); primaVolta = true; }
   inpData.value=stato.inizio; inpPers.value=stato.persone;
   disegnaSettimana();
   disegnaFiltriRicette(); disegnaRicette();
   disegnaFiltriGiochi(); disegnaGiochi();
   disegnaFiltriPiscina(); disegnaPiscina();
   caricaMeteo();
+  if(primaVolta){ memoria.salva(); } // il primo che apre l'app pubblica il piano per tutti gli altri
+  avviaPollingSync();
 }
 
 (function avvio(){
