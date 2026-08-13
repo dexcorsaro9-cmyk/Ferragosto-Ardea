@@ -349,6 +349,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .hdr-saluto-box{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
 .hdr-saluto{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
 .hdr-nome{font-family:var(--display);font-size:17px;text-transform:uppercase;line-height:1}
+.hdr-nomignolo{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;opacity:.55;margin-top:1px}
 .hdr-destra{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
 .pallino-sync{font-family:var(--mono);font-size:10.5px;color:rgba(255,253,246,.6);white-space:nowrap;align-self:center}
 /* ---------- BADGE UTENTE (legacy, non usato) ---------- */
@@ -437,6 +438,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
           <div class="hdr-saluto-box">
             <span class="hdr-saluto" id="hdrSaluto"></span>
             <span class="hdr-nome" id="badgeNome"></span>
+            <span class="hdr-nomignolo" id="hdrNomignolo"></span>
           </div>
         </button>
         <div class="hdr-destra">
@@ -1397,6 +1399,8 @@ function applicaUtente(u){
   document.getElementById('badgeNome').textContent = u.nome;
   const sal = document.getElementById('hdrSaluto');
   if(sal) sal.textContent = paroleSaluto();
+  const nom = document.getElementById('hdrNomignolo');
+  if(nom) nom.textContent = nomeAvatar(u.avatar);
   document.getElementById('badgeUtente').hidden=false;
 }
 function mostraSplashSaluto(u){
