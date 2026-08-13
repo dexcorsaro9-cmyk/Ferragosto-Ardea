@@ -160,8 +160,11 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 }
 .slot:hover .cambia,.cambia:focus-visible{opacity:1}
 @media (hover:none){.cambia{opacity:.55}}
-.turno{padding:8px 10px;display:flex;align-items:center;gap:6px;background:rgba(242,194,39,.16)}
-.turno span{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;opacity:.7}
+.turno{padding:8px 10px;background:rgba(242,194,39,.16)}
+.turno>.turno-label{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;opacity:.7;display:block;margin-bottom:4px}
+.turno-righe{display:flex;flex-direction:column;gap:3px}
+.turno-riga{display:flex;align-items:center;gap:6px}
+.turno-riga label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.06em;opacity:.55;white-space:nowrap;min-width:36px}
 .turno input{flex:1;min-width:0;border:0;border-bottom:1.5px dotted var(--ink);background:transparent;font-weight:800;font-size:12.5px;padding:1px 2px}
 .turno input::placeholder{font-weight:400;opacity:.45}
 
@@ -366,24 +369,27 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 
 /* ---------- HEADER NUOVO ---------- */
 .marchio{display:none}
-.hdr-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);opacity:.9;margin:0}
+/* riga 1: titolo + orologio/luogo */
+.hdr-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);opacity:.9;margin:0;flex:none}
 .hdr-titolo em{font-style:normal;color:var(--limone)}
 .hdr-info{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:rgba(255,253,246,.55);letter-spacing:.05em;white-space:nowrap}
 .hdr-orologio{font-size:13px;color:rgba(255,253,246,.8);font-weight:700;letter-spacing:.08em}
 .hdr-sep{opacity:.4}
 .hdr-luogo{font-size:10.5px}
-.hdr-corpo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.hdr-utente{display:flex;align-items:center;gap:12px;background:rgba(255,253,246,.1);border:1.5px solid rgba(255,253,246,.3);border-radius:16px;padding:8px 14px 8px 8px;color:var(--carta);transition:background .15s;cursor:pointer}
+/* riga 2: badge utente full-width */
+.hdr-utente{display:flex;align-items:center;gap:12px;width:100%;background:rgba(255,253,246,.1);border:1.5px solid rgba(255,253,246,.3);border-radius:16px;padding:8px 14px 8px 8px;color:var(--carta);transition:background .15s;cursor:pointer;box-sizing:border-box;margin-bottom:10px}
 .hdr-utente:hover{background:rgba(255,253,246,.18)}
 .hdr-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--limone);flex:none;background:var(--limone)}
 .hdr-avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.hdr-saluto-box{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.hdr-saluto-box{display:flex;flex-direction:column;align-items:flex-start;gap:1px;flex:1;min-width:0}
 .hdr-saluto{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
 .hdr-nome{font-family:var(--display);font-size:17px;text-transform:uppercase;line-height:1}
 .hdr-nomignolo{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;opacity:.55;margin-top:1px}
-.hdr-destra{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.pallino-sync{font-family:var(--mono);font-size:10.5px;color:rgba(255,253,246,.6);white-space:nowrap;align-self:center}
+/* riga 3: comandi full-width */
+.hdr-comandi{display:flex;align-items:center;gap:8px;width:100%}
+.hdr-comandi .btn-limone{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pallino-sync{font-family:var(--mono);font-size:10.5px;color:rgba(255,253,246,.6);white-space:nowrap;flex:none}
 .btn-impostazioni{background:rgba(255,253,246,.12);border:1.5px solid rgba(255,253,246,.3);border-radius:50%;width:38px;height:38px;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none;transition:background .15s}
 .btn-impostazioni:hover{background:rgba(255,253,246,.22)}
 /* ---------- BADGE UTENTE (legacy, non usato) ---------- */
@@ -427,9 +433,9 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .splash-nome{font-family:var(--mono);font-size:15px;opacity:.75;margin-top:2px}
 
 @media (max-width:480px){
-  .hdr-destra{}
   .hdr-nome{font-size:15px}
   .hdr-avatar{width:40px;height:40px}
+  .hdr-comandi .btn-limone{font-size:12px;padding:7px 10px}
 }
 
 @media (max-width:640px){
@@ -473,21 +479,19 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
           <span class="hdr-luogo" id="hdrLuogo">📍 Ardea, Italia</span>
         </div>
       </div>
-      <div class="hdr-corpo">
-        <button class="hdr-utente" id="badgeUtente" hidden>
-          <span class="hdr-avatar" id="badgeAvatar"></span>
-          <div class="hdr-saluto-box">
-            <span class="hdr-saluto" id="hdrSaluto"></span>
-            <span class="hdr-nome" id="badgeNome"></span>
-            <span class="hdr-nomignolo" id="hdrNomignolo"></span>
-          </div>
-        </button>
-        <div class="hdr-destra">
-          <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
-          <span class="pallino-sync" id="statoSync">🔄 Sincronizzo…</span>
-          <button class="btn btn-limone" id="btnSpesa">🛒 Lista della spesa</button>
-          <button class="btn-impostazioni" id="btnImpostazioni" title="Impostazioni">⚙️</button>
+      <button class="hdr-utente" id="badgeUtente" hidden>
+        <span class="hdr-avatar" id="badgeAvatar"></span>
+        <div class="hdr-saluto-box">
+          <span class="hdr-saluto" id="hdrSaluto"></span>
+          <span class="hdr-nome" id="badgeNome"></span>
+          <span class="hdr-nomignolo" id="hdrNomignolo"></span>
         </div>
+      </button>
+      <div class="hdr-comandi">
+        <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
+        <span class="pallino-sync" id="statoSync">🔄 Sincronizzo…</span>
+        <button class="btn btn-limone" id="btnSpesa">🛒 Lista della spesa</button>
+        <button class="btn-impostazioni" id="btnImpostazioni" title="Impostazioni">⚙️</button>
       </div>
     </div>
   </div>
@@ -557,14 +561,14 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 
   <section id="v-ricette" hidden>
     <h2 class="sezione">🥗 Ricette estive</h2>
-    <p class="intro">Cinquanta piatti pensati per una casa piena di gente. Le quantità si adattano da sole al numero di persone che hai impostato in alto.</p>
+    <p class="intro">Cento piatti pensati per una casa piena di gente. Le quantità si adattano da sole al numero di persone che hai impostato in alto.</p>
     <div class="filtri" id="filtriRicette"></div>
     <div class="griglia" id="grigliaRicette"></div>
   </section>
 
   <section id="v-giochi" hidden>
     <h2 class="sezione">🎲 Giochi da fare tutti insieme</h2>
-    <p class="intro">Cinquanta giochi che chiedono pochissimi oggetti: quasi tutto si fa con foglietti, una palla o niente del tutto.</p>
+    <p class="intro">Cento giochi che chiedono pochissimi oggetti: quasi tutto si fa con foglietti, una palla o niente del tutto.</p>
     <button class="banner-burraco" id="btnApriBurraco">
       <span class="bb-emoji">🎴</span>
       <span class="bb-testo"><b>Segnapunti Burraco</b><span>Punteggi automatici, mano per mano, zero errori da spritz</span></span>
@@ -1710,7 +1714,7 @@ A('Circuito a stazioni','fun','35 min','Noodle, tavolette, palla','Playlist mist
 const GIORNI = ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
 const GIORNI_BREVI = ['DOM','LUN','MAR','MER','GIO','VEN','SAB'];
 const MESI = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
-const COLORI = ['#1B54C7','#EE5B4E','#17A9BC','#F2C227','#2E8B62','#EE5B4E','#1B54C7'];
+const COLORI = ['#1B54C7','#EE5B4E','#17A9BC','#F2C227','#2E8B62','#EE5B4E','#1B54C7','#17A9BC'];
 const REPARTI = {V:'🥦 Frutta e verdura',P:'🐟 Pescheria',C:'🥩 Macelleria e salumi',L:'🧀 Latticini e uova',D:'🥫 Dispensa',B:'🍞 Pane e forno',X:'🥤 Bevande e altro'};
 const SLOT = {
   acqua:{et:'🏊 Acquagym',ora:'09:30',c:'#17A9BC'},
@@ -1846,7 +1850,7 @@ let stato = {
   inizio: '2026-08-14',
   persone: 12,
   settimana: [],
-  cuochi: ['','','','','','','',''],
+  cuochi: [{p:'',c:''},{p:'',c:''},{p:'',c:''},{p:'',c:''},{p:'',c:''},{p:'',c:''},{p:'',c:''},{p:'',c:''}],
   spesa: {},
   filtroRicette: 'tutte',
   cercaRicette: '',
@@ -1931,9 +1935,11 @@ const memoria = {
 
 // applica dati arrivati dal foglio condiviso (al primo avvio o durante il polling)
 function applicaDatiCondivisi(dati){
-  stato.inizio = dati.inizio || stato.inizio;
+  // stato.inizio è fisso al 14/8, non lo sovrascriviamo mai dal cloud
   stato.persone = dati.persone || stato.persone;
-  stato.cuochi = (dati.cuochi && dati.cuochi.length===GIORNI_SETTIMANA) ? dati.cuochi : stato.cuochi;
+  if(dati.cuochi && dati.cuochi.length===GIORNI_SETTIMANA){
+    stato.cuochi = dati.cuochi.map(v=> typeof v==='string' ? {p:v,c:''} : (v||{p:'',c:''}));
+  }
   stato.spesa = dati.spesa || {};
   stato.settimana = (dati.settimana && dati.settimana.length===GIORNI_SETTIMANA) ? dati.settimana : stato.settimana;
   if(inpPers){ inpPers.value = stato.persone; }
@@ -2132,7 +2138,10 @@ function disegnaSettimana(){
       riga(i,'cena',c.n,c.t)+
       riga(i,'dolce',dl.n,'')+
       riga(i,'gioco',gi.n,gi.d+' · '+gi.g)+
-      '<div class="turno"><span>ai fornelli</span><input data-cuoco="'+i+'" value="'+esc(stato.cuochi[i]||'')+'" placeholder="scrivi un nome"></div>'+
+      '<div class="turno"><span class="turno-label">ai fornelli</span><div class="turno-righe">'+
+      '<div class="turno-riga"><label>pranzo</label><input data-cuoco="'+i+'" data-pasto="p" value="'+esc((stato.cuochi[i]&&stato.cuochi[i].p)||'')+'" placeholder="chi cucina?"></div>'+
+      '<div class="turno-riga"><label>cena</label><input data-cuoco="'+i+'" data-pasto="c" value="'+esc((stato.cuochi[i]&&stato.cuochi[i].c)||'')+'" placeholder="chi cucina?"></div>'+
+      '</div></div>'+
       '</article>';
   }).join('');
   box.querySelectorAll('.slot').forEach(b=>{
@@ -2145,7 +2154,12 @@ function disegnaSettimana(){
     b.addEventListener('click',e=>{ e.stopPropagation(); cambiaSlot(+b.dataset.giorno,b.dataset.tipo); });
   });
   box.querySelectorAll('[data-cuoco]').forEach(inp=>{
-    inp.addEventListener('input',()=>{ stato.cuochi[+inp.dataset.cuoco]=inp.value; memoria.salva(); });
+    inp.addEventListener('input',()=>{
+      const idx=+inp.dataset.cuoco, pasto=inp.dataset.pasto;
+      if(!stato.cuochi[idx]||typeof stato.cuochi[idx]==='string') stato.cuochi[idx]={p:'',c:''};
+      stato.cuochi[idx][pasto]=inp.value;
+      memoria.salva();
+    });
   });
 }
 function riga(giorno,tipo,titolo,nota){
@@ -2170,7 +2184,10 @@ function disegnaMeteo(){
     box.innerHTML='<div class="vuoto">🌦️ <b>Le previsioni non arrivano.</b><br>Succede quando la connessione manca o quando il file è aperto in un\u2019anteprima che blocca internet. Salva il file sul telefono, aprilo dal browser e premi Aggiorna.</div>';
     return;
   }
-  box.innerHTML='<div class="meteo-griglia">'+meteoDati.map(m=>{
+  const dal14=new Date('2026-08-14T12:00:00'), al21=new Date('2026-08-21T12:00:00');
+  const datiVacanza=meteoDati.filter(m=>{ const d=new Date(m.data+'T12:00:00'); return d>=dal14 && d<=al21; });
+  const datiMostra=datiVacanza.length ? datiVacanza : meteoDati;
+  box.innerHTML='<div class="meteo-griglia">'+datiMostra.map(m=>{
     const d=new Date(m.data+'T12:00:00');
     const mare=statoMare(m.onda,m.vento), uv=statoUV(m.uv);
     const vp=statoVento(m.vPom!=null?m.vPom:m.vento), vm=statoVento(m.vMatt!=null?m.vMatt:m.vento);
@@ -2544,7 +2561,8 @@ function testoSettimana(){
     t+='Cena — '+RICETTE[g.cena].n+'\n';
     t+='Dolce — '+RICETTE[g.dolce].n+'\n';
     t+='Gioco della sera — '+GIOCHI[g.gioco].n+'\n';
-    if(stato.cuochi[i]) t+='Ai fornelli: '+stato.cuochi[i]+'\n';
+    const cu=stato.cuochi[i];
+    if(cu){ const cp=typeof cu==='string'?cu:cu.p; const cc=typeof cu==='string'?'':cu.c; if(cp||cc){ t+='Ai fornelli — pranzo: '+(cp||'?')+', cena: '+(cc||'?')+'\n'; } }
     t+='\n';
   });
   return t;
@@ -2949,9 +2967,11 @@ inpPers.addEventListener('input',()=>{
 async function avviaApp(){
   const salvato=await memoria.carica();
   if(salvato){
-    stato.inizio=salvato.inizio||stato.inizio;
+    // stato.inizio è fisso al 14/8, non viene mai sovrascritto da dati salvati
     stato.persone=salvato.persone||stato.persone;
-    stato.cuochi=(salvato.cuochi&&salvato.cuochi.length===GIORNI_SETTIMANA)?salvato.cuochi:stato.cuochi;
+    if(salvato.cuochi&&salvato.cuochi.length===GIORNI_SETTIMANA){
+      stato.cuochi=salvato.cuochi.map(v=> typeof v==='string' ? {p:v,c:''} : (v||{p:'',c:''}));
+    }
     stato.spesa=salvato.spesa||{};
     stato.settimana=(salvato.settimana&&salvato.settimana.length===GIORNI_SETTIMANA)?salvato.settimana:[];
   }
