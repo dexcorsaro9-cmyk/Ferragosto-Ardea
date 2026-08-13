@@ -103,6 +103,9 @@ nav.sezioni{
   position:fixed;left:0;right:0;bottom:0;z-index:30;
   padding-bottom:env(safe-area-inset-bottom,0px);
   box-shadow:0 -2px 10px rgba(0,0,0,.25);
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  will-change:transform;
 }
 .sezioni-inner{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 .sezioni-inner::-webkit-scrollbar{display:none}
@@ -352,6 +355,8 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .hdr-nomignolo{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;opacity:.55;margin-top:1px}
 .hdr-destra{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
 .pallino-sync{font-family:var(--mono);font-size:10.5px;color:rgba(255,253,246,.6);white-space:nowrap;align-self:center}
+.btn-impostazioni{background:rgba(255,253,246,.12);border:1.5px solid rgba(255,253,246,.3);border-radius:50%;width:38px;height:38px;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none;transition:background .15s}
+.btn-impostazioni:hover{background:rgba(255,253,246,.22)}
 /* ---------- BADGE UTENTE (legacy, non usato) ---------- */
 .badge-nome{font-weight:800;font-size:13px}
 
@@ -371,8 +376,8 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .scu-tenda i:nth-child(even){background:var(--carta)}
 .scu-corpo{padding:22px 24px 26px}
 .avatar-scelta{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0 18px}
-.avatar-anteprima{width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid var(--ink);box-shadow:0 4px 0 rgba(12,35,64,.2);flex:none;background:var(--fondo)}
-.avatar-anteprima img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-anteprima{width:180px;height:180px;border-radius:12px;overflow:hidden;border:3px solid var(--ink);box-shadow:0 4px 0 rgba(12,35,64,.2);flex:none;background:var(--fondo)}
+.avatar-anteprima img{width:100%;height:100%;object-fit:contain;display:block}
 .avatar-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;opacity:.6;text-align:center;margin-top:6px;max-width:130px;line-height:1.3}
 .avatar-preview-box{display:flex;flex-direction:column;align-items:center}
 .avatar-freccia{width:40px;height:40px;border-radius:50%;border:2.5px solid var(--ink);background:var(--carta);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;flex:none;transition:background .12s,transform .1s;box-shadow:0 3px 0 rgba(12,35,64,.18)}
@@ -445,6 +450,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
           <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
           <span class="pallino-sync" id="statoSync">🔄 Sincronizzo…</span>
           <button class="btn btn-limone" id="btnSpesa">🛒 Lista della spesa</button>
+          <button class="btn-impostazioni" id="btnImpostazioni" title="Impostazioni">⚙️</button>
         </div>
       </div>
     </div>
@@ -1908,6 +1914,55 @@ function apriLezione(i){
 }
 
 /* =======================================================
+   IMPOSTAZIONI
+   ======================================================= */
+function apriImpostazioni(){
+  const corpo=`
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:4px">
+
+      <div style="background:var(--fondo);border:2px solid var(--ink);border-radius:12px;padding:16px">
+        <div style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:10px">Profilo</div>
+        <p style="margin:0 0 12px;font-size:13.5px;opacity:.8">Cancella il tuo profilo per cambiare nome e avatar. I dati condivisi (settimana, spesa) restano intatti.</p>
+        <button class="btn btn-corallo" id="btnCancellaUtente">🗑️ Cancella il mio profilo</button>
+      </div>
+
+      <div style="background:var(--fondo);border:2px solid var(--ink);border-radius:12px;padding:16px">
+        <div style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:10px">Backup</div>
+        <p style="margin:0 0 12px;font-size:13.5px;opacity:.8">Esporta tutti i dati dell'app (settimana, spesa, punteggi) come testo da copiare e conservare.</p>
+        <button class="btn" id="btnBackup">💾 Copia il backup</button>
+      </div>
+
+      <div style="background:var(--fondo);border:2px solid var(--ink);border-radius:12px;padding:16px">
+        <div style="font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:10px">Aggiornamento</div>
+        <p style="margin:0 0 12px;font-size:13.5px;opacity:.8">Forza il ricaricamento dell'app e svuota la cache del service worker per ottenere l'ultima versione.</p>
+        <button class="btn" id="btnRefreshApp">🔄 Ricarica l'app</button>
+      </div>
+
+    </div>`;
+  apriPannello('⚙️ Impostazioni','Impostazioni','Gestione profilo e app',corpo);
+  document.getElementById('btnCancellaUtente').addEventListener('click',()=>{
+    if(!confirm('Cancello il tuo profilo? Dovrai scegliere di nuovo nome e avatar.')) return;
+    localStorage.removeItem('casa-al-mare-utente');
+    chiudiPannello();
+    location.reload();
+  });
+  document.getElementById('btnBackup').addEventListener('click',e=>{
+    const testo=JSON.stringify({
+      stato: stato,
+      dataExport: new Date().toISOString()
+    }, null, 2);
+    copia(testo, e.target);
+  });
+  document.getElementById('btnRefreshApp').addEventListener('click',async()=>{
+    if('serviceWorker' in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      for(const r of regs) await r.unregister();
+    }
+    location.reload(true);
+  });
+}
+
+/* =======================================================
    LISTA DELLA SPESA
    ======================================================= */
 function apriSpesa(){
@@ -2378,6 +2433,7 @@ function vaiA(vista){
 }
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>vaiA(t.dataset.vista)));
 document.getElementById('btnSpesa').addEventListener('click',apriSpesa);
+document.getElementById('btnImpostazioni').addEventListener('click',apriImpostazioni);
 document.getElementById('btnMeteo').addEventListener('click',caricaMeteo);
 document.getElementById('btnCasuale').addEventListener('click',()=>{
   const lista=GIOCHI.map((g,i)=>({g,i})).filter(({g})=>stato.filtroGiochi==='tutti'||g.c===stato.filtroGiochi);
