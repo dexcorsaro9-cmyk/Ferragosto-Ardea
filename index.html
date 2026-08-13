@@ -2400,7 +2400,7 @@ async function avviaApp(){
   }
   let primaVolta = false;
   if(!stato.settimana.length){ generaSettimana(); primaVolta = true; }
-  inpData.value=stato.inizio; inpPers.value=stato.persone;
+  inpPers.value=stato.persone;
   disegnaSettimana();
   disegnaFiltriRicette(); disegnaRicette();
   disegnaFiltriGiochi(); disegnaGiochi();
