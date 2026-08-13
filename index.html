@@ -366,8 +366,13 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 
 /* ---------- HEADER NUOVO ---------- */
 .marchio{display:none}
-.hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);margin-bottom:14px;opacity:.9}
+.hdr-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);opacity:.9;margin:0}
 .hdr-titolo em{font-style:normal;color:var(--limone)}
+.hdr-info{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:rgba(255,253,246,.55);letter-spacing:.05em;white-space:nowrap}
+.hdr-orologio{font-size:13px;color:rgba(255,253,246,.8);font-weight:700;letter-spacing:.08em}
+.hdr-sep{opacity:.4}
+.hdr-luogo{font-size:10.5px}
 .hdr-corpo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hdr-utente{display:flex;align-items:center;gap:12px;background:rgba(255,253,246,.1);border:1.5px solid rgba(255,253,246,.3);border-radius:16px;padding:8px 14px 8px 8px;color:var(--carta);transition:background .15s;cursor:pointer}
 .hdr-utente:hover{background:rgba(255,253,246,.18)}
@@ -460,7 +465,14 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 <div class="tenda">
   <div class="tenda-inner">
     <div class="wrap">
-      <div class="hdr-titolo">🌊 Casa al Mare — Ardea</div>
+      <div class="hdr-top">
+        <div class="hdr-titolo">🌊 Casa al Mare — Ardea</div>
+        <div class="hdr-info">
+          <span class="hdr-orologio" id="hdrOrologio">--:--</span>
+          <span class="hdr-sep">·</span>
+          <span class="hdr-luogo" id="hdrLuogo">📍 Ardea, Italia</span>
+        </div>
+      </div>
       <div class="hdr-corpo">
         <button class="hdr-utente" id="badgeUtente" hidden>
           <span class="hdr-avatar" id="badgeAvatar"></span>
@@ -1924,7 +1936,6 @@ function applicaDatiCondivisi(dati){
   stato.cuochi = (dati.cuochi && dati.cuochi.length===GIORNI_SETTIMANA) ? dati.cuochi : stato.cuochi;
   stato.spesa = dati.spesa || {};
   stato.settimana = (dati.settimana && dati.settimana.length===GIORNI_SETTIMANA) ? dati.settimana : stato.settimana;
-  if(inpData){ inpData.value = stato.inizio; }
   if(inpPers){ inpPers.value = stato.persone; }
 }
 
@@ -2858,6 +2869,36 @@ inpPers.addEventListener('input',()=>{
   const v=parseInt(inpPers.value,10);
   if(v>=2&&v<=40){ stato.persone=v; memoria.salva(); }
 });
+
+/* ---------- OROLOGIO E POSIZIONE IN HEADER ---------- */
+(function avviaOrologio(){
+  function tick(){
+    const el=document.getElementById('hdrOrologio');
+    if(!el) return;
+    const now=new Date();
+    el.textContent=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+
+(function rilevaPosizione(){
+  if(!navigator.geolocation) return;
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const {latitude:lat,longitude:lon}=pos.coords;
+    const el=document.getElementById('hdrLuogo');
+    if(!el) return;
+    // reverse geocode con Nominatim
+    fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+lat+'&lon='+lon)
+      .then(r=>r.json())
+      .then(d=>{
+        const citta=d.address?.city||d.address?.town||d.address?.village||d.address?.county||'';
+        const paese=d.address?.country||'';
+        if(citta) el.textContent='📍 '+citta+(paese&&paese!=='Italia'?', '+paese:'');
+      })
+      .catch(()=>{});
+  },()=>{});
+})();
 
 /* ---------- SPLASH COMPLEANNO VALERIO ---------- */
 (function inizializzaCompleanno(){
