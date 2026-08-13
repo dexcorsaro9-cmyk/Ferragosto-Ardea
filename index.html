@@ -339,6 +339,31 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 #bootSplash .bs-testo{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,253,246,.5)}
 #bootSplash.nascondi{opacity:0;pointer-events:none}
 
+/* ---------- SPLASH COMPLEANNO ---------- */
+#bdaySplash{position:fixed;inset:0;z-index:998;background:#0a0a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;overflow:hidden}
+#bdaySplash[hidden]{display:none}
+.bday-number{font-family:var(--display);font-size:clamp(90px,25vw,160px);color:#F2C227;text-shadow:0 0 40px rgba(242,194,39,.6),0 4px 0 rgba(180,140,0,.8);line-height:1;margin-bottom:8px;animation:bdayPulse 1.6s ease-in-out infinite}
+@keyframes bdayPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.bday-auguri{font-family:var(--display);font-size:clamp(32px,10vw,56px);text-transform:uppercase;letter-spacing:-.01em;color:#fff;line-height:1.05;margin-bottom:6px}
+.bday-auguri span{color:#F2C227}
+.bday-sub{font-family:var(--mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:10px}
+.bday-data{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.4);margin-bottom:32px}
+.bday-btn{background:var(--limone);border:0;border-radius:999px;padding:14px 36px;font-family:var(--display);font-size:18px;text-transform:uppercase;color:var(--ink);box-shadow:0 4px 24px rgba(242,194,39,.4);cursor:pointer;transition:transform .12s}
+.bday-btn:hover{transform:scale(1.05)}
+.bday-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bday-confetti i{position:absolute;top:-20px;width:8px;height:12px;border-radius:2px;animation:bdayFall linear infinite}
+@keyframes bdayFall{to{transform:translateY(110vh) rotate(720deg)}}
+
+/* ---------- BANNER COMPLEANNO ---------- */
+#bdayBanner{
+  position:fixed;top:0;left:0;right:0;z-index:97;
+  background:var(--limone);color:var(--ink);
+  font-family:var(--display);font-size:13px;text-transform:uppercase;letter-spacing:.06em;
+  text-align:center;padding:8px 20px;
+  border-bottom:2px solid var(--ink);
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
+}
+
 /* ---------- HEADER NUOVO ---------- */
 .marchio{display:none}
 .hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);margin-bottom:14px;opacity:.9}
@@ -454,6 +479,15 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
       </div>
     </div>
   </div>
+</div>
+
+<div id="bdaySplash" hidden>
+  <div class="bday-confetti" id="bdayConfetti"></div>
+  <div class="bday-number">22</div>
+  <div class="bday-auguri">Auguri<br><span>Valerio!</span></div>
+  <div class="bday-sub">Buon 22° Compleanno</div>
+  <div class="bday-data">15 Agosto 🎉 · Ferragosto da ricordare</div>
+  <button class="bday-btn" id="bdayBtn">🎂 Festeggiamo!</button>
 </div>
 
 <div class="schermata-utente" id="schermataUtente" hidden>
@@ -831,7 +865,173 @@ R('Coppa yogurt, pesche e amaretti','dolce','10 min',['sf','vg','ve'],
 
 R('Crostata di frutta furba','dolce','30 min',['vg'],
 [[35,'g','pasta frolla pronta','D'],[60,'g','crema pasticcera','L'],[80,'g','frutta di stagione','V'],[10,'g','gelatina o marmellata','D']],
-['Cuoci il guscio di frolla in bianco con i legumi sopra, 15 minuti a 180°.','Farcisci con la crema fredda.','Frutta a fette a raggiera, lucida con marmellata scaldata e allungata con acqua.'])
+['Cuoci il guscio di frolla in bianco con i legumi sopra, 15 minuti a 180°.','Farcisci con la crema fredda.','Frutta a fette a raggiera, lucida con marmellata scaldata e allungata con acqua.']),
+
+/* ---------- PRANZI EXTRA ---------- */
+
+R('Wraps tonno e avocado','pranzo','10 min',['sf','ve','pu'],
+[[80,'g','piadina o tortilla','B'],[60,'g','tonno sott\'olio','D'],[0.5,'pz','avocado','V'],[40,'g','pomodorini','V'],[20,'g','insalata','V'],[1,'qb','limone e pepe','D']],
+['Schiaccia l\'avocado con succo di limone, sale e pepe.','Spalma sulla piadina, aggiungi tonno sgocciolato, pomodorini dimezzati e insalata.','Arrotola stretto e taglia a metà in diagonale.']),
+
+R('Gazpacho andaluso','pranzo','15 min + frigo',['sf','vg','ve'],
+[[400,'g','pomodori maturi','V'],[0.5,'pz','peperone rosso','V'],[70,'g','cetriolo','V'],[0.5,'pz','aglio','V'],[30,'g','pane raffermo','B'],[1,'qb','aceto, olio, sale','D']],
+['Ammolla il pane in acqua fredda per 5 minuti e strizzalo.','Frulla tutto insieme finché è liscio, aggiusta di sale e aceto.','Almeno due ore in frigo. Servi con un filo d\'olio e cubetti di cetriolo crudo.']),
+
+R('Insalata nizzarda','pranzo','20 min',['sf','pe'],
+[[1,'pz','uova','L'],[120,'g','tonno sott\'olio','D'],[80,'g','fagiolini','V'],[60,'g','pomodori','V'],[30,'g','olive nere','D'],[4,'pz','acciughe','P'],[1,'qb','senape e olio','D']],
+['Lessa le uova sode 8 minuti e i fagiolini 4 minuti, entrambi in acqua salata.','Componi il piatto: pomodori, fagiolini, tonno, uova a spicchi, olive e acciughe.','Vinaigrette con senape, aceto, olio. Non mescolare: lascia i sapori separati.']),
+
+R('Poké bowl di salmone','pranzo','25 min',['sf','pe','pu'],
+[[80,'g','riso','D'],[100,'g','salmone fresco','P'],[0.5,'pz','avocado','V'],[50,'g','edamame','V'],[30,'g','carote','V'],[1,'qb','salsa di soia e sesamo','D']],
+['Lessa il riso, condisci caldo con aceto di riso e lascia intiepidire.','Taglia il salmone a cubetti, marinalo 10 minuti con salsa di soia, sesamo e lime.','Assembla la bowl: riso, pesce, verdure. Semi di sesamo e cipollotto.'],),
+
+R('Pasta alle vongole fredda','pranzo','25 min',['sf','pe'],
+[[90,'g','spaghetti','D'],[200,'g','vongole surgelate','P'],[1,'pz','aglio','V'],[50,'ml','vino bianco','D'],[1,'qb','prezzemolo e peperoncino','V']],
+['Salta le vongole con aglio e olio, sfuma col vino, copri finché si aprono.','Cuoci gli spaghetti al dente, scolali e passali sotto acqua fredda.','Manteca freddo con il sughetto delle vongole e tanto prezzemolo.']),
+
+R('Bruschettone del mare','pranzo','15 min',['sf','pe','ve'],
+[[2,'fette','pane casereccio','B'],[80,'g','gamberi già cotti','P'],[60,'g','avocado','V'],[40,'g','pomodori','V'],[1,'qb','lime e peperoncino','D']],
+['Tosta il pane sotto il grill o sulla griglia.','Schiaccia l\'avocado con lime, sale e peperoncino.','Spalma, aggiungi pomodori a cubetti e gamberi. Servilo subito.']),
+
+R('Insalata di orzo con pesto e stracciatella','pranzo','25 min',['sf','vg','pu'],
+[[80,'g','orzo','D'],[40,'g','pesto','D'],[60,'g','stracciatella','L'],[50,'g','pomodorini','V'],[20,'g','pinoli','D']],
+['Cuoci l\'orzo in acqua salata, scolalo e raffreddalo.','Mescola con il pesto, regola di sale.','Servi con stracciatella spezzettata sopra, pomodorini e pinoli tostati.']),
+
+R('Tartare di tonno fresco','pranzo','15 min',['sf','pe','ve'],
+[[150,'g','tonno fresco','P'],[0.5,'pz','avocado','V'],[30,'g','cetriolo','V'],[1,'qb','salsa di soia e zenzero','D'],[10,'g','sesamo','D']],
+['Taglia il tonno a cubetti piccoli con un coltello affilato.','Mescola con avocado a cubetti, cetriolo, un cucchiaino di soia e zenzero grattugiato.','Forma con un coppapasta, cospargi di sesamo. Servire subito.']),
+
+R('Pasta fredda pesto e fagiolini','pranzo','25 min',['sf','vg','pu'],
+[[90,'g','trofie o fusilli','D'],[40,'g','pesto genovese','D'],[60,'g','fagiolini','V'],[1,'pz','patate piccole','V'],[15,'g','parmigiano','L']],
+['Lessa fagiolini e patate a cubetti nella stessa acqua della pasta, scola tutto insieme.','Raffredda sotto acqua corrente, poi manteca col pesto.','Parmigiano in scaglie sopra. Il freddo è perfetto anche il giorno dopo.']),
+
+R('Insalata di polpo','pranzo','40 min',['sf','pe'],
+[[200,'g','polpo surgelato già pulito','P'],[80,'g','patate','V'],[50,'g','sedano','V'],[30,'g','olive','D'],[1,'qb','prezzemolo e limone','D']],
+['Lessa il polpo 25 minuti in acqua salata con una foglia di alloro, lascia intiepidire.','Cuoci le patate a cubetti finché sono morbide.','Taglia il polpo a pezzi, unisci patate, sedano, olive. Condisci con olio e limone.']),
+
+R('Sandwich al vapore con pollo','pranzo','20 min',['ve','pu'],
+[[2,'fette','pane da tramezzino','B'],[80,'g','petto di pollo','C'],[30,'g','maionese','D'],[40,'g','insalata','V'],[30,'g','pomodoro','V']],
+['Cuoci il pollo sulla griglia o al vapore, fallo intiepidire e taglialo a strisce.','Spalma la maionese sul pane, aggiungi insalata, pomodoro e pollo.','Taglia in due. Funziona anche portato in spiaggia avvolto nella carta forno.']),
+
+R('Crudités con hummus e guacamole','pranzo','15 min',['sf','vg','ve','pu'],
+[[150,'g','carote, cetrioli, sedano, peperoni','V'],[100,'g','hummus pronto','D'],[1,'pz','avocado','V'],[0.5,'pz','lime','V'],[1,'qb','peperoncino e coriandolo','D']],
+['Taglia tutte le verdure a bastoncini regolari.','Prepara il guacamole: avocado schiacciato con lime, sale e peperoncino.','Disponi tutto su un vassoio largo. Perfetto da condividere sotto l\'ombrellone.']),
+
+/* ---------- CENE EXTRA ---------- */
+
+R('Salmone in crosta di erbe','cena','25 min',['gr','pe'],
+[[150,'g','filetto di salmone','P'],[20,'g','pangrattato','B'],[1,'qb','prezzemolo e aneto','V'],[1,'qb','olio e limone','D']],
+['Mescola pangrattato con erbe tritate finissime, olio e scorza di limone.','Premi la crosta sopra il filetto di salmone.','Cuoci in padella coperta a fuoco medio 4 minuti, poi 3 minuti scoperto finché la crosta è dorata.']),
+
+R('Spiedini di carne e verdure','cena','30 min',['gr'],
+[[120,'g','carne mista (vitello e maiale)','C'],[60,'g','zucchine','V'],[60,'g','peperoni','V'],[1,'qb','rosmarino e aglio','D']],
+['Marina la carne a cubetti con olio, rosmarino, aglio e pepe almeno 30 minuti.','Alterna sulla griglia con verdure a tocchi uguali.','Cuoci a fuoco medio 12-15 minuti girando spesso.']),
+
+R('Branzino all\'acqua pazza','cena','30 min',['pe'],
+[[350,'g','branzino a filetti','P'],[200,'g','pomodorini','V'],[1,'pz','aglio','V'],[100,'ml','vino bianco','D'],[1,'qb','prezzemolo e peperoncino','V']],
+['Soffriggi aglio e peperoncino nell\'olio.','Aggiungi i pomodorini, schiacciandoli piano, e il vino. Cuoci 5 minuti.','Adagia i filetti, copri e cuoci a fuoco basso 8 minuti. Prezzemolo a fine cottura.']),
+
+R('Costolette alla brace con chimichurri','cena','25 min',['gr'],
+[[200,'g','costolette d\'agnello','C'],[30,'g','prezzemolo','V'],[1,'pz','aglio','V'],[30,'ml','aceto di vino','D'],[1,'qb','peperoncino e origano','D']],
+['Frulla prezzemolo, aglio, aceto, peperoncino e olio: è il chimichurri. Lascia riposare.','Griglia le costolette 4 minuti per lato su brace viva.','Servi con il chimichurri accanto. Non usarlo per marinare: va messo a crudo alla fine.']),
+
+R('Pasta aglio olio e vongole veloci','cena','20 min',['pe'],
+[[90,'g','spaghetti','D'],[200,'g','vongole surgelate già aperte','P'],[2,'pz','aglio','V'],[1,'qb','peperoncino e prezzemolo','V']],
+['Cuoci gli spaghetti. Intanto salta l\'aglio nell\'olio, aggiungi le vongole scongelate.','Scola la pasta al dente conservando un bicchiere d\'acqua.','Manteca in padella con le vongole, aggiungendo acqua di cottura se serve. Prezzemolo.']),
+
+R('Orata ripiena di limone e timo','cena','35 min',['pe'],
+[[350,'g','orata intera pulita','P'],[1,'pz','limone','V'],[3,'rametti','timo fresco','V'],[2,'pz','aglio','V'],[1,'qb','olio e sale grosso','D']],
+['Riempi il ventre del pesce con fette di limone, rametti di timo e spicchi d\'aglio.','Incidi la pelle, massaggia con olio e sale grosso.','Cuoci in forno a 200° per 22 minuti, o sulla griglia 10 minuti per lato.']),
+
+R('Tacos di pesce','cena','25 min',['pe'],
+[[120,'g','merluzzo o sogliola','P'],[4,'pz','tortillas piccole','B'],[60,'g','cavolo cappuccio','V'],[30,'g','panna acida','L'],[1,'qb','lime, cumin, peperoncino','D']],
+['Cuoci il pesce in padella con olio, cumin e peperoncino, 3 minuti per lato.','Prepara la salsina: panna acida con lime e sale.','Assembla: tortilla, pesce spezzettato, cavolo affettato sottile, salsina.']),
+
+R('Penne all\'arrabbiata di mare','cena','25 min',['pe'],
+[[90,'g','penne','D'],[150,'g','gamberetti','P'],[200,'g','pomodori pelati','D'],[2,'pz','aglio','V'],[1,'qb','peperoncino abbondante','D']],
+['Soffriggi aglio e tanto peperoncino nell\'olio.','Aggiungi i pelati schiacciati, cuoci 10 minuti.','Butta i gamberetti negli ultimi 3 minuti. Scola la pasta al dente e manteca.']),
+
+R('Grigliata mista di verdure con burrata','cena','25 min',['gr','vg'],
+[[150,'g','verdure miste (melanzane, zucchine, peperoni)','V'],[100,'g','burrata','L'],[1,'qb','origano, olio, aceto balsamico','D']],
+['Griglia le verdure a fette spesse su brace o padella striata, senza olio.','Componi il piatto con le verdure ancora calde, la burrata al centro.','Olio, aceto balsamico, origano. Il calore della verdura fa sciogliere la burrata.']),
+
+R('Pasta e fagioli estiva','cena','30 min',['vg'],
+[[80,'g','pasta mista corta','D'],[200,'g','fagioli borlotti già cotti','D'],[100,'g','pomodorini','V'],[2,'pz','aglio','V'],[1,'qb','rosmarino e peperoncino','D']],
+['Soffriggi aglio con rosmarino e peperoncino nell\'olio.','Aggiungi i pomodorini, schiaccia metà fagioli per cremosità, aggiungi tutto il resto.','Cuoci la pasta direttamente nel brodo allungato con acqua. Servi tiepida.']),
+
+R('Polpette di tonno al forno','cena','30 min',['pe'],
+[[200,'g','tonno sott\'olio','D'],[40,'g','pangrattato','B'],[1,'pz','uova','L'],[20,'g','parmigiano','L'],[1,'qb','prezzemolo e limone','V']],
+['Sgocciola il tonno, schiaccialo con una forchetta.','Mescola con uova, pangrattato, parmigiano, prezzemolo e scorza di limone.','Forma le polpette, disponi su carta forno. Cuoci a 190° per 18 minuti.']),
+
+R('Risotto agli scampi','cena','35 min',['pe'],
+[[80,'g','riso Carnaroli','D'],[120,'g','scampi o mazzancolle','P'],[50,'ml','vino bianco','D'],[1,'pz','scalogno','V'],[700,'ml','brodo di pesce','D']],
+['Soffriggi lo scalogno, tosta il riso due minuti, sfuma col vino.','Aggiungi il brodo caldo mestolo per mestolo, mescolando.','Ultimi 4 minuti: unisci gli scampi in padella separata con olio e aglio, poi aggiungi tutto.']),
+
+/* ---------- DOLCI EXTRA ---------- */
+
+R('Semifreddo al limone','dolce','20 min + freezer',['sf','vg'],
+[[200,'g','panna da montare','L'],[80,'g','lemon curd o crema al limone','D'],[2,'pz','uova','L'],[60,'g','zucchero','D']],
+['Monta la panna a neve, in un\'altra ciotola monta i tuorli con lo zucchero.','Unisci i due composti delicatamente con il lemon curd.','Versa in uno stampo da plumcake, copri e metti in freezer almeno 4 ore. Affetta freddo.']),
+
+R('Panna cotta al cocco e mango','dolce','15 min + frigo',['sf','vg'],
+[[200,'ml','panna da montare','L'],[100,'ml','latte di cocco','D'],[3,'g','gelatina','D'],[50,'g','mango fresco','V'],[20,'g','zucchero','D']],
+['Scalda panna, latte di cocco e zucchero. Aggiungi la gelatina ammollata e strizzata.','Versa negli stampini, lascia raffreddare poi metti in frigo almeno 3 ore.','Sforma e servi col mango a dadini.']),
+
+R('Torta di pesche e mandorle','dolce','45 min',['vg'],
+[[3,'pz','pesche mature','V'],[120,'g','farina di mandorle','D'],[3,'pz','uova','L'],[80,'g','zucchero','D'],[60,'g','burro','L']],
+['Monta uova e zucchero finché sono gonfi, aggiungi la farina di mandorle e il burro fuso.','Versa in una tortiera foderata, disponi le pesche a fette sopra.','Cuoci a 170° per 35 minuti. Ottima tiepida o fredda il giorno dopo.']),
+
+R('Cheesecake senza cottura alle fragole','dolce','25 min + frigo',['sf','vg'],
+[[200,'g','biscotti secchi','D'],[80,'g','burro fuso','L'],[250,'g','formaggio spalmabile','L'],[100,'g','panna','L'],[60,'g','zucchero a velo','D'],[150,'g','fragole','V']],
+['Sgretola i biscotti, mescola col burro fuso, premi sul fondo di uno stampo.','Monta il formaggio con panna e zucchero a velo, versa sulla base, livella.','Frigo 4 ore minimo. Prima di servire disponi le fragole e un po\' di marmellata.']),
+
+R('Bavarese al cioccolato bianco e frutti rossi','dolce','20 min + frigo',['sf','vg'],
+[[150,'g','cioccolato bianco','D'],[200,'ml','panna da montare','L'],[3,'g','gelatina','D'],[80,'g','frutti rossi misti','V']],
+['Fondi il cioccolato a bagnomaria, unisci la gelatina ammollata e sciolta.','Lascia intiepidire, poi incorpora la panna semimontata.','Versa in coppette, frigo 3 ore. Servi con i frutti rossi interi sopra.']),
+
+R('Tiramisù estivo alle pesche','dolce','20 min + frigo',['sf','vg'],
+[[200,'g','mascarpone','L'],[3,'pz','uova','L'],[80,'g','zucchero','D'],[150,'g','savoiardi','D'],[200,'g','pesche sciroppate','D'],[100,'ml','sciroppo delle pesche','D']],
+['Monta tuorli e zucchero, aggiungi il mascarpone, poi gli albumi a neve.','Inzuppa i savoiardi nello sciroppo di pesche.','Alterna strati di savoiardi e crema, sopra le pesche a fette. Frigo 2 ore.']),
+
+R('Mousse di ricotta e cioccolato','dolce','10 min',['sf','vg','ve'],
+[[200,'g','ricotta','L'],[40,'g','cioccolato fondente','D'],[30,'g','zucchero a velo','D'],[1,'qb','scorza d\'arancia','V']],
+['Fondi il cioccolato e lascialo intiepidire.','Mescola la ricotta con zucchero a velo e scorza d\'arancia finché è cremosa.','Unisci il cioccolato fuso e mescola velocemente. Frigo 30 minuti. Servi in coppette.']),
+
+R('Torta di ricotta e visciole','dolce','50 min',['vg'],
+[[300,'g','ricotta','L'],[3,'pz','uova','L'],[100,'g','zucchero','D'],[1,'vasetto','marmellata di visciole','D'],[150,'g','pasta frolla','D']],
+['Stendi la frolla in una tortiera, tienine un po\' per le strisce.','Spalma uno strato di marmellata, poi il composto di ricotta, uova e zucchero.','Decora con le strisce di frolla. Cuoci a 175° per 35 minuti.']),
+
+R('Granite siciliane in casa','dolce','10 min + freezer',['sf','vg','ve'],
+[[500,'ml','succo di frutta fresca','V'],[80,'g','zucchero','D'],[1,'qb','succo di limone','V']],
+['Sciogli lo zucchero nel succo caldo, aggiungi il limone.','Versa in un contenitore piatto nel freezer.','Ogni 30 minuti raschia con la forchetta. Dopo tre ore è pronta. Gusti: anguria, limone, mandorla.']),
+
+R('Profiteroles estivi alla crema','dolce','40 min',['vg'],
+[[100,'g','farina','D'],[80,'g','burro','L'],[3,'pz','uova','L'],[250,'g','panna montata','L'],[100,'g','cioccolato fondente','D']],
+['Cuoci i bignè: porta a bollore acqua e burro, aggiungi la farina, poi le uova una a una.','Cuoci cucchiaiate su carta forno a 200° per 22 minuti senza aprire il forno.','Farcisci con panna montata, copri di cioccolato fuso fatto colare.']),
+
+R('Tiramisù al pistacchio','dolce','25 min + frigo',['sf','vg'],
+[[200,'g','mascarpone','L'],[3,'pz','uova','L'],[80,'g','zucchero','D'],[150,'g','savoiardi','D'],[100,'ml','caffè','D'],[60,'g','crema di pistacchio','D']],
+['Monta tuorli e zucchero, aggiungi mascarpone e crema di pistacchio, poi albumi a neve.','Inzuppa i savoiardi nel caffè freddo.','Strati di savoiardi e crema, granella di pistacchio sopra. Frigo 2 ore.']),
+
+R('Torta di carote umida','dolce','50 min',['vg'],
+[[200,'g','carote grattugiate','V'],[150,'g','farina','D'],[3,'pz','uova','L'],[120,'g','zucchero','D'],[80,'ml','olio di semi','D'],[1,'bustina','lievito','D']],
+['Monta uova e zucchero, aggiungi l\'olio a filo.','Unisci farina e lievito setacciati, poi le carote grattugiate.','Cuoci a 175° per 35 minuti. Rimane umidissima. Glassa di zucchero a velo facoltativa.']),
+
+R('Zabaione freddo','dolce','20 min',['sf','vg'],
+[[4,'pz','tuorli','L'],[80,'g','zucchero','D'],[80,'ml','Marsala secco o succo d\'arancia','D'],[100,'g','panna montata','L']],
+['Cuoci i tuorli con zucchero e Marsala a bagnomaria, sbattendo finché si triplicano di volume.','Lascia raffreddare nel ghiaccio continuando a sbattere.','Incorpora delicatamente la panna montata. Servi in coppette con savoiardo a lato.']),
+
+R('Brownies al cioccolato e sale','dolce','40 min',['vg'],
+[[150,'g','cioccolato fondente 70%','D'],[100,'g','burro','L'],[3,'pz','uova','L'],[120,'g','zucchero','D'],[60,'g','farina','D'],[1,'qb','sale in fiocchi','D']],
+['Fondi cioccolato e burro, lascia intiepidire.','Sbatti uova e zucchero, unisci il cioccolato e la farina.','Cuoci a 180° per 22 minuti: deve tremare al centro. Fiocchi di sale sopra subito dopo.']),
+
+R('Gelato finto alla banana','dolce','5 min + freezer',['sf','vg','ve'],
+[[4,'pz','banane mature','V'],[30,'g','burro di arachidi','D'],[1,'qb','cacao o granella','D']],
+['Taglia le banane a rondelle e mettile in freezer per 3 ore.','Frullale nel mixer finché diventano cremose come il gelato: ci vogliono 2-3 minuti.','Servi subito o rimetti in freezer 30 minuti. Burro di arachidi e cacao sopra.']),
+
+R('Panna cotta al caffè','dolce','15 min + frigo',['sf','vg'],
+[[250,'ml','panna','L'],[100,'ml','caffè espresso','D'],[3,'g','gelatina','D'],[40,'g','zucchero','D']],
+['Scalda panna con caffè e zucchero, aggiungi la gelatina ammollata.','Versa negli stampini monoporzione, lascia solidificare in frigo 3 ore.','Sforma su piatto, servi con salsa al caramello o granella di nocciole.'])
 
 ];
 /* 50 giochi — c = categoria: spiaggia | tavola | movimento */
@@ -1043,7 +1243,209 @@ G('Statue nell\'acqua','movimento','15 min','5-15','Niente',
 
 G('Lancio nei bicchieri','movimento','20 min','4-12','Bicchieri di plastica e palline',
 ['Piramide di bicchieri pieni d\'acqua a un capo del tavolo.','A turno si lancia la pallina: se entra, chi difende beve un sorso d\'acqua e toglie il bicchiere.','Vince chi svuota per primo il campo avversario.'],
-'Solo acqua e succhi: così giocano anche i ragazzi e finisce bene per tutti.')
+'Solo acqua e succhi: così giocano anche i ragazzi e finisce bene per tutti.'),
+
+/* ---------- PISCINA & GIARDINO EXTRA ---------- */
+
+G('Shark e pesciolini','movimento','20 min','5-15','Niente',
+['Uno è lo squalo e aspetta al centro, gli altri sono pesciolini sul bordo.','Al via tutti cercano di attraversare fino al bordo opposto.','Chi viene toccato diventa squalo: si va avanti finché non restano pesciolini.'],
+'Lo squalo deve restare in acqua bassa, i pesciolini usano tutto lo spazio. Chaotico e liberatorio.'),
+
+G('Marco Polo','movimento','15 min','4-14','Niente',
+['Chi è "Marco" ha gli occhi chiusi (o la maschera), gli altri restano in acqua.','Marco chiama "Marco!", gli altri rispondono "Polo!". Si va ad orecchio.','Chi viene toccato diventa Marco.'],
+'Variante: chi esce dall\'acqua quando Marco chiama diventa automaticamente Marco.'),
+
+G('Anelli subacquei','movimento','20 min','3-10','Anelli o oggetti che affondano',
+['Si gettano 10 anelli colorati sparsi in tutta la piscina.','Al via ci si immerge per raccoglierli, uno per volta.','Chi ne raccoglie di più vince. A squadre: si conta il totale.'],
+'Punti doppi per gli anelli che finiscono in fondo fondo: quello vale il coraggio.'),
+
+G('Palla avvelenata in acqua','movimento','25 min','6-16','Una palla morbida',
+['Tutti in acqua, una palla. Chi ha la palla ha tre secondi per passarla o è "avvelenato".','Chi è avvelenato esce per 30 secondi sul bordo, poi rientra.','Nessun vincitore: si gioca finché non si stanca nessuno.'],
+'Regola di sopravvivenza: si può schivare sott\'acqua. Il gioco dura il doppio.'),
+
+G('Staffetta con oggetti sott\'acqua','movimento','20 min','6-16','Oggetti che galleggiano e affondano',
+['Due squadre in corsia, ogni componente deve portare un oggetto nuotando al compagno.','Primo giro: oggetti che galleggiano. Secondo giro: oggetti che affondano (difficile tenerli).','Chi completa prima la staffetta doppia vince.'],
+'Con oggetti grandi che creano resistenza nell\'acqua è molto più faticoso del previsto.'),
+
+G('Torre di Pisa in piscina','movimento','15 min','4-12','Niente',
+['A coppie: uno fa la "base" in piedi sul fondo, l\'altro si appoggia sulle sue spalle.','Si valuta la stabilità: quanti secondi reggono prima che la torre crolli.','Si cambia ruolo e si sommano i tempi. La coppia più stabile vince.'],
+'Solo in acqua bassa o con persone che sanno nuotare. Giuria severa sulla tecnica.'),
+
+G('Chi arriva?','movimento','15 min','4-12','Niente',
+['Tutti sul bordo, un giudice dà le istruzioni: "nuota a rana", "a dorso", "a gambe sole".','Prima di dire vai, dice chi vince: "arriva secondo" o "arriva terzo".','Chi arriva nella posizione giusta guadagna un punto, chi arriva primo quando non doveva perde un punto.'],
+'Serve concentrazione: il riflesso di nuotare veloce vince quasi sempre.'),
+
+G('Pallone gonfiabile gigante','movimento','30 min','6-20','Un pallone da spiaggia grande',
+['Si gonfia un pallone enorme. Scopo: tenerlo in aria il più possibile tutti insieme.','Nessuno può fare due tocchi di fila. Chi fa cadere il pallone in acqua conta ad alta voce.','Ogni dieci tocchi senza cadute si festeggia. Si conta il record e si cerca di batterlo.'],
+'Variante: i colpi si fanno con una mano sola. Poi a pugni chiusi. Poi con la testa.'),
+
+G('Cannone ad acqua','movimento','15 min','4-12','Bottiglie squirt o pistole ad acqua',
+['Due squadre, ognuna con le proprie armi ad acqua.','Campo diviso in due, chi è colpito (bagnato in faccia) conta fino a dieci prima di sparare ancora.','Cinque minuti di combattimento, vince la squadra con più membri "attivi".'],
+'Regola che salva la pace: mai al viso degli adulti che non vogliono bagnarsi i capelli.'),
+
+G('Corsa con materassini','movimento','20 min','4-12','Materassini gonfiabili',
+['Si mettono i materassini in acqua, uno per squadra.','Bisogna salire sul materassino a un capo della piscina, raggiungere l\'altra estremità senza cadere e tornare a nuoto.','Chi completa prima per tutta la squadra vince.'],
+'Salire sul materassino è la parte più difficile e divertente. Aiutarsi è vietato.'),
+
+G('Piscina-bowling','movimento','20 min','4-12','Bottiglie di plastica e una palla morbida',
+['Si mettono dieci bottiglie vuote sul bordo basso o su un gradino della piscina.','Si lancia la palla dall\'acqua cercando di abbatterle.','Tre tiri a testa, si segna lo score come al bowling. Si sommano le manche.'],
+'Le bottiglie leggere volano anche con un colpo d\'acqua: tecnica, non forza.'),
+
+G('Polo acquatico con palloncini','movimento','25 min','6-14','Palloncini d\'acqua e due secchi',
+['Due secchi sul bordo alle estremità opposte: sono le porte.','Ci si passa i palloncini e si cerca di infilare in quello avversario.','Chi buca un palloncino facendolo esplodere può usarne subito uno nuovo.'],
+'Si gioca in acqua bassa così anche i più piccoli restano in sicurezza. I palloncini li preparano i bambini prima.'),
+
+G('Gioco dell\'orso','movimento','15 min','5-15','Niente',
+['L\'orso è al centro, tutti gli altri si tengono al bordo.','L\'orso conta fino a tre, al tre ci si deve spostare da un bordo all\'altro senza essere presi.','Chi viene preso diventa orso. Se ci sono tanti orsi, si cacciano a squadre.'],
+'In acqua alta il gioco diventa nuoto. In acqua bassa è puro caos.'),
+
+G('Oca aquatica','movimento','30 min','4-12','Un dado',
+['Si disegnano con gessetto sul bordo le caselle da 1 a 30.','Si tira il dado e si percorre la piscina per quel numero di vasca-lunghezze.','Alcune caselle hanno sfide: bomba, galletto, stile libero. Vince chi arriva al 30 per primo.'],
+'Le caselle sfida le decidono i partecipanti prima di iniziare: più sono cattive più è divertente.'),
+
+G('Salta la corda in acqua','movimento','15 min','4-14','Una corda lunga',
+['Due persone girano la corda nell\'acqua bassa sopra la superficie.','Gli altri saltano uno alla volta nel momento giusto.','Chi tocca la corda o inciampa esce. Si accelera gradualmente.'],
+'La resistenza dell\'acqua rallenta la corda: è più facile che a secco ma le cadute sono meglio.'),
+
+G('Biathlon acquatico','movimento','25 min','4-12','Pistole ad acqua e birilli',
+['Metti cinque birilli leggeri sul bordo, a dieci metri.','Si nuota andata e ritorno, poi si usano le pistole d\'acqua per abbattere i birilli.','Tre minuti a testa, si conta quanti birilli si abbatte. Record di squadra.'],
+'Pistole ad acqua grandi caricano in piscina: si riempiono da sole immergendole.'),
+
+G('Niente mani','movimento','15 min','4-12','Una palla da spiaggia',
+['Si gioca a pallavolo in acqua ma non si possono usare le mani.','Solo avambracci, braccia chiuse, testa, spalle.','Conta ogni tocco valido: il goal è fare dieci scambi consecutivi senza mani.'],
+'Sembra impossibile, e all\'inizio lo è. Ma dopo venti minuti ci si adatta.'),
+
+G('Cronometro sott\'acqua','movimento','15 min','2-10','Un cronometro',
+['A turno, ognuno stima quanto può stare in apnea. Lo dice prima di immergersi.','Si misura il tempo reale. Punti a chi si avvicina di più alla propria stima.','Non si vince stando sotto più degli altri, si vince indovinando il proprio tempo.'],
+'Versione cognizione corporea pura. I bambini tendono a sopravvalutarsi, i nonni a sottovalutarsi.'),
+
+G('Treno in piscina','movimento','10 min','4-16','Niente',
+['Il "locomotore" nuota lento, gli altri si attaccano in fila tenendosi per i piedi.','Il treno deve fare il giro completo della piscina senza spezzarsi.','Ogni volta si aggiunge un vagone: fino a quanti si riesce?'],
+'Variante corsa: il locomotore può andare più veloce. I vagoni scelgono il ritmo di sopravvivenza.'),
+
+G('Boa colorate','movimento','20 min','4-12','Palle galleggianti colorate',
+['Si distribuiscono in acqua tre palle di colori diversi.','L\'arbitro chiama un colore e tutti devono toccarla prima degli altri.','Un punto per tocco, tre giri da due minuti. Chi arriva terzo perde un punto.'],
+'Con bambini piccoli: si assegna un colore a testa e si difende la propria.'),
+
+G('Pesca a squadre','movimento','20 min','6-14','Oggetti vari (palline, anelli, spugne)',
+['Si riempie la piscina di oggetti di tre colori, ognuna squadra ne "possiede" uno.','Al via si raccolgono solo i propri oggetti e si portano alla propria base sul bordo.','Vince chi ha più oggetti nella propria base dopo tre minuti.'],
+'Variante: si possono anche "rubare" gli oggetti dalla base avversaria.'),
+
+G('Passerella di schiuma','movimento','20 min','4-12','Materassini sottili o tappetini',
+['Si mettono cinque tappetini in fila dall\'un bordo all\'altro, come ponticelli.','Bisogna attraversare senza cadere, poi saltare in acqua e tornare a nuoto.','Al meglio dei tre tentativi, si cronometra. Record da battere ogni giorno.'],
+'I tappetini possono muoversi: aggiungi ostacolo acqua spruzzata dagli avversari.'),
+
+G('Battaglia delle noodles','movimento','15 min','4-14','Noodles galleggianti',
+['Ognuno ha una noodle da piscina.','Si usa come sciabola per bagnare gli avversari o farli perdere l\'equilibrio.','Chi tocca il fondo o esce dall\'acqua perde un punto. Tre punti e fuori per un giro.'],
+'In acqua medio-bassa, mai in testa. Le noodle sono morbide ma in tanti fa lo stesso ridere.'),
+
+G('Gong show acquatico','movimento','20 min','6-16','Un oggetto sonoro come gong',
+['Ogni squadra prepara un numero acquatico: un tuffo coreografato, una formazione, una storia.','Massimo due minuti di performance.','La giuria batte il "gong" (o suona un campanaccio) se la performance è troppo breve o troppo lunga.'],
+'I bambini fanno sempre la scena del naufragio. È sempre la migliore.'),
+
+G('Palla salva capitan','movimento','25 min','8-18','Una palla morbida',
+['Ognuno ha un numero. Uno lancia la palla in aria e urla un numero.','Il numero chiamato deve prendere la palla prima che tocchi l\'acqua.','Chi non la prende perde un punto. Tre punti persi e si ricomincia dall\'inizio come ultimo.'],
+'Con il numero scritto su un foglio appeso al bordo: si ricordano meglio quando sono emozionati.'),
+
+G('Canoa umana','movimento','20 min','6-16','Niente',
+['A coppie: uno fa da "canoa" (galleggia sulla schiena), l\'altro lo spinge per la piscina.','Giro completo della vasca e si cambia ruolo.','Vince la coppia che fa il doppio giro più veloce.'],
+'Il "passeggero" può aiutare con le braccia ma le gambe devono restare immobili. Si controlla a voce.'),
+
+G('Gara di schizzi','movimento','10 min','4-12','Niente',
+['Tutti sul bordo, un bersaglio disegnato sull\'asfalto bagnato.','A turno si fa la "bomba" cercando di schizzare il bersaglio.','Giuria di tre che valuta ampiezza e precisione dello schizzo. Da 1 a 10.'],
+'La giuria deve stare abbastanza vicina per valutare bene, abbastanza lontana per non finire tutta bagnata. La distanza giusta si trova al primo turno.'),
+
+G('Zattera di sopravvivenza','movimento','20 min','6-14','Un materassino grande',
+['Uno solo può stare sul materassino, gli altri sono in acqua.','Chi è in acqua cerca di salire, chi è sul materassino cerca di non farcelo.','Ogni 60 secondi si fischia: chi è sul materassino guadagna un punto.'],
+'Con un materassino gigante: si può salire in due, poi in tre. Finisce sempre nello stesso modo.'),
+
+G('Occhi bendati in piscina','movimento','15 min','4-12','Una fascia per gli occhi (sicura)',
+['Solo in piscina bassa o con sponde raggiunte a piedi.','Chi è bendato cerca di toccare un compagno entro due minuti, guidandosi solo con la voce.','Gli altri devono emettere un suono ogni dieci secondi, non possono restare in silenzio.'],
+'Un assistente senza benda controlla che chi è bendato non vada in acque profonde.'),
+
+G('Noodle-polo','movimento','25 min','6-12','Noodles e una palla galleggiante',
+['Ogni giocatore ha una noodle con cui colpisce la palla.','Due porte sul bordo (due sedie o due bottiglie).','Partita da dieci minuti, rotazione dei portieri ogni due.'],
+'Regola necessaria: non si può usare la noodle come sciabola contro le persone, solo contro la palla.'),
+
+G('Cascata umana','movimento','10 min','6-16','Niente',
+['Fila lungo il bordo, tutti seduti con le gambe nell\'acqua.','Al ritmo di un battito di mani si cade in acqua uno alla volta, a cascata da sinistra a destra.','Si prova a fare la cascata più fluida possibile. La giuria valuta la sincronia.'],
+'Secondo giro: si cade all\'indietro. Terzo giro: in piedi con le braccia aperte.'),
+
+G('Chi resiste?','movimento','20 min','4-12','Niente',
+['Sfida di resistenza: tutti in acqua, chi esce per primo dalla piscina (o tocca il bordo con le mani) perde.','Si possono fare onde, schizzi, spingere (gentilmente). Non si può tenere giù di forza.','Vince l\'ultimo rimasto in acqua.'],
+'In acqua fredda dura tre minuti. In acqua calda può durare tutto il pomeriggio.'),
+
+G('Gara di nuoto a stile libero pazzi','movimento','15 min','4-14','Niente',
+['Gare di nuoto a tema: a rana rumorosa, col bicchiere in equilibrio sulla testa, con le braccia sotto l\'acqua.','Tre gare da una vasca, si assegna 3-2-1 punti.','Chi vince due gare su tre è il campione della piscina di Ardea.'],
+'Aggiungete ogni giorno una gara nuova. Entro venerdì avrete categorie degne delle olimpiadi.'),
+
+G('Giardino-quiz in corsa','movimento','20 min','6-16','Fogli con domande',
+['Si distribuiscono dieci cartellini con domande in giro per il giardino o a bordo piscina.','Le squadre corrono a trovarle, le raccolgono e rispondono all\'arbitro prima di prenderne un\'altra.','Ogni risposta giusta vale un punto. Chi finisce i cartellini per primo ha un punto bonus.'],
+'Le domande le preparano i bambini la sera prima: sono sempre le più difficili.'),
+
+G('Limbo in acqua bassa','movimento','15 min','5-14','Una noodle tenuta da due persone',
+['Due persone tengono una noodle orizzontale appena sopra l\'acqua.','Gli altri passano sotto a schiena in giù senza toccarla e senza toccare il fondo con le mani.','Si abbassa a ogni giro. Chi tocca la noodle o cade è fuori.'],
+'A differenza del limbo classico l\'acqua aiuta a galleggiare: si arriva più bassi di quanto si pensi.'),
+
+G('Il vulcano','movimento','10 min','5-20','Niente',
+['Tutti in cerchio al centro della piscina, si cammina nella stessa direzione creando una corrente.','Dopo un minuto tutti si fermano di colpo e cercano di andare nella direzione opposta.','La corrente creata porta tutti dove vuole per i primi venti secondi: puro caos.'],
+'Più persone ci sono, più la corrente è forte e più è difficile invertirla. Dieci persone è il minimo.'),
+
+G('Aquathlon casalingo','movimento','40 min','4-14','Cronometro',
+['Tre prove in sequenza: cinque vasche a nuoto, venti salti sul posto a bordo piscina, poi rientro in acqua e dieci secondi di apnea.','Si cronometra l\'intera sequenza per ogni partecipante.','Classifica finale. Si ripete il giorno dopo per vedere chi migliora.'],
+'Adattate le distanze all\'età. L\'importante è che sia faticoso ma fattibile per tutti.'),
+
+G('Calcio in acqua bassa','movimento','30 min','6-14','Una palla morbida e quattro segnaposto',
+['Campo delimitato in acqua bassa, porte fatte con bottiglie o ciabatte.','Si gioca a calcio normale ma in acqua fino alle ginocchia.','Partita da due tempi di dieci minuti. Nessun portiere: la porta si difende coi piedi.'],
+'L\'acqua rallenta tutto e rende i movimenti imprevedibili: è il grande equalizzatore.'),
+
+G('Lancio e affonda','movimento','20 min','4-10','Oggetti vari, un secchio',
+['A turno si lancia un oggetto in aria e bisogna tuffarcisi sopra per "affondarlo" prima che riemerga.','L\'arbitro valuta se l\'oggetto è stato "affondato" (tenuto sott\'acqua per tre secondi).','Un punto per ogni affondo riuscito. Variante: più oggetti lanciati insieme.'],
+'Con una palla da spiaggia è quasi impossibile: galleggia sempre. Con una spugna bagnata è facile. Cercate la difficoltà giusta.'),
+
+G('Tutti giù per terra in acqua','movimento','10 min','4-14','Musica',
+['Come le sedie musicali ma in acqua: si nuota nel cerchio, quando la musica si ferma tutti cercano di toccare il fondo.','Chi non riesce a toccare il fondo (in acqua troppo alta) o è l\'ultimo è fuori.','Si esclude un\'area di piscina a ogni giro: si va sempre in acqua più alta.'],
+'In acqua alta diventa quasi impossibile: gambe e braccia che combattono contro il galleggiamento.'),
+
+G('Palla nella buca','movimento','20 min','4-12','Una palla e un cerchio galleggiante',
+['Si mette un cerchio galleggiante al centro della piscina come bersaglio.','Da bordo piscina si lancia la palla cercando di farla atterrare dentro.','Tre lanci a testa, si conta il totale. Si aumenta la distanza se è troppo facile.'],
+'Variante: si lancia mentre ci si muove, senza fermarsi. Molto più difficile.'),
+
+G('Water polo semplificato','movimento','30 min','6-16','Una palla e due secchi sul bordo',
+['Due secchi alle estremità come porte, due squadre.','Regole semplicissime: non si cammina, si nuota o si salta. Si passa obbligatoriamente prima di tirare.','Partita da dieci minuti. Rotazione dei portieri ogni tre gol.'],
+'In piscina piccola i gol arrivano spesso: tenete il punteggio su un foglio.'),
+
+G('Corsa con la noodle tra le gambe','movimento','15 min','4-12','Noodles',
+['Ognuno tiene una noodle tra le gambe come un cavallino di gommapiuma.','Gara di velocità da un capo all\'altro della piscina con sole le braccia.','Tre batterie, finale coi migliori tempi. Chi perde la noodle ricomincia.'],
+'Le noodle tendono a scappare verso il basso: serve tecnica specifica che si inventa sul momento.'),
+
+G('Lancio degli anelli tra i delfini','movimento','20 min','6-14','Anelli galleggianti e un cerchio',
+['Un giocatore fa il "delfino" in acqua, gli altri lanciano gli anelli cercando di infilarceli nelle braccia aperte.','Il delfino può spostarsi ma non uscire dall\'acqua.','Tre minuti per squadra, si conta quanti anelli vengono infilati.'],
+'Il delfino può anche immergersi per scomparire: allora gli anelli si lanciano dove si presume riemergerà.'),
+
+G('Giardino-staffetta pazza','movimento','25 min','6-16','Cucchiai e palline da ping pong',
+['Percorso a ostacoli in giardino: slalom tra i vasi, salto della corda, strisciamento sotto al tavolo.','Ogni concorrente porta una pallina da ping pong sul cucchiaio tenuto in bocca.','Se cade si riparte dall\'ostacolo precedente. Vince la squadra che finisce prima.'],
+'In giardino bagnato diventa dieci volte più difficile: spruzzate l\'erba prima di iniziare.'),
+
+G('Frisbee goal in piscina','movimento','20 min','4-12','Un frisbee e due ceste da bordo',
+['Due ceste sui bordi opposti come canestri.','Si nuota con il frisbee e si cerca di lanciarlo nella cesta avversaria senza alzarsi troppo dall\'acqua.','Chi fa goal può fare il tiro dell\'altro lato. Partita a sette.'],
+'Il frisbee in acqua vola diversamente: basso e veloce. Ci vuole pratica.'),
+
+G('Gara di costruzione in giardino','movimento','30 min','4-12','Secchielli, sabbia o terra',
+['Ogni squadra costruisce una struttura (torre, animale, castello) con secchielli e quello che trova in giardino: ghiaia, foglie, rametti.','Quindici minuti di costruzione, poi visita guidata da ogni squadra.','La giuria assegna punti per altezza, creatività e spiegazione.'],
+'Fotografate le costruzioni prima che piova. Queste foto sopravvivono alle vacanze.'),
+
+G('Tag acquatico in punta di piedi','movimento','15 min','5-14','Niente',
+['Si gioca a rincorsa in acqua bassa, ma tutti devono camminare sulla punta dei piedi.','Chi corre (abbassa i talloni) viene squalificato per 30 secondi sul bordo.','Chi è il lupo taglia su piedi anche lui. Si ride tantissimo per la goffaggine.'],
+'Arbitro fisso per il controllo dei talloni: è il ruolo preferito dai nonni.'),
+
+G('Fronte a fronte','movimento','15 min','6-16','Niente',
+['Due squadre schiena contro schiena in acqua.','L\'arbitro grida "fronte a fronte!": le due squadre si voltano e chi prende il compagno avversario vince il punto.','Poi "schiena a schiena" e si ricomincia. Varianti: "lato a lato", "sopra a sotto".'],
+'Funziona solo se l\'arbitro alterna i comandi velocemente e in modo imprevedibile.'),
+
+G('Numero di vasca','movimento','20 min','4-10','Niente',
+['Ognuno sceglie un numero da 1 a 10.','L\'arbitro chiama un numero e quella persona deve fare subito il numero di vasche corrispondente.','Chi finisce per primo guadagna un punto. Al decimo punto si vince.'],
+'L\'arbitro può chiamare lo stesso numero due volte di fila. Subdolo ma lecito.')
 
 ];
 /* 20 lezioni di acquagym — liv: soft | brucia | fun
@@ -1427,11 +1829,12 @@ if('serviceWorker' in navigator && (location.protocol === 'https:' || location.h
   });
 }
 
+const GIORNI_SETTIMANA = 8; // 14-21 agosto
 let stato = {
-  inizio: oggiISO(),
+  inizio: '2026-08-14',
   persone: 12,
   settimana: [],
-  cuochi: ['','','','','','',''],
+  cuochi: ['','','','','','','',''],
   spesa: {},
   filtroRicette: 'tutte',
   cercaRicette: '',
@@ -1518,9 +1921,9 @@ const memoria = {
 function applicaDatiCondivisi(dati){
   stato.inizio = dati.inizio || stato.inizio;
   stato.persone = dati.persone || stato.persone;
-  stato.cuochi = (dati.cuochi && dati.cuochi.length===7) ? dati.cuochi : stato.cuochi;
+  stato.cuochi = (dati.cuochi && dati.cuochi.length===GIORNI_SETTIMANA) ? dati.cuochi : stato.cuochi;
   stato.spesa = dati.spesa || {};
-  stato.settimana = (dati.settimana && dati.settimana.length===7) ? dati.settimana : stato.settimana;
+  stato.settimana = (dati.settimana && dati.settimana.length===GIORNI_SETTIMANA) ? dati.settimana : stato.settimana;
   if(inpData){ inpData.value = stato.inizio; }
   if(inpPers){ inpPers.value = stato.persone; }
 }
@@ -1565,10 +1968,11 @@ function pesca(tipo,n){
   return out;
 }
 function generaSettimana(){
-  const a=pesca('acqua',7), p=pesca('pranzo',7), c=pesca('cena',7), d=pesca('dolce',7), g=pesca('gioco',7);
-  stato.settimana = [0,1,2,3,4,5,6].map(i=>({acqua:a[i],pranzo:p[i],cena:c[i],dolce:d[i],gioco:g[i]}));
+  const n=GIORNI_SETTIMANA;
+  const a=pesca('acqua',n), p=pesca('pranzo',n), c=pesca('cena',n), d=pesca('dolce',n), g=pesca('gioco',n);
+  stato.settimana = Array.from({length:n},(_,i)=>({acqua:a[i],pranzo:p[i],cena:c[i],dolce:d[i],gioco:g[i]}));
   // il sabato ci vuole la grigliata
-  const iSab = [0,1,2,3,4,5,6].find(i=>dataDelGiorno(i).getDay()===6);
+  const iSab = Array.from({length:n},(_,i)=>i).find(i=>dataDelGiorno(i).getDay()===6);
   if(iSab!==undefined){
     const grill = RICETTE.map((r,i)=>({r,i})).filter(x=>x.r.m==='cena'&&x.r.tg.includes('gr')).map(x=>x.i);
     if(grill.length){
@@ -2040,6 +2444,17 @@ function dataLunga(i){ const d=dataDelGiorno(i); return d.getDate()+' '+MESI[d.g
    ======================================================= */
 let seq=[], idx=0, restante=0, tick=null, inPausa=false, audioCtx=null;
 const elTimer=document.getElementById('timer');
+
+let _wakeLock=null;
+async function _acquireWakeLock(){
+  if(!('wakeLock' in navigator)) return;
+  try{ _wakeLock=await navigator.wakeLock.request('screen'); }catch(e){}
+}
+function _releaseWakeLock(){ if(_wakeLock){ _wakeLock.release(); _wakeLock=null; } }
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible' && elTimer.classList.contains('on')) _acquireWakeLock();
+});
+
 function avviaTimer(iLez){
   const a=ACQUAGYM[iLez];
   seq=[{tipo:'via',nome:'Si comincia',desc:a.n,sec:10}];
@@ -2048,7 +2463,7 @@ function avviaTimer(iLez){
     if(k<a.es.length-1) seq.push({tipo:'riposo',nome:'Pausa',desc:'Respira, bevi un sorso. Poi: '+a.es[k+1].e,sec:15});
   });
   seq.push({tipo:'fine',nome:'Finito',desc:'Bravi. Ora l\u2019aperitivo è meritato.',sec:0});
-  idx=0; inPausa=false; elTimer.classList.add('on');
+  idx=0; inPausa=false; elTimer.classList.add('on'); _acquireWakeLock();
   document.getElementById('tPausa').textContent='Pausa';
   vaiAPasso(0);
   clearInterval(tick);
@@ -2087,9 +2502,9 @@ function mostraFine(){
   document.getElementById('tDesc').textContent='Bevete acqua e allungate le gambe al bordo prima di uscire.';
   document.getElementById('tProssimo').textContent='';
   document.getElementById('tBarra').style.width='100%';
-  bip(1046,400);
+  bip(1046,400); _releaseWakeLock();
 }
-function fermaTimer(){ clearInterval(tick); elTimer.classList.remove('on'); }
+function fermaTimer(){ clearInterval(tick); elTimer.classList.remove('on'); _releaseWakeLock(); }
 function bip(freq,ms){
   try{
     audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
@@ -2444,14 +2859,60 @@ inpPers.addEventListener('input',()=>{
   if(v>=2&&v<=40){ stato.persone=v; memoria.salva(); }
 });
 
+/* ---------- SPLASH COMPLEANNO VALERIO ---------- */
+(function inizializzaCompleanno(){
+  const COLORI=['#F2C227','#EE5B4E','#17A9BC','#1B54C7','#2E8B62','#fff','#FF9F43','#A29BFE'];
+  function creaConfetti(){
+    const box=document.getElementById('bdayConfetti');
+    for(let i=0;i<60;i++){
+      const el=document.createElement('i');
+      el.style.cssText=`left:${Math.random()*100}%;background:${COLORI[i%COLORI.length]};animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*3}s;transform:rotate(${Math.random()*360}deg)`;
+      box.appendChild(el);
+    }
+  }
+  function mostraCompleanno(){
+    const splash=document.getElementById('bdaySplash');
+    if(!splash||!splash.hidden) return;
+    creaConfetti();
+    splash.hidden=false;
+    document.getElementById('bdayBtn').addEventListener('click',()=>{
+      splash.hidden=true;
+      mostraBannerBday();
+    },{ once:true });
+    sessionStorage.setItem('bdayVisto','1');
+  }
+  function mostraBannerBday(){
+    const ora=new Date();
+    if(ora.getMonth()!==7||ora.getDate()!==15) return;
+    let banner=document.getElementById('bdayBanner');
+    if(!banner){
+      banner=document.createElement('div');
+      banner.id='bdayBanner';
+      banner.innerHTML='🎂 <strong>Auguri Valerio!!</strong> 22 anni portati BENE &nbsp;🎉';
+      document.body.appendChild(banner);
+    }
+  }
+  function controllaBday(){
+    if(sessionStorage.getItem('bdayVisto')) return;
+    const ora=new Date();
+    if(ora.getMonth()===7 && ora.getDate()===15){ mostraCompleanno(); return; }
+    // programma il timeout per la mezzanotte del 15 agosto
+    const target=new Date(ora.getFullYear(),7,15,0,1,0);
+    const ms=target-ora;
+    if(ms>0 && ms<36*3600*1000) setTimeout(mostraCompleanno, ms);
+  }
+  document.addEventListener('DOMContentLoaded', controllaBday);
+  controllaBday();
+})();
+
 async function avviaApp(){
   const salvato=await memoria.carica();
   if(salvato){
     stato.inizio=salvato.inizio||stato.inizio;
     stato.persone=salvato.persone||stato.persone;
-    stato.cuochi=(salvato.cuochi&&salvato.cuochi.length===7)?salvato.cuochi:stato.cuochi;
+    stato.cuochi=(salvato.cuochi&&salvato.cuochi.length===GIORNI_SETTIMANA)?salvato.cuochi:stato.cuochi;
     stato.spesa=salvato.spesa||{};
-    stato.settimana=(salvato.settimana&&salvato.settimana.length===7)?salvato.settimana:[];
+    stato.settimana=(salvato.settimana&&salvato.settimana.length===GIORNI_SETTIMANA)?salvato.settimana:[];
   }
   let primaVolta = false;
   if(!stato.settimana.length){ generaSettimana(); primaVolta = true; }
