@@ -1,4 +1,4 @@
-const CACHE = 'casa-al-mare-v1';
+const CACHE = 'casa-al-mare-v4';
 const FILE_APP = [
   './',
   './index.html',
