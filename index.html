@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Casa al Mare · il planogramma della settimana</title>
+<meta name="description" content="Il planogramma della settimana al mare: acquagym, ricette, giochi e meteo.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0C2340">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Casa al Mare">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Karla:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap');
 
@@ -256,6 +265,13 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .badge-cambia{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.55}
 .badge-utente:hover .badge-cambia{opacity:.9}
 
+/* ---------- INSTALLA L'APP ---------- */
+.btn-installa{background:var(--limone);border:2px solid var(--ink);color:var(--ink);border-radius:999px;padding:7px 15px;font-weight:800;font-size:13px;box-shadow:var(--ombra);display:flex;align-items:center;gap:6px}
+.passi-installa{list-style:none;margin:0;padding:0;counter-reset:pi}
+.passi-installa li{counter-increment:pi;position:relative;padding-left:38px;margin-bottom:16px;font-size:14px}
+.passi-installa li::before{content:counter(pi);position:absolute;left:0;top:-1px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--carta);font-family:var(--mono);font-size:13px;display:flex;align-items:center;justify-content:center}
+.passi-installa .icona-passo{font-size:20px;margin-right:4px}
+
 /* ---------- SCHERMATA CREAZIONE UTENTE ---------- */
 .schermata-utente{position:fixed;inset:0;z-index:90;background:var(--cobalto);background-image:repeating-linear-gradient(90deg,var(--cobalto) 0 26px,#2C63D6 26px 52px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
 .schermata-utente[hidden]{display:none}
@@ -327,6 +343,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
         <button class="btn" id="btnSpesa">🛒 Lista della spesa</button>
         <button class="btn btn-fantasma" id="btnCopia">💬 Copia per WhatsApp</button>
         <button class="btn btn-fantasma" id="btnStampa">🖨️ Stampa</button>
+        <button class="btn-installa" id="btnInstalla" hidden>📲 Installa l’app</button>
         <button class="badge-utente" id="badgeUtente" hidden>
           <span class="badge-avatar" id="badgeAvatar"></span>
           <span class="badge-nome" id="badgeNome"></span>
@@ -1220,6 +1237,52 @@ function mostraSplashSaluto(u){
 document.getElementById('scuEntra').addEventListener('click',confermaUtente);
 document.getElementById('scuNome').addEventListener('keydown',e=>{ if(e.key==='Enter') confermaUtente(); });
 document.getElementById('badgeUtente').addEventListener('click',()=>mostraSchermataUtente(true));
+
+/* =======================================================
+   INSTALLA L'APP SULLA HOME
+   ======================================================= */
+const btnInstalla = document.getElementById('btnInstalla');
+const isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) && !window.MSStream;
+const giaInstallata = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+let promptInstallazione = null;
+
+if(!giaInstallata){
+  if(isIos){
+    btnInstalla.hidden = false;
+  } else {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      promptInstallazione = e;
+      btnInstalla.hidden = false;
+    });
+    window.addEventListener('appinstalled', () => { btnInstalla.hidden = true; });
+  }
+}
+
+btnInstalla.addEventListener('click', async () => {
+  if(isIos){
+    apriPannello('📲 Installa l\u2019app', 'Aggiungila alla schermata Home', 'Un\u2019icona tutta sua, si apre a schermo intero come un\u2019app vera',
+      '<ol class="passi-installa">'+
+      '<li><span class="icona-passo">⬆️</span>Tocca il tasto <b>Condividi</b> in basso al centro di Safari (il quadrato con la freccia verso l\u2019alto).</li>'+
+      '<li><span class="icona-passo">➕</span>Scorri il menu e tocca <b>Aggiungi a Home</b>.</li>'+
+      '<li><span class="icona-passo">✅</span>Tocca <b>Aggiungi</b> in alto a destra: l\u2019icona compare sulla schermata Home, pronta per essere aperta come un\u2019app.</li>'+
+      '</ol>'+
+      '<div class="nota-box">Funziona solo da Safari (non da Chrome su iPhone) ed è disponibile su questo indirizzo online — se hai scaricato il file, apri prima il link del sito.</div>');
+    return;
+  }
+  if(promptInstallazione){
+    btnInstalla.hidden = true;
+    promptInstallazione.prompt();
+    await promptInstallazione.userChoice;
+    promptInstallazione = null;
+  }
+});
+
+if('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 
 let stato = {
   inizio: oggiISO(),

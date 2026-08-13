@@ -1,0 +1,18 @@
+{
+  "name": "Casa al Mare · Ardea",
+  "short_name": "Casa al Mare",
+  "description": "Il planogramma della settimana al mare: acquagym, ricette, giochi e meteo.",
+  "id": "/Ferragosto-Ardea/",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0C2340",
+  "theme_color": "#0C2340",
+  "lang": "it",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
