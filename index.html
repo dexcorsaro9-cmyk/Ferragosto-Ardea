@@ -47,16 +47,15 @@ button{cursor:pointer}
 
 /* ---------- TENDA / HEADER ---------- */
 .tenda{
-  background:var(--cobalto);
-  background-image:repeating-linear-gradient(90deg,var(--cobalto) 0 26px,#F4F8FF 26px 52px);
-  padding:0;
+  background:var(--ink);
+  padding-top:env(safe-area-inset-top, 0px);
   position:relative;
 }
 .tenda-inner{
   background:var(--ink);
   color:var(--carta);
   margin:0;
-  padding:calc(env(safe-area-inset-top, 0px) + 18px) 20px 20px;
+  padding:18px 20px 20px;
 }
 .wrap{max-width:1420px;margin:0 auto}
 .marchio{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 16px}
@@ -344,7 +343,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .marchio{display:none}
 .hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);margin-bottom:14px;opacity:.9}
 .hdr-titolo em{font-style:normal;color:var(--limone)}
-.hdr-corpo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hdr-corpo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .hdr-utente{display:flex;align-items:center;gap:12px;background:rgba(255,253,246,.1);border:1.5px solid rgba(255,253,246,.3);border-radius:16px;padding:8px 14px 8px 8px;color:var(--carta);transition:background .15s;cursor:pointer}
 .hdr-utente:hover{background:rgba(255,253,246,.18)}
 .hdr-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--limone);flex:none;background:var(--limone)}
@@ -353,7 +352,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .hdr-saluto{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
 .hdr-nome{font-family:var(--display);font-size:17px;text-transform:uppercase;line-height:1}
 .hdr-nomignolo{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.07em;opacity:.55;margin-top:1px}
-.hdr-destra{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
+.hdr-destra{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .pallino-sync{font-family:var(--mono);font-size:10.5px;color:rgba(255,253,246,.6);white-space:nowrap;align-self:center}
 .btn-impostazioni{background:rgba(255,253,246,.12);border:1.5px solid rgba(255,253,246,.3);border-radius:50%;width:38px;height:38px;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none;transition:background .15s}
 .btn-impostazioni:hover{background:rgba(255,253,246,.22)}
@@ -398,7 +397,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .splash-nome{font-family:var(--mono);font-size:15px;opacity:.75;margin-top:2px}
 
 @media (max-width:480px){
-  .hdr-destra{margin-left:0}
+  .hdr-destra{}
   .hdr-nome{font-size:15px}
   .hdr-avatar{width:40px;height:40px}
 }
