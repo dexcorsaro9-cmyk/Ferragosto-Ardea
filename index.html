@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casa al Mare · il planogramma della settimana</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Karla:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --ink:#0C2340;
+  --cobalto:#1B54C7;
+  --acqua:#17A9BC;
+  --limone:#F2C227;
+  --corallo:#EE5B4E;
+  --verde:#2E8B62;
+  --carta:#FFFDF6;
+  --fondo:#E4EFEE;
+  --riga:#BFD6D6;
+  --ombra:0 2px 0 rgba(12,35,64,.14);
+  --display:'Archivo Black', Impact, sans-serif;
+  --testo:'Karla', system-ui, sans-serif;
+  --mono:'Space Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--fondo);
+  color:var(--ink);
+  font-family:var(--testo);
+  font-size:15px;
+  line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--limone);outline-offset:2px}
+
+/* ---------- TENDA / HEADER ---------- */
+.tenda{
+  background:var(--cobalto);
+  background-image:repeating-linear-gradient(90deg,var(--cobalto) 0 26px,#F4F8FF 26px 52px);
+  padding:0;
+  position:relative;
+}
+.tenda-inner{
+  background:var(--ink);
+  color:var(--carta);
+  margin:0;
+  padding:18px 20px 20px;
+}
+.wrap{max-width:1420px;margin:0 auto}
+.marchio{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 16px}
+h1{
+  font-family:var(--display);
+  font-size:clamp(28px,5vw,46px);
+  letter-spacing:-.02em;
+  line-height:.95;
+  margin:0;
+  text-transform:uppercase;
+}
+h1 em{font-style:normal;color:var(--limone)}
+.sottotitolo{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.75;padding-bottom:5px}
+
+.comandi{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
+.campo{display:flex;align-items:center;gap:7px;background:rgba(255,253,246,.1);border:1px solid rgba(255,253,246,.25);border-radius:999px;padding:5px 12px}
+.campo label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;opacity:.8}
+.campo input{background:transparent;border:0;color:var(--carta);font-family:var(--mono);font-size:13px;width:110px}
+.campo input[type=number]{width:44px;text-align:center}
+.campo input::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.6}
+
+.btn{
+  border:2px solid var(--ink);
+  background:var(--carta);
+  color:var(--ink);
+  border-radius:999px;
+  padding:7px 15px;
+  font-weight:800;
+  font-size:13px;
+  box-shadow:var(--ombra);
+  transition:transform .12s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(1px);box-shadow:none}
+.btn-limone{background:var(--limone)}
+.btn-corallo{background:var(--corallo);color:var(--carta);border-color:var(--carta)}
+.btn-fantasma{background:transparent;color:var(--carta);border-color:rgba(255,253,246,.5);box-shadow:none}
+.btn-piccolo{padding:4px 10px;font-size:12px;border-width:1.5px}
+
+/* ---------- NAVIGAZIONE ---------- */
+nav.sezioni{background:var(--ink);border-top:1px solid rgba(255,253,246,.15)}
+.sezioni-inner{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.sezioni-inner::-webkit-scrollbar{display:none}
+.tab{
+  background:transparent;border:0;color:rgba(255,253,246,.65);
+  font-family:var(--display);text-transform:uppercase;font-size:13px;letter-spacing:.03em;
+  padding:13px 16px;white-space:nowrap;border-bottom:4px solid transparent;
+}
+.tab[aria-selected=true]{color:var(--carta);border-bottom-color:var(--limone)}
+
+main{padding:24px 20px 80px}
+.titoletto{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.6;margin:0 0 10px}
+h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transform:uppercase;margin:0 0 4px;letter-spacing:-.01em}
+.intro{margin:0 0 18px;max-width:62ch;opacity:.8}
+
+/* ---------- CABINE ---------- */
+.spiaggia{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;align-items:start}
+.cabina{background:var(--carta);border:2px solid var(--ink);border-radius:10px;overflow:hidden;box-shadow:0 3px 0 rgba(12,35,64,.18);display:flex;flex-direction:column}
+.cabina.oggi{box-shadow:0 3px 0 var(--corallo),0 0 0 3px var(--corallo)}
+.tetto{height:24px;background-image:repeating-linear-gradient(90deg,var(--c) 0 11px,var(--carta) 11px 22px);position:relative;border-bottom:2px solid var(--ink)}
+.frangia{position:absolute;left:-1px;right:-1px;bottom:-9px;height:10px;background:var(--c);z-index:2;
+  -webkit-mask-image:radial-gradient(circle 5.5px at 5.5px 2px,#000 98%,transparent 100%);
+  mask-image:radial-gradient(circle 5.5px at 5.5px 2px,#000 98%,transparent 100%);
+  -webkit-mask-size:11px 100%;mask-size:11px 100%;
+  -webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;}
+.targa{padding:14px 10px 6px;text-align:center;border-bottom:1px dashed var(--riga)}
+.targa .gg{font-family:var(--display);text-transform:uppercase;font-size:15px;line-height:1}
+.targa .dd{font-family:var(--mono);font-size:11px;opacity:.65;letter-spacing:.05em}
+.meteo-mini{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 8px;border-bottom:1px dashed var(--riga);font-family:var(--mono);font-size:11px}
+.meteo-mini svg{width:20px;height:20px;flex:none}
+.meteo-mini b{font-size:12px}
+.meteo-mini .min{opacity:.55}
+
+.slot{
+  display:block;width:100%;text-align:left;background:transparent;border:0;
+  border-bottom:1px dashed var(--riga);padding:8px 10px 9px;position:relative;
+  border-left:5px solid var(--sc,var(--acqua));
+}
+.slot:hover{background:rgba(23,169,188,.07)}
+.slot .riga1{display:flex;align-items:center;gap:6px}
+.slot .ora{font-family:var(--mono);font-size:10px;background:var(--ink);color:var(--carta);padding:1px 5px;border-radius:3px}
+.slot .et{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;opacity:.6}
+.slot .tit{display:block;font-weight:800;font-size:13.5px;line-height:1.25;margin-top:3px}
+.slot .nota{display:block;font-size:11px;opacity:.6;margin-top:1px}
+.cambia{
+  position:absolute;top:6px;right:6px;border:1.5px solid var(--ink);background:var(--carta);
+  border-radius:999px;width:22px;height:22px;line-height:1;font-size:12px;padding:0;opacity:0;
+}
+.slot:hover .cambia,.cambia:focus-visible{opacity:1}
+@media (hover:none){.cambia{opacity:.55}}
+.turno{padding:8px 10px;display:flex;align-items:center;gap:6px;background:rgba(242,194,39,.16)}
+.turno span{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;opacity:.7}
+.turno input{flex:1;min-width:0;border:0;border-bottom:1.5px dotted var(--ink);background:transparent;font-weight:800;font-size:12.5px;padding:1px 2px}
+.turno input::placeholder{font-weight:400;opacity:.45}
+
+/* ---------- SCHEDE GENERICHE ---------- */
+.filtri{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;align-items:center}
+.chip{border:1.5px solid var(--ink);background:var(--carta);border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:600}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--carta)}
+.cerca{border:1.5px solid var(--ink);background:var(--carta);border-radius:999px;padding:5px 14px;min-width:180px}
+
+.griglia{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
+.scheda{
+  background:var(--carta);border:2px solid var(--ink);border-radius:10px;padding:14px;
+  text-align:left;box-shadow:0 3px 0 rgba(12,35,64,.15);display:flex;flex-direction:column;gap:7px;
+  transition:transform .12s ease;
+}
+.scheda:hover{transform:translateY(-2px)}
+.scheda h3{font-family:var(--display);font-size:15px;line-height:1.15;margin:0;text-transform:uppercase;letter-spacing:-.01em}
+.scheda .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;opacity:.65;text-transform:uppercase}
+.scheda .desc{font-size:12.5px;opacity:.8;margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px}
+.tag{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--ink);border-radius:3px;padding:1px 5px}
+.tag.b{background:var(--limone)}
+.tag.c{background:var(--acqua);color:var(--carta);border-color:var(--acqua)}
+.tag.d{background:var(--corallo);color:var(--carta);border-color:var(--corallo)}
+.vuoto{padding:30px;text-align:center;border:2px dashed var(--riga);border-radius:10px;opacity:.75}
+
+/* ---------- METEO ---------- */
+.meteo-testata{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.meteo-griglia{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px}
+.giorno{background:var(--carta);border:2px solid var(--ink);border-radius:10px;padding:12px;box-shadow:0 3px 0 rgba(12,35,64,.15)}
+.giorno .data{font-family:var(--display);text-transform:uppercase;font-size:14px}
+.giorno .cielo{display:flex;align-items:center;gap:10px;margin:8px 0}
+.giorno .cielo svg{width:42px;height:42px;flex:none}
+.gradi{font-family:var(--mono);font-size:20px;font-weight:700;line-height:1}
+.gradi small{font-size:13px;opacity:.5;font-weight:400}
+.desc-cielo{font-size:12px;opacity:.75}
+.indicatore{display:flex;align-items:center;gap:7px;border-top:1px dashed var(--riga);padding-top:7px;margin-top:7px;font-size:12px}
+.pallino{width:9px;height:9px;border-radius:50%;flex:none;border:1px solid rgba(12,35,64,.35)}
+.indicatore .k{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;width:40px;flex:none}
+.uv-badge{font-family:var(--mono);font-weight:700;font-size:11px;padding:1px 6px;border-radius:4px;border:1px solid var(--ink)}
+
+/* ---------- PANNELLO LATERALE ---------- */
+.velo{position:fixed;inset:0;background:rgba(12,35,64,.55);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.velo.on{opacity:1;pointer-events:auto}
+.pannello{
+  position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--carta);z-index:50;
+  transform:translateX(101%);transition:transform .25s ease;display:flex;flex-direction:column;
+  border-left:3px solid var(--ink);
+}
+.pannello.on{transform:none}
+.pannello header{padding:18px 20px 14px;border-bottom:2px solid var(--ink);position:relative;background:var(--limone)}
+.pannello header .kicker{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;opacity:.7}
+.pannello header h3{font-family:var(--display);font-size:clamp(19px,3.4vw,26px);text-transform:uppercase;margin:3px 40px 4px 0;line-height:1.05}
+.pannello header .meta{font-family:var(--mono);font-size:11px;opacity:.7}
+.chiudi{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:var(--carta);font-size:16px;font-weight:800;line-height:1}
+.pannello .corpo{padding:18px 20px 40px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+.pannello h4{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;margin:20px 0 8px;opacity:.6}
+.pannello h4:first-child{margin-top:0}
+.ingredienti{list-style:none;margin:0;padding:0}
+.ingredienti li{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dashed var(--riga)}
+.ingredienti .q{font-family:var(--mono);font-weight:700;white-space:nowrap}
+.passi{margin:0;padding-left:0;list-style:none;counter-reset:p}
+.passi li{counter-increment:p;position:relative;padding-left:34px;margin-bottom:12px}
+.passi li::before{content:counter(p);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--carta);font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center}
+.nota-box{background:rgba(23,169,188,.12);border-left:4px solid var(--acqua);padding:10px 12px;border-radius:0 8px 8px 0;font-size:13.5px}
+.esercizi{list-style:none;margin:0;padding:0}
+.esercizi li{display:flex;gap:12px;padding:9px 0;border-bottom:1px dashed var(--riga)}
+.esercizi .sec{font-family:var(--mono);font-weight:700;font-size:13px;min-width:44px;color:var(--cobalto)}
+.esercizi b{display:block;font-size:14px}
+.esercizi span{font-size:12.5px;opacity:.78}
+.azioni{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;padding-top:16px;border-top:2px solid var(--ink)}
+.assegna{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.assegna select{border:1.5px solid var(--ink);border-radius:8px;padding:6px 10px;background:var(--carta)}
+
+/* ---------- LISTA SPESA ---------- */
+.reparto{font-family:var(--display);text-transform:uppercase;font-size:13px;margin:18px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--ink)}
+.spesa-riga{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px dashed var(--riga)}
+.spesa-riga input{width:18px;height:18px;accent-color:var(--verde);flex:none}
+.spesa-riga.fatto label{text-decoration:line-through;opacity:.45}
+.spesa-riga label{flex:1;cursor:pointer}
+.spesa-riga .q{font-family:var(--mono);font-weight:700;white-space:nowrap}
+
+/* ---------- TIMER ---------- */
+.timer{position:fixed;inset:0;background:var(--ink);color:var(--carta);z-index:70;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.timer.on{display:flex}
+.timer .fase{font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:12px;opacity:.7}
+.timer .conto{font-family:var(--mono);font-weight:700;font-size:clamp(74px,22vw,150px);line-height:1;margin:6px 0 2px}
+.timer.riposo .conto{color:var(--limone)}
+.timer.lavoro .conto{color:var(--acqua)}
+.timer .esNome{font-family:var(--display);text-transform:uppercase;font-size:clamp(20px,5vw,32px);margin:6px 0;max-width:20ch}
+.timer .esDesc{max-width:44ch;opacity:.82;font-size:15px}
+.timer .prossimo{margin-top:16px;font-family:var(--mono);font-size:12px;opacity:.55}
+.barra{width:min(560px,90%);height:6px;background:rgba(255,253,246,.18);border-radius:99px;margin-top:22px;overflow:hidden}
+.barra i{display:block;height:100%;background:var(--limone);width:0}
+.timer .pulsanti{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+
+.piede{max-width:1420px;margin:40px auto 0;padding:16px 20px 0;border-top:1px dashed var(--riga);font-size:12px;opacity:.6}
+
+/* ---------- BADGE UTENTE ---------- */
+.badge-utente{display:flex;align-items:center;gap:8px;background:rgba(255,253,246,.12);border:1.5px solid rgba(255,253,246,.4);border-radius:999px;padding:4px 12px 4px 5px;margin-left:auto;color:var(--carta)}
+.badge-avatar{width:26px;height:26px;border-radius:50%;background:var(--limone);display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.badge-nome{font-weight:800;font-size:13px}
+.badge-cambia{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.55}
+.badge-utente:hover .badge-cambia{opacity:.9}
+
+/* ---------- SCHERMATA CREAZIONE UTENTE ---------- */
+.schermata-utente{position:fixed;inset:0;z-index:90;background:var(--cobalto);background-image:repeating-linear-gradient(90deg,var(--cobalto) 0 26px,#2C63D6 26px 52px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.schermata-utente[hidden]{display:none}
+.scu-carta{background:var(--carta);border:3px solid var(--ink);border-radius:16px;max-width:480px;width:100%;box-shadow:0 8px 0 rgba(12,35,64,.35);overflow:hidden;margin:auto}
+.scu-tenda{height:20px;display:flex}
+.scu-tenda i{flex:1;background:var(--corallo)}
+.scu-tenda i:nth-child(even){background:var(--carta)}
+.scu-corpo{padding:22px 24px 26px}
+.avatar-scelta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 18px}
+.avatar-opzione{aspect-ratio:1;border-radius:50%;border:2.5px solid var(--riga);background:var(--fondo);font-size:26px;display:flex;align-items:center;justify-content:center;transition:transform .12s ease,border-color .12s ease}
+.avatar-opzione:hover{transform:translateY(-2px)}
+.avatar-opzione[aria-pressed=true]{border-color:var(--ink);background:var(--limone);box-shadow:0 3px 0 rgba(12,35,64,.25)}
+.scu-campo{margin-bottom:18px}
+.scu-campo label{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:6px}
+.scu-campo input{width:100%;border:2px solid var(--ink);border-radius:8px;padding:10px 12px;font-size:16px;font-weight:800}
+.btn-grande{width:100%;padding:13px;font-size:15px}
+.scu-nota{font-size:11.5px;opacity:.55;margin:14px 0 0;text-align:center}
+
+/* ---------- SPLASH DI SALUTO ---------- */
+.splash-saluto{position:fixed;inset:0;z-index:95;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;pointer-events:none;transition:opacity .4s ease}
+.splash-saluto.on{opacity:1;pointer-events:auto}
+.splash-avatar{width:96px;height:96px;border-radius:50%;background:var(--limone);display:flex;align-items:center;justify-content:center;font-size:52px;box-shadow:0 5px 0 rgba(0,0,0,.25)}
+.splash-testo{text-align:center;color:var(--carta)}
+.splash-saluto-parola{font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,6vw,38px)}
+.splash-nome{font-family:var(--mono);font-size:15px;opacity:.75;margin-top:2px}
+
+@media (max-width:640px){
+  .avatar-scelta{grid-template-columns:repeat(4,1fr)}
+  .badge-nome{display:none}
+  .badge-utente{padding:4px 10px 4px 4px}
+}
+
+@media (max-width:640px){
+  main{padding:18px 14px 70px}
+  .tenda-inner{padding:14px 14px 16px}
+  .pannello{border-left:0;border-top:3px solid var(--ink);top:auto;height:92vh;border-radius:16px 16px 0 0;transform:translateY(101%)}
+  .pannello.on{transform:none}
+}
+
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body{background:#fff}
+  .tenda-inner{background:#fff;color:#000}
+  nav.sezioni,.comandi,.cambia,.velo,.pannello,.timer,.filtri,.piede{display:none!important}
+  .spiaggia{grid-template-columns:repeat(7,1fr);gap:6px}
+  .cabina{box-shadow:none;break-inside:avoid}
+  .slot .nota{display:none}
+  h1{color:#000}
+  h1 em{color:#000}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="tenda">
+  <div class="tenda-inner">
+    <div class="wrap">
+      <div class="marchio">
+        <h1>Casa al <em>Mare</em></h1>
+        <div class="sottotitolo">Tor San Lorenzo · Ardea</div>
+      </div>
+      <div class="comandi">
+        <div class="campo"><label for="dataInizio">Si parte il</label><input type="date" id="dataInizio"></div>
+        <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
+        <button class="btn btn-limone" id="btnRimescola">Rimescola la settimana</button>
+        <button class="btn" id="btnSpesa">Lista della spesa</button>
+        <button class="btn btn-fantasma" id="btnCopia">Copia per WhatsApp</button>
+        <button class="btn btn-fantasma" id="btnStampa">Stampa</button>
+        <button class="badge-utente" id="badgeUtente" hidden>
+          <span class="badge-avatar" id="badgeAvatar"></span>
+          <span class="badge-nome" id="badgeNome"></span>
+          <span class="badge-cambia">cambia</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="schermata-utente" id="schermataUtente" hidden>
+  <div class="scu-carta">
+    <div class="scu-tenda"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="scu-corpo">
+      <div class="titoletto">Prima di entrare</div>
+      <h2 class="sezione" id="scuTitolo">Chi sei?</h2>
+      <p class="intro" id="scuIntro">Scegli un avatar e scrivi il tuo nome: l’app se lo ricorda su questo telefono, così ogni volta che la apri sa già che sei tu.</p>
+      <div class="avatar-scelta" id="avatarScelta"></div>
+      <div class="scu-campo">
+        <label for="scuNome">Il tuo nome</label>
+        <input type="text" id="scuNome" maxlength="18" placeholder="Come ti chiami?" autocomplete="off">
+      </div>
+      <button class="btn btn-limone btn-grande" id="scuEntra">Entra nell’app</button>
+      <p class="scu-nota">Ogni persona apre l’app dal proprio telefono e si crea il suo profilo: i profili non si mescolano tra un telefono e l’altro.</p>
+    </div>
+  </div>
+</div>
+
+<div class="splash-saluto" id="splashSaluto">
+  <span class="splash-avatar" id="splashAvatar"></span>
+  <div class="splash-testo">
+    <div class="splash-saluto-parola" id="splashParola">Buongiorno</div>
+    <div class="splash-nome" id="splashNome"></div>
+  </div>
+</div>
+
+<nav class="sezioni">
+  <div class="wrap sezioni-inner" role="tablist">
+    <button class="tab" role="tab" data-vista="settimana" aria-selected="true">Settimana</button>
+    <button class="tab" role="tab" data-vista="meteo" aria-selected="false">Meteo 10 giorni</button>
+    <button class="tab" role="tab" data-vista="ricette" aria-selected="false">50 ricette</button>
+    <button class="tab" role="tab" data-vista="giochi" aria-selected="false">50 giochi</button>
+    <button class="tab" role="tab" data-vista="piscina" aria-selected="false">20 acquagym</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="v-settimana">
+    <h2 class="sezione">Il planogramma</h2>
+    <p class="intro">Ogni cabina è un giorno: acquagym in piscina la mattina, pranzo, cena, dolce e il gioco della sera. Tocca una riga per aprire la scheda, usa <b>⟳</b> per cambiarla, scrivi chi sta ai fornelli.</p>
+    <div class="spiaggia" id="spiaggia"></div>
+  </section>
+
+  <section id="v-meteo" hidden>
+    <h2 class="sezione">Meteo dei prossimi 10 giorni</h2>
+    <div class="meteo-testata">
+      <p class="intro" style="margin:0">Previsioni per la costa di Ardea, con due indicatori che servono davvero: com'è il mare e quanto tira il vento nel pomeriggio.</p>
+      <button class="btn btn-piccolo" id="btnMeteo">Aggiorna</button>
+    </div>
+    <div id="meteoContenuto"><div class="vuoto">Carico le previsioni…</div></div>
+  </section>
+
+  <section id="v-ricette" hidden>
+    <h2 class="sezione">Ricette estive</h2>
+    <p class="intro">Cinquanta piatti pensati per una casa piena di gente. Le quantità si adattano da sole al numero di persone che hai impostato in alto.</p>
+    <div class="filtri" id="filtriRicette"></div>
+    <div class="griglia" id="grigliaRicette"></div>
+  </section>
+
+  <section id="v-giochi" hidden>
+    <h2 class="sezione">Giochi da fare tutti insieme</h2>
+    <p class="intro">Cinquanta giochi che chiedono pochissimi oggetti: quasi tutto si fa con foglietti, una palla o niente del tutto.</p>
+    <div class="filtri" id="filtriGiochi">
+      <button class="btn btn-corallo" id="btnCasuale">Cosa giochiamo stasera?</button>
+    </div>
+    <div class="griglia" id="grigliaGiochi"></div>
+  </section>
+
+  <section id="v-piscina" hidden>
+    <h2 class="sezione">Acquagym in piscina</h2>
+    <p class="intro">Venti lezioni a rotazione, su tre intensità. Ogni scheda ha il timer integrato: parte da sola da un esercizio all'altro, così nessuno deve stare a guardare l'orologio.</p>
+    <div class="filtri" id="filtriPiscina"></div>
+    <div class="griglia" id="grigliaPiscina"></div>
+  </section>
+
+  <div class="piede">Le previsioni arrivano da Open-Meteo e si aggiornano da sole. Tutto il resto vive dentro questo file: puoi salvarlo, mandarlo su WhatsApp e aprirlo anche senza connessione.</div>
+</main>
+
+<div class="velo" id="velo"></div>
+<aside class="pannello" id="pannello" role="dialog" aria-modal="true" aria-labelledby="pannelloTitolo">
+  <header>
+    <div class="kicker" id="pannelloKicker"></div>
+    <h3 id="pannelloTitolo"></h3>
+    <div class="meta" id="pannelloMeta"></div>
+    <button class="chiudi" id="btnChiudi" aria-label="Chiudi">✕</button>
+  </header>
+  <div class="corpo" id="pannelloCorpo"></div>
+</aside>
+
+<div class="timer" id="timer" aria-live="polite">
+  <div class="fase" id="tFase">Preparati</div>
+  <div class="conto" id="tConto">10</div>
+  <div class="esNome" id="tNome"></div>
+  <div class="esDesc" id="tDesc"></div>
+  <div class="prossimo" id="tProssimo"></div>
+  <div class="barra"><i id="tBarra"></i></div>
+  <div class="pulsanti">
+    <button class="btn btn-limone" id="tPausa">Pausa</button>
+    <button class="btn" id="tSalta">Salta</button>
+    <button class="btn btn-corallo" id="tStop">Chiudi</button>
+  </div>
+</div>
+
+<script>
+/* 50 ricette estive — quantità PER PERSONA, l'app le moltiplica.
+   m = momento: pranzo | cena | dolce
+   tg = tag: sf senza forno · ve pronti in 10' · gr grigliata · pu piatto unico/da spiaggia · vg vegetariano · pe pesce
+   reparti: V verdura · P pescheria · C macelleria · L latticini/uova · D dispensa · B pane/forno · X altro */
+const R = (n, m, t, tg, ing, p) => ({
+  n, m, t, tg,
+  ing: ing.map(([q, u, nm, r]) => ({ q, u, n: nm, r })),
+  p
+});
+
+window.RICETTE = [
+
+/* ---------- PRANZI, FREDDI, PIATTI UNICI ---------- */
+
+R('Insalata di riso della cambusa','pranzo','25 min + frigo',['sf','pu','ve'],
+[[80,'g','riso','D'],[40,'g','tonno sott\'olio','D'],[60,'g','pomodorini','V'],[25,'g','mais','D'],[15,'g','olive verdi','D'],[0.5,'pz','uova','L'],[20,'g','sottaceti misti','D'],[1,'qb','olio e basilico','D']],
+['Lessa il riso in acqua salata, scolalo al dente e raffreddalo sotto l\'acqua fredda.','Condisci subito con un filo d\'olio così non si attacca, poi unisci tutto il resto tagliato a pezzetti.','Un\'ora in frigo prima di servire: guadagna moltissimo.']),
+
+R('Panzanella','pranzo','15 min',['sf','vg','pu'],
+[[70,'g','pane raffermo','B'],[150,'g','pomodori maturi','V'],[20,'g','cipolla rossa','V'],[50,'g','cetrioli','V'],[1,'qb','basilico, aceto, olio','D']],
+['Bagna il pane in acqua fredda per 5 minuti e strizzalo bene tra le mani.','Sbriciolalo in una ciotola grande con pomodori a spicchi, cetriolo e cipolla affettata sottile.','Condisci con olio, aceto, sale e tanto basilico. Lascia riposare 20 minuti.']),
+
+R('Pasta fredda al pesto di pomodori secchi','pranzo','20 min',['sf','vg','pu'],
+[[90,'g','pasta corta','D'],[25,'g','pomodori secchi','D'],[15,'g','mandorle','D'],[15,'g','parmigiano','L'],[50,'g','pomodorini','V'],[40,'g','ciliegine di mozzarella','L']],
+['Frulla pomodori secchi ammollati, mandorle, parmigiano, basilico e olio fino a crema.','Cuoci la pasta, scolala al dente e raffreddala sotto l\'acqua.','Manteca con il pesto, unisci pomodorini e ciliegine. Ottima anche tiepida.']),
+
+R('Insalata di farro, feta e cetrioli','pranzo','20 min',['sf','vg','pu'],
+[[70,'g','farro','D'],[40,'g','feta','L'],[60,'g','cetrioli','V'],[60,'g','pomodorini','V'],[15,'g','olive nere','D'],[1,'qb','menta e limone','V']],
+['Lessa il farro, scolalo e stendilo su un vassoio per raffreddarlo in fretta.','Unisci cetrioli a mezzaluna, pomodorini, olive e feta a cubetti.','Condisci con olio, succo di limone e menta spezzettata a mano.']),
+
+R('Caprese di bufala, crudo e pane','pranzo','10 min',['sf','ve'],
+[[100,'g','mozzarella di bufala','L'],[120,'g','pomodori cuore di bue','V'],[50,'g','prosciutto crudo','C'],[80,'g','pane','B'],[1,'qb','basilico e origano','V']],
+['Affetta i pomodori spessi, salali e lasciali scolare 5 minuti.','Componi il piatto alternando pomodoro, bufala strappata a mano e crudo.','Olio, origano, basilico. Pane a fette accanto e via.']),
+
+R('Cous cous di verdure e gamberi','pranzo','25 min',['sf','pe','pu'],
+[[70,'g','cous cous','D'],[60,'g','gamberi sgusciati','P'],[60,'g','zucchine','V'],[50,'g','peperoni','V'],[30,'g','carote','V'],[1,'qb','limone e menta','V']],
+['Salta le verdure a cubetti piccoli in padella, 6-7 minuti, devono restare croccanti.','Nella stessa padella scotta i gamberi 2 minuti con olio e limone.','Idrata il cous cous con acqua bollente salata pari peso, sgrana con la forchetta e unisci tutto.']),
+
+R('Frittata di zucchine e menta','pranzo','20 min',['vg','ve'],
+[[1.5,'pz','uova','L'],[80,'g','zucchine','V'],[15,'g','parmigiano','L'],[1,'qb','menta','V'],[40,'g','insalata mista','V']],
+['Rosola le zucchine a rondelle sottili finché non prendono colore.','Sbatti le uova con parmigiano, sale e menta, versale in padella.','Cuoci a fuoco basso, gira con l\'aiuto di un piatto. Buonissima fredda il giorno dopo.']),
+
+R('Gazpacho all\'italiana','pranzo','15 min + frigo',['sf','vg','ve'],
+[[200,'g','pomodori maturi','V'],[50,'g','cetrioli','V'],[40,'g','peperoni','V'],[15,'g','cipollotto','V'],[20,'g','pane raffermo','B'],[25,'g','tarallini','B']],
+['Frulla pomodori, cetriolo, peperone, cipollotto e pane ammollato con olio e un goccio di aceto.','Passa al colino se lo vuoi vellutato, poi almeno 2 ore in frigo.','Servi freddissimo con un filo d\'olio e i tarallini sbriciolati sopra.']),
+
+R('Insalata di pasta tonno, olive e capperi','pranzo','20 min',['sf','pu','ve'],
+[[90,'g','pasta corta','D'],[45,'g','tonno sott\'olio','D'],[20,'g','olive taggiasche','D'],[8,'g','capperi','D'],[60,'g','pomodorini','V'],[1,'qb','origano','D']],
+['Cuoci la pasta molto al dente, raffreddala e ungila subito con olio.','Unisci tonno sgocciolato, olive, capperi dissalati e pomodorini a metà.','Origano e pepe. Regge benissimo in borsa frigo fino a sera.']),
+
+R('Piadine caprese','pranzo','10 min',['vg','ve','pu'],
+[[1.5,'pz','piadine','B'],[70,'g','mozzarella','L'],[80,'g','pomodori','V'],[1,'qb','basilico','V']],
+['Scalda le piadine in padella 1 minuto per lato.','Farcisci con mozzarella scolata, pomodoro a fette salato e basilico.','Piega, taglia a metà, avvolgi nella carta forno per portarle in spiaggia.']),
+
+R('Piadine crudo, rucola e squacquerone','pranzo','10 min',['ve','pu'],
+[[1.5,'pz','piadine','B'],[50,'g','prosciutto crudo','C'],[60,'g','squacquerone','L'],[20,'g','rucola','V']],
+['Scalda le piadine, spalmale con lo squacquerone ancora calde.','Aggiungi crudo e rucola, senza esagerare col sale.','Arrotolale strette e taglia in due.']),
+
+R('Insalata di pollo, mais e sedano','pranzo','25 min',['sf','pu'],
+[[100,'g','petto di pollo','C'],[30,'g','mais','D'],[30,'g','sedano','V'],[40,'g','insalata','V'],[10,'g','maionese o yogurt','L'],[1,'qb','limone','V']],
+['Lessa il petto di pollo 15 minuti con carota e sedano, poi lascialo raffreddare nel suo brodo.','Sfilaccialo a mano e condiscilo con limone, olio e sale.','Unisci sedano a fettine, mais e insalata, lega con un cucchiaio di maionese o yogurt.']),
+
+R('Vitello tonnato veloce','pranzo','20 min + frigo',['sf'],
+[[90,'g','arrosto di vitello a fette','C'],[35,'g','tonno sott\'olio','D'],[15,'g','maionese','D'],[6,'g','capperi','D'],[1,'qb','limone','V']],
+['Frulla tonno, capperi, maionese e qualche goccia di limone fino a salsa liscia.','Disponi le fette di arrosto su un vassoio e coprile con la salsa.','Frigo per almeno un\'ora, capperi interi sopra prima di servire.']),
+
+R('Insalata di orzo, zucchine grigliate e pesto','pranzo','25 min',['vg','pu'],
+[[70,'g','orzo perlato','D'],[90,'g','zucchine','V'],[20,'g','pesto','D'],[30,'g','ricotta salata','L'],[1,'qb','menta','V']],
+['Griglia le zucchine a fette sottili, poi tagliale a striscioline.','Lessa l\'orzo e raffreddalo.','Condisci con pesto allungato con un filo d\'acqua, zucchine e ricotta salata grattugiata.']),
+
+R('Melanzane a funghetto','pranzo','30 min',['vg','sf'],
+[[150,'g','melanzane','V'],[60,'g','pomodorini','V'],[1,'qb','aglio e basilico','V'],[70,'g','pane','B']],
+['Taglia le melanzane a cubi e falle saltare in padella larga con olio e aglio a fuoco vivo.','Quando sono dorate unisci i pomodorini e cuoci 10 minuti.','Basilico a crudo. Da mangiare tiepida col pane, o fredda sotto l\'ombrellone.']),
+
+R('Tramezzini della casa','pranzo','15 min',['sf','ve','pu'],
+[[2,'pz','pane per tramezzini','B'],[30,'g','tonno sott\'olio','D'],[0.5,'pz','uova','L'],[15,'g','maionese','D'],[40,'g','pomodori','V'],[15,'g','insalata','V']],
+['Prepara due farciture: tonno e maionese, uovo sodo e insalata.','Farcisci generosamente al centro, così restano gonfi.','Taglia in diagonale e avvolgi nella pellicola: reggono tutta la mattina in frigo.']),
+
+R('Insalata greca','pranzo','10 min',['sf','vg','ve'],
+[[120,'g','pomodori','V'],[70,'g','cetrioli','V'],[50,'g','feta','L'],[20,'g','olive nere','D'],[20,'g','cipolla rossa','V'],[1,'qb','origano','D']],
+['Taglia pomodori e cetrioli a pezzi grossi, non a cubetti piccoli.','Unisci cipolla affettata e olive.','Feta a fette intere sopra, origano e olio abbondante. Niente aceto.']),
+
+R('Cannellini, tonno e cipolla di Tropea','pranzo','10 min',['sf','ve','pu'],
+[[90,'g','fagioli cannellini lessati','D'],[45,'g','tonno sott\'olio','D'],[25,'g','cipolla di Tropea','V'],[1,'qb','prezzemolo e aceto','V']],
+['Sciacqua i cannellini e scolali bene.','Affetta la cipolla sottilissima e lasciala 10 minuti in acqua e aceto per addolcirla.','Unisci il tonno a pezzi, prezzemolo, olio e pepe.']),
+
+R('Pomodori ripieni di riso','pranzo','1 h',['vg'],
+[[2,'pz','pomodori grandi','V'],[35,'g','riso','D'],[150,'g','patate','V'],[1,'qb','aglio e basilico','V']],
+['Svuota i pomodori, frulla la polpa e mescolala col riso crudo, olio, sale e basilico. Riposo 30 minuti.','Riempi i pomodori per 3/4, coprili col cappello.','Forno 180° per 50 minuti con le patate a spicchi intorno.']),
+
+R('Insalata di ceci, feta e menta','pranzo','10 min',['sf','vg','ve','pu'],
+[[90,'g','ceci lessati','D'],[35,'g','feta','L'],[50,'g','pomodorini','V'],[30,'g','cetrioli','V'],[1,'qb','menta e limone','V']],
+['Scola e sciacqua i ceci.','Unisci pomodorini, cetriolo, feta sbriciolata e menta.','Condisci con olio, limone e pepe. Meglio dopo mezz\'ora di frigo.']),
+
+R('Wrap di verdure grigliate e hummus','pranzo','25 min',['vg','pu'],
+[[1.5,'pz','tortillas','B'],[60,'g','melanzane','V'],[60,'g','zucchine','V'],[40,'g','peperoni','V'],[50,'g','hummus','D'],[15,'g','rucola','V']],
+['Griglia le verdure a fette e condiscile con olio, sale e menta.','Spalma l\'hummus sulla tortilla, aggiungi verdure e rucola.','Arrotola stretto, taglia in due in diagonale.']),
+
+R('Pasta fredda greca','pranzo','20 min',['sf','vg','pu'],
+[[90,'g','pasta corta','D'],[45,'g','feta','L'],[60,'g','pomodorini','V'],[50,'g','cetrioli','V'],[20,'g','olive nere','D'],[1,'qb','origano','D']],
+['Cuoci la pasta al dente e raffreddala.','Unisci cetriolo a cubetti, pomodorini, olive e feta.','Origano, olio, scorza di limone. Meglio prepararla la mattina.']),
+
+R('Insalata di patate, fagiolini e uova','pranzo','30 min',['sf','vg'],
+[[180,'g','patate','V'],[80,'g','fagiolini','V'],[1,'pz','uova','L'],[15,'g','olive','D'],[1,'qb','prezzemolo e aceto','V']],
+['Lessa insieme patate a tocchi e fagiolini, scolali quando sono ancora sodi.','Condisci da tiepidi con olio, aceto e sale: assorbono meglio.','Aggiungi uova sode a spicchi e olive.']),
+
+R('Caponata siciliana','pranzo','45 min',['vg','sf'],
+[[150,'g','melanzane','V'],[40,'g','sedano','V'],[30,'g','cipolla','V'],[60,'g','passata di pomodoro','D'],[15,'g','olive verdi','D'],[8,'g','capperi','D'],[1,'qb','aceto e zucchero','D']],
+['Friggi le melanzane a cubi e scolale su carta.','A parte stufa cipolla e sedano, unisci passata, olive e capperi.','Rimetti le melanzane, sfuma con aceto e un cucchiaino di zucchero. Servila fredda, il giorno dopo è più buona.']),
+
+R('Bruschette in tris','pranzo','20 min',['vg','ve'],
+[[90,'g','pane casereccio','B'],[90,'g','pomodori','V'],[40,'g','ricotta','L'],[25,'g','olive per patè','D'],[1,'qb','aglio e basilico','V']],
+['Tosta il pane e strofinalo con aglio finché è caldo.','Prepara tre ciotole: pomodoro a cubetti, ricotta con scorza di limone, patè di olive.','Ognuno si compone la sua. Condisci solo al momento o il pane si ammolla.']),
+
+R('Focaccia con mortadella e stracciatella','pranzo','15 min',['ve','pu'],
+[[110,'g','focaccia','B'],[50,'g','mortadella','C'],[50,'g','stracciatella','L'],[10,'g','pistacchi','D']],
+['Scalda appena la focaccia e aprila a libro.','Farcisci con stracciatella, mortadella a velo e pistacchi tritati.','Taglia a quadrotti e servi subito.']),
+
+R('Riso venere con gamberi e avocado','pranzo','30 min',['pe','pu','sf'],
+[[70,'g','riso venere','D'],[60,'g','gamberi','P'],[50,'g','avocado','V'],[50,'g','pomodorini','V'],[1,'qb','lime','V']],
+['Lessa il riso venere (ci mette 35 minuti) e raffreddalo.','Scotta i gamberi 2 minuti in acqua bollente salata, poi in acqua e ghiaccio.','Unisci avocado a cubi e pomodorini, condisci con olio, lime e sale.']),
+
+R('Bresaola, rucola e grana','pranzo','5 min',['sf','ve'],
+[[60,'g','bresaola','C'],[20,'g','rucola','V'],[20,'g','grana a scaglie','L'],[1,'qb','limone','V']],
+['Disponi la bresaola a raggiera sul piatto.','Al centro rucola condita con olio, limone e sale.','Scaglie di grana sopra e pepe macinato al momento.']),
+
+R('Zucchine alla scapece e mozzarella','pranzo','30 min',['vg','sf'],
+[[150,'g','zucchine','V'],[90,'g','mozzarella','L'],[1,'qb','menta, aglio, aceto','V'],[70,'g','pane','B']],
+['Friggi le zucchine a rondelle sottili e scolale.','Condiscile da calde con aceto, menta, aglio a lamelle e sale. Riposo un\'ora.','Servi con mozzarella e pane.']),
+
+R('Insalata di mare con patate e sedano','pranzo','35 min',['pe','sf'],
+[[150,'g','misto di mare surgelato','P'],[100,'g','patate','V'],[30,'g','sedano','V'],[1,'qb','prezzemolo e limone','V']],
+['Lessa il misto di mare 8-10 minuti in acqua con limone, scolalo.','Lessa le patate a cubi tenendole sode.','Condisci tutto da tiepido con olio, limone, prezzemolo e sedano a fettine.']),
+
+/* ---------- CENE ---------- */
+
+R('Spaghetti alle vongole','cena','35 min',['pe'],
+[[90,'g','spaghetti','D'],[200,'g','vongole','P'],[1,'qb','aglio, prezzemolo, peperoncino','V'],[20,'ml','vino bianco','X']],
+['Fai spurgare le vongole in acqua e sale grosso per un paio d\'ore.','Aprile in padella coperta con aglio e olio, sfuma col vino, filtra l\'acqua e tieni da parte.','Salta gli spaghetti scolati molto al dente nella padella con l\'acqua delle vongole, manteca e prezzemolo.']),
+
+R('Pesce spada alla griglia con salmoriglio','cena','25 min',['gr','pe'],
+[[180,'g','pesce spada','P'],[0.4,'pz','limoni','V'],[1,'qb','origano e prezzemolo','V'],[60,'g','insalata','V']],
+['Prepara il salmoriglio: olio, succo di limone, origano, prezzemolo, sale, emulsionati con un goccio d\'acqua tiepida.','Griglia le fette 2-3 minuti per lato su piastra rovente, non di più.','Spennella subito col salmoriglio e servi con insalata.']),
+
+R('Parmigiana di melanzane','cena','1 h 30',['vg'],
+[[250,'g','melanzane','V'],[150,'g','passata di pomodoro','D'],[60,'g','mozzarella','L'],[25,'g','parmigiano','L'],[1,'qb','basilico','V']],
+['Friggi o griglia le melanzane a fette e falle asciugare su carta.','Prepara un sugo semplice con passata, aglio e basilico, 20 minuti.','Alterna gli strati, ultimo di sugo e parmigiano. Forno 180° per 40 minuti, poi riposo 20 minuti prima di tagliare.']),
+
+R('Grigliata mista','cena','45 min',['gr'],
+[[100,'g','salsicce','C'],[150,'g','costine o pollo','C'],[80,'g','zucchine','V'],[60,'g','peperoni','V'],[60,'g','pane','B']],
+['Accendi il fuoco 40 minuti prima: serve brace, non fiamma.','Comincia dalle carni più lunghe (costine), poi salsicce, per ultime le verdure a fette.','Sala solo a fine cottura. Pane sulla griglia negli ultimi minuti.']),
+
+R('Polpo e patate','cena','1 h',['pe','sf'],
+[[180,'g','polpo','P'],[200,'g','patate','V'],[10,'g','olive taggiasche','D'],[1,'qb','prezzemolo e limone','V']],
+['Cuoci il polpo in acqua non salata 40 minuti, poi lascialo raffreddare nella sua acqua: resta morbido.','Lessa le patate a tocchi.','Taglia il polpo, condisci tutto con olio, limone, prezzemolo e olive. Tiepido o freddo.']),
+
+R('Pasta alla Norma','cena','40 min',['vg'],
+[[90,'g','pasta','D'],[120,'g','melanzane','V'],[120,'g','passata di pomodoro','D'],[20,'g','ricotta salata','L'],[1,'qb','basilico','V']],
+['Friggi le melanzane a cubi e tienile da parte.','Sugo veloce di passata, aglio e basilico.','Condisci la pasta, aggiungi le melanzane e finisci con ricotta salata grattugiata in abbondanza.']),
+
+R('Serata pizza fatta in casa','cena','3 h (lievitazione)',['vg']  ,
+[[130,'g','farina','D'],[1,'g','lievito di birra secco','D'],[70,'g','passata di pomodoro','D'],[70,'g','mozzarella','L'],[1,'qb','origano e olio','D']],
+['Impasta farina, acqua (60%), lievito e sale. Lievitazione 3 ore, o tutta la mattina in frigo.','Stendi a mano su teglie unte, condisci col pomodoro.','Forno al massimo, mozzarella solo negli ultimi 5 minuti. Sforna e infila subito la successiva.']),
+
+R('Linguine al limone e gamberi','cena','25 min',['pe','ve'],
+[[90,'g','linguine','D'],[80,'g','gamberi','P'],[0.4,'pz','limoni','V'],[50,'g','zucchine','V'],[20,'g','robiola','L']],
+['Salta le zucchine a julienne, poi unisci i gamberi per 2 minuti.','Sciogli la robiola con scorza e succo di limone e un mestolo di acqua di cottura.','Manteca le linguine nella crema, pepe abbondante.']),
+
+R('Orata al cartoccio','cena','45 min',['pe'],
+[[250,'g','orate','P'],[80,'g','pomodorini','V'],[15,'g','olive','D'],[0.3,'pz','limoni','V'],[150,'g','patate','V']],
+['Pulisci le orate e mettile su un foglio di carta forno con pomodorini, olive, limone e un rametto di rosmarino.','Chiudi il cartoccio sigillando bene i bordi.','Forno 200° per 25-30 minuti, con le patate a spicchi in una teglia a parte.']),
+
+R('Spiedini di pollo alla paprika','cena','30 min + marinatura',['gr'],
+[[160,'g','petto di pollo','C'],[60,'g','peperoni','V'],[40,'g','cipolla','V'],[1,'qb','paprika, limone, yogurt','D'],[150,'g','patate','V']],
+['Marina il pollo a cubi con yogurt, paprika, limone e olio per almeno un\'ora.','Infila sugli spiedini alternando peperone e cipolla.','Griglia 10-12 minuti girando spesso. Patate al forno come contorno.']),
+
+R('Paccheri pomodorini e pesce spada','cena','30 min',['pe'],
+[[90,'g','paccheri','D'],[100,'g','pesce spada','P'],[100,'g','pomodorini','V'],[15,'g','mandorle','D'],[1,'qb','menta','V']],
+['Rosola il pesce spada a cubetti 2 minuti e toglilo dalla padella.','Fai il sugo coi pomodorini schiacciati, 10 minuti.','Rimetti il pesce, condisci i paccheri, finisci con mandorle tostate e menta.']),
+
+R('Hamburger di famiglia alla griglia','cena','30 min',['gr'],
+[[150,'g','macinato di manzo','C'],[1,'pz','panini da hamburger','B'],[30,'g','cheddar o provola','L'],[40,'g','pomodori','V'],[20,'g','insalata','V'],[20,'g','cipolla','V']],
+['Forma gli hamburger senza lavorare troppo la carne, spessi 2 cm, e falli riposare in frigo.','Griglia 3-4 minuti per lato, formaggio sopra all\'ultimo minuto.','Tosta i panini sulla griglia e monta con insalata, pomodoro e cipolla.']),
+
+R('Calamari grigliati e insalata di rucola','cena','25 min',['gr','pe','ve'],
+[[180,'g','calamari puliti','P'],[25,'g','rucola','V'],[0.3,'pz','limoni','V'],[1,'qb','prezzemolo e aglio','V']],
+['Apri i calamari a libro e incidili a griglia con la punta del coltello.','Piastra rovente, 2 minuti per lato, niente di più o diventano gomma.','Condisci caldi con olio, limone, prezzemolo e aglio tritato. Rucola sotto.']),
+
+R('Risotto al limone e gamberi','cena','35 min',['pe'],
+[[80,'g','riso carnaroli','D'],[70,'g','gamberi','P'],[0.4,'pz','limoni','V'],[20,'g','burro','L'],[20,'ml','vino bianco','X']],
+['Prepara un brodo leggero con le teste dei gamberi, sedano e carota.','Tosta il riso, sfuma col vino, poi brodo poco alla volta per 16 minuti.','Manteca fuori dal fuoco con burro, succo e scorza di limone. Gamberi scottati sopra.']),
+
+R('Cozze alla marinara e bruschette','cena','30 min',['pe','ve'],
+[[350,'g','cozze','P'],[60,'g','pane','B'],[1,'qb','aglio, prezzemolo, peperoncino','V'],[80,'g','pomodorini','V']],
+['Pulisci le cozze raschiando i gusci e togliendo il bisso.','Aprile in pentola larga con aglio, olio e pomodorini, coperchio, 6-7 minuti.','Prezzemolo e pepe, bruschette tostate per raccogliere il fondo.']),
+
+R('Salsicce e peperoni alla griglia','cena','35 min',['gr'],
+[[150,'g','salsicce','C'],[120,'g','peperoni','V'],[70,'g','pane','B'],[1,'qb','origano','D']],
+['Punzecchia appena le salsicce e mettile sulla parte meno calda della brace.','Griglia i peperoni interi finché la buccia non si annerisce, poi spellali e condiscili con olio e aglio.','Servi insieme, col pane abbrustolito.']),
+
+R('Spaghetti aglio, olio, peperoncino e alici','cena','15 min',['ve'],
+[[90,'g','spaghetti','D'],[3,'g','filetti di alici','D'],[1,'qb','aglio e peperoncino','V'],[15,'g','pangrattato','D']],
+['Scalda olio, aglio e peperoncino a fuoco bassissimo, sciogli le alici.','Tosta il pangrattato a parte in padella asciutta.','Salta gli spaghetti nel condimento con acqua di cottura, pangrattato sopra. La cena delle 23.']),
+
+R('Tagliata di manzo e verdure gratinate','cena','40 min',['gr'],
+[[180,'g','controfiletto di manzo','C'],[100,'g','zucchine','V'],[80,'g','melanzane','V'],[20,'g','pangrattato','D'],[20,'g','rucola','V']],
+['Condisci le verdure a fette con pangrattato, origano e olio, forno 200° per 20 minuti.','Cuoci la carne su piastra rovente 3 minuti per lato, poi 5 minuti di riposo coperta.','Taglia a fette contro fibra, sale grosso, rucola e olio.']),
+
+R('Pollo al limone in padella','cena','30 min',['ve'],
+[[160,'g','petto di pollo','C'],[0.5,'pz','limoni','V'],[10,'g','farina','D'],[1,'qb','prezzemolo','V'],[150,'g','patate','V']],
+['Infarina leggermente le fettine e rosolale 2 minuti per lato.','Sfuma col succo di limone e mezzo bicchiere d\'acqua, fai restringere.','Prezzemolo e servi con patate lesse o insalata.']),
+
+/* ---------- DOLCI ---------- */
+
+R('Tiramisù freddo senza cottura','dolce','25 min + frigo',['sf','vg'],
+[[80,'g','mascarpone','L'],[0.7,'pz','uova','L'],[20,'g','zucchero','D'],[4,'pz','savoiardi','D'],[60,'ml','caffè','X'],[1,'qb','cacao amaro','D']],
+['Monta i tuorli con lo zucchero, unisci il mascarpone e infine gli albumi a neve.','Inzuppa i savoiardi nel caffè freddo, velocemente.','Alterna due strati, cacao solo al momento di servire. Almeno 4 ore in frigo.']),
+
+R('Granita al caffè con panna','dolce','10 min + freezer',['sf','vg'],
+[[100,'ml','caffè','X'],[15,'g','zucchero','D'],[40,'g','panna da montare','L']],
+['Zucchera il caffè da caldo e mettilo in una teglia bassa nel freezer.','Ogni 30 minuti raschialo con la forchetta, per 3 ore.','Servi in bicchiere con panna montata poco zuccherata.']),
+
+R('Macedonia anguria e menta','dolce','15 min',['sf','vg','ve'],
+[[250,'g','anguria','V'],[80,'g','pesche','V'],[0.3,'pz','lime','V'],[1,'qb','menta','V']],
+['Taglia anguria e pesche a cubi regolari.','Condisci con succo di lime e menta spezzettata a mano.','Mezz\'ora in frigo. Zucchero solo se la frutta non è matura.']),
+
+R('Coppa yogurt, pesche e amaretti','dolce','10 min',['sf','vg','ve'],
+[[120,'g','yogurt greco','L'],[90,'g','pesche','V'],[20,'g','amaretti','D'],[10,'g','miele','D']],
+['Mescola lo yogurt col miele.','Alterna nei bicchieri yogurt, pesche a cubetti e amaretti sbriciolati.','Assembla all\'ultimo o gli amaretti si ammollano.']),
+
+R('Crostata di frutta furba','dolce','30 min',['vg'],
+[[35,'g','pasta frolla pronta','D'],[60,'g','crema pasticcera','L'],[80,'g','frutta di stagione','V'],[10,'g','gelatina o marmellata','D']],
+['Cuoci il guscio di frolla in bianco con i legumi sopra, 15 minuti a 180°.','Farcisci con la crema fredda.','Frutta a fette a raggiera, lucida con marmellata scaldata e allungata con acqua.'])
+
+];
+/* 50 giochi — c = categoria: spiaggia | tavola | movimento */
+const G = (n, c, d, g, m, come, v) => ({ n, c, d, g, m, come, v });
+
+window.GIOCHI = [
+
+/* ---------- SOTTO L'OMBRELLONE ---------- */
+
+G('Nomi cose città lampo','spiaggia','15 min','3-12','Foglietti e penne',
+['Si sceglie una lettera a caso e si parte: nome, cosa, città, animale, mestiere, cibo.','Il primo che finisce grida stop, gli altri posano la penna dove sono arrivati.','10 punti per risposta unica, 5 se qualcun altro ha scritto la stessa, 0 se è vuota.'],
+'Versione mare: categorie tutte marine — pesce, isola, cosa che galleggia, tormentone estivo.'),
+
+G('Indovina chi sono','spiaggia','20 min','4-15','Post-it o foglietti e nastro',
+['Ognuno scrive un personaggio famoso e lo attacca sulla fronte del vicino, senza fargliela vedere.','A turno si fa una domanda a cui si può rispondere solo sì o no.','Se la risposta è sì si continua a chiedere, se è no passa il turno.'],
+'Variante di famiglia: invece dei personaggi famosi si scrivono i parenti presenti. Litigate assicurate.'),
+
+G('Venti domande','spiaggia','10 min','2-12','Niente',
+['Uno pensa a un oggetto, una persona o un luogo.','Gli altri hanno venti domande da sì/no per indovinare.','Chi indovina pensa il prossimo. Se finiscono le domande vince chi ha pensato.'],
+'Per i più piccoli: si parte dicendo se è animale, vegetale o minerale.'),
+
+G('Chi è più probabile che…','spiaggia','20 min','5-15','Niente',
+['A turno si legge una frase: "chi è più probabile che si addormenti sul lettino?"','Al tre tutti puntano il dito verso qualcuno.','Chi riceve più dita si prende un punto-penitenza: un tuffo, un caffè da offrire, una canzone da cantare.'],
+'Preparate prima venti frasi su un foglio, altrimenti a metà gioco non ne viene più in mente nessuna.'),
+
+G('Parola proibita','spiaggia','20 min','6-14','Foglietti scritti a mano',
+['Si scrivono su bigliettini una parola da far indovinare e tre parole vietate.','Chi pesca deve far indovinare alla sua squadra senza usare le parole vietate né gesti.','Un minuto a turno, un punto per ogni parola indovinata.'],
+'Le carte le preparano i ragazzi: sono sempre le più cattive.'),
+
+G('Catena di parole','spiaggia','10 min','3-12','Niente',
+['Si parte da una parola, il successivo ne dice una che comincia con l\'ultima sillaba.','Chi ci mette più di tre secondi o ripete una parola già detta è fuori.','Si va avanti finché resta uno solo.'],
+'Versione difficile: solo parole di una categoria, tipo cibo o città.'),
+
+G('Un due tre stella sul bagnasciuga','spiaggia','15 min','5-15','Niente',
+['Uno sta girato verso il mare e conta, gli altri avanzano dalla riva.','Quando si gira, chi si muove torna indietro. Sulla sabbia bagnata scivolare è facilissimo.','Vince chi tocca per primo chi conta.'],
+'Se c\'è onda si gioca in acqua bassa: molto più difficile stare immobili.'),
+
+G('Torneo di racchettoni','spiaggia','40 min','4-12','Racchettoni e palline',
+['Si gioca a coppie, non a punti ma a scambi: quanti colpi riuscite a fare senza far cadere la pallina.','Ogni coppia ha tre tentativi, si segna il record.','Tabellone appeso all\'ombrellone, si sfida il record per tutta la settimana.'],
+'Handicap per i più piccoli: si può far rimbalzare la pallina una volta a terra.'),
+
+G('Beach volley con palla morbida','spiaggia','30 min','6-14','Palla leggera, una corda o due asciugamani',
+['Campo delimitato con gli asciugamani, rete anche solo immaginaria.','Squadre miste per età, si gioca a 15 punti.','Regola della casa: chi ha meno di dieci anni può prendere la palla anche al secondo rimbalzo.'],
+'Se siete in tanti: rotazione obbligatoria, chi sbaglia esce e entra chi è in panchina.'),
+
+G('Castelli di sabbia a squadre','spiaggia','45 min','4-16','Secchielli, palette, conchiglie',
+['Squadre da tre, mezz\'ora di tempo, tema estratto a sorte: castello, animale marino, faccia di un parente.','Una giuria di due persone assegna i voti come a un talent.','Premio simbolico: il vincitore decide il gelato di tutti.'],
+'Fotografate tutto: al prossimo Natale è materiale prezioso.'),
+
+G('Sto pensando a qualcosa di…','spiaggia','10 min','3-10','Niente',
+['Chi guida dice "sto pensando a qualcosa di blu" guardandosi intorno.','Gli altri fanno ipotesi guardando solo ciò che si vede dall\'ombrellone.','Chi indovina guida il turno dopo.'],
+'Perfetto per i bambini piccoli, dura esattamente il tempo di digerire.'),
+
+G('Battaglia navale','spiaggia','20 min','2 (a coppie 4)','Fogli a quadretti e penne',
+['Ognuno disegna due griglie 10x10 e piazza le navi senza farle vedere.','A turno si chiama una casella: acqua, colpito o affondato.','Vince chi affonda per primo tutta la flotta avversaria.'],
+'A coppie: due contro due, ci si consulta a bassa voce. Molto più divertente.'),
+
+G('Tris gigante con le conchiglie','spiaggia','10 min','2-6','Conchiglie e sassolini',
+['Si disegna la griglia sulla sabbia bagnata col dito.','Una squadra usa le conchiglie, l\'altra i sassolini.','Chi vince resta in campo e sfida il prossimo.'],
+'Versione grande: griglia da 5x5, servono cinque simboli in fila.'),
+
+G('Indovina la canzone in 5 secondi','spiaggia','25 min','4-14','Uno smartphone e una cassa',
+['A turno uno mette cinque secondi di una canzone.','Il primo che alza la mano prova a indovinare titolo e artista.','Due punti se azzecca entrambi, uno solo per il titolo.'],
+'Girone dei nonni: solo canzoni prima del 1980. Vincono sempre loro.'),
+
+G('Bocce sulla battigia','spiaggia','30 min','2-10','Bocce o palline da tennis',
+['Si lancia il pallino sulla sabbia compatta vicino alla riva.','Ogni giocatore ha due bocce, si gioca a 12 punti.','Vale solo la boccia più vicina, come sempre.'],
+'Il punto si misura con l\'infradito: ha la stessa autorevolezza del metro.'),
+
+G('Forza quattro con i tappi','spiaggia','15 min','2-8','Tappi di bottiglia di due colori',
+['Griglia disegnata sulla sabbia, sette colonne.','Si inseriscono i tappi dal basso come nel gioco vero.','Quattro in fila in qualsiasi direzione e si vince.'],
+'Torneo a eliminazione diretta con tabellone disegnato accanto.'),
+
+G('Il gioco del silenzio','spiaggia','5-30 min','2-15','Niente',
+['Al via tutti in silenzio assoluto.','Chi parla o ride per primo perde.','Il premio lo decidono i genitori, tipicamente un gelato.'],
+'Onesto: è un gioco inventato dai genitori per riposare dieci minuti. Funziona benissimo.'),
+
+/* ---------- DA TAVOLA / DOPO CENA ---------- */
+
+G('Sciarada, il mimo a squadre','tavola','40 min','6-16','Bigliettini e un timer',
+['Due squadre, ognuna scrive dieci titoli di film, libri o canzoni per gli avversari.','A turno si mima un titolo, senza parlare né disegnare, un minuto a testa.','Un punto per ogni titolo indovinato dalla propria squadra.'],
+'Secondo giro con gli stessi bigliettini ma una sola parola per descriverli. Terzo giro: solo mimo. Diventa esilarante.'),
+
+G('Lupus in fabula','tavola','40 min','7-16','Un mazzo di carte o bigliettini',
+['Si assegnano in segreto i ruoli: lupi, veggente, medico, cittadini.','Di notte i lupi scelgono una vittima, il veggente scopre un\'identità.','Di giorno il paese discute e vota chi eliminare. Vincono i lupi se restano in parità.'],
+'Serve un narratore paziente. Il ruolo perfetto per chi non vuole giocare ma vuole comandare.'),
+
+G('Delitto in casa','tavola','20 min','6-15','Niente',
+['Tutti in cerchio, uno esce e gli altri scelgono l\'assassino.','L\'assassino uccide facendo l\'occhiolino a qualcuno, che deve "morire" in modo teatrale entro cinque secondi.','L\'investigatore ha tre tentativi per scoprire chi è.'],
+'Punteggio alla drammaticità delle morti: si vince anche morendo bene.'),
+
+G('Doblone, il dado bugiardo','tavola','30 min','3-10','Cinque dadi a testa e un bicchiere',
+['Ognuno scuote i dadi sotto il bicchiere e guarda solo i suoi.','Si dichiara a salire: "ci sono cinque tre" contando tutti i dadi del tavolo.','Chi non ci crede dice dubito: si scoprono i dadi, chi ha torto perde un dado.'],
+'Chi resta senza dadi è fuori. Se non avete i dadi vanno benissimo delle carte.'),
+
+G('Telefono senza fili disegnato','tavola','30 min','5-12','Un foglio a testa e penne',
+['Ognuno scrive una frase in cima al foglio e passa a destra.','Il vicino la disegna, piega la frase e passa. Il successivo scrive cosa vede, piega il disegno, passa.','Si va avanti fino a esaurire il foglio, poi si aprono tutti e si legge il disastro.'],
+'La frase iniziale deve essere concreta e assurda: "il nonno balla il tango con un polpo".'),
+
+G('Quiz di famiglia','tavola','40 min','6-16','Foglietti, penne, un presentatore',
+['Il presentatore prepara venti domande sui presenti: chi russa di più, chi è arrivato ultimo in spiaggia, chi ha fatto la patente a che età.','Si gioca a squadre miste, risposte scritte.','Punto pieno se azzeccata, mezzo punto se ci si va vicino. Decide il presentatore, insindacabile.'],
+'Chiedete in anticipo ai nonni tre aneddoti a testa: il round finale sarà il migliore.'),
+
+G('Tombola estiva con pegni','tavola','40 min','6-20','Tombola o cartelle fatte a mano',
+['Tombola classica, ma invece dei soldi si vincono pegni.','Ambo: scegli la musica per la cena. Terno: sei esonerato dai piatti. Cinquina: colazione servita a letto.','Tombola: decidi il programma di un\'intera giornata.'],
+'Se non avete la tombola: numeri su foglietti in un cappello e cartelle disegnate a mano.'),
+
+G('Il gioco del dizionario','tavola','35 min','4-10','Un vocabolario, foglietti, penne',
+['Uno cerca una parola oscura e la legge ad alta voce.','Tutti scrivono una definizione inventata ma credibile, lui copia quella vera.','Si leggono tutte mescolate e si vota: punti a chi indovina la vera e a chi inganna gli altri.'],
+'Vale anche col dizionario del telefono, ma il vocabolario di casa fa più atmosfera.'),
+
+G('Due verità e una bugia','tavola','25 min','4-14','Niente',
+['A turno si raccontano tre cose di sé: due vere e una falsa.','Gli altri votano quale sia la bugia.','Un punto a chi inganna la maggioranza, un punto a chi la smaschera.'],
+'Con i parenti diventa un archivio di storie di famiglia che nessuno conosceva.'),
+
+G('Storie a dadi','tavola','25 min','3-10','Sei foglietti con parole a caso',
+['Si pescano sei parole a caso, scritte prima da tutti.','Il narratore deve inventare una storia che le contenga tutte, in ordine.','Massimo due minuti, poi tocca al prossimo che continua da dove ha lasciato.'],
+'Registrate la storia col telefono: riascoltarla l\'anno dopo vale il viaggio.'),
+
+G('La valigia della memoria','tavola','15 min','3-12','Niente',
+['"Sono partito per il mare e ho messo in valigia il costume."','Ognuno ripete tutta la lista e aggiunge un oggetto.','Chi sbaglia l\'ordine esce. Vince l\'ultimo che ricorda tutto.'],
+'I nonni vincono quasi sempre. Non è un caso, è allenamento.'),
+
+G('Sette e mezzo coi fagioli','tavola','30 min','3-8','Un mazzo di carte napoletane e fagioli secchi',
+['Si punta coi fagioli, il mazziere distribuisce una carta a testa coperta.','Si chiede carta per avvicinarsi a sette e mezzo senza sballare. Le figure valgono mezzo punto.','Chi supera sette e mezzo perde la puntata.'],
+'Un fagiolo a puntata, cento fagioli a testa: dura giusto una serata.'),
+
+G('Categorie a ritmo','tavola','15 min','4-12','Niente',
+['Tutti battono le mani sulle cosce a tempo, due colpi e uno schiocco.','Si sceglie una categoria e a ogni schiocco uno dice una parola, senza perdere il ritmo.','Chi ripete, esita o sbaglia il tempo perde e sceglie la categoria nuova.'],
+'Accelerate il ritmo ogni giro: dopo cinque minuti è una carneficina.'),
+
+G('Chi ha detto cosa','tavola','30 min','6-14','Foglietti e un cappello',
+['Durante la giornata ognuno annota frasi buffe sentite dire dagli altri.','La sera si pescano e si legge ad alta voce.','Si vota chi l\'ha detta: un punto a chi indovina, un punto a chi non viene riconosciuto.'],
+'Nominate un cronista ufficiale che gira tutto il giorno col taccuino.'),
+
+G('Impiccato a squadre','tavola','20 min','4-14','Foglio grande e pennarello',
+['Una squadra sceglie una parola lunga o una frase, l\'altra chiama le lettere.','Ogni errore aggiunge un pezzo al disegno.','Si può tentare la parola intera in qualsiasi momento, ma sbagliando si perde subito.'],
+'Frasi a tema vacanza: si indovinano prima ma si ride di più.'),
+
+G('Che film è?','tavola','30 min','6-16','Bigliettini',
+['Come la sciarada ma solo film, e si mima anche la locandina.','Squadre da almeno tre, 90 secondi a mimo.','Punti doppi se la squadra indovina in meno di 15 secondi.'],
+'Categoria speciale: film che hanno visto solo i nonni. Livello leggendario.'),
+
+G('Il processo','tavola','35 min','6-14','Niente',
+['Si mette sotto processo qualcosa di assurdo: "l\'ombrellone va chiuso alle 17".','Due squadre: accusa e difesa, dieci minuti per preparare le arringhe.','Un giudice neutrale ascolta e sentenzia. Le obiezioni si urlano.'],
+'Temi migliori: le regole di casa. Si risolvono discussioni vere ridendo.'),
+
+G('Memory dei parenti','tavola','20 min','3-10','Foto stampate o sul telefono',
+['Si raccolgono vecchie foto di famiglia, meglio se imbarazzanti.','A turno si mostra una foto: bisogna dire chi è, dove e in che anno.','Punti a chi ricorda di più. I nonni arbitrano.'],
+'Fatelo l\'ultima sera: finisce sempre in racconti lunghissimi ed è il senso della vacanza.'),
+
+/* ---------- MOVIMENTO, GIARDINO, PISCINA ---------- */
+
+G('Caccia al tesoro express','movimento','30 min','6-16','Una lista scritta a mano',
+['Lista di quindici oggetti da trovare in casa, giardino o spiaggia: qualcosa di rosso, una conchiglia rotta, un tappo, qualcosa che profuma.','Squadre da tre, venti minuti di tempo.','Un punto per oggetto, due punti bonus per il più creativo scelto dalla giuria.'],
+'Versione notturna con le torce del telefono: molto più elettrizzante.'),
+
+G('Caccia al tesoro fotografica','movimento','45 min','4-16','Uno smartphone per squadra',
+['Invece di raccogliere si fotografa: un tramonto, un piede nella sabbia, tre persone che saltano insieme, un cane.','Trenta minuti, poi si proiettano le foto sulla tv o si passa il telefono.','Voto di squadra sulle foto altrui, non sulle proprie.'],
+'Categoria fissa: la foto di gruppo più assurda. Diventa la copertina della vacanza.'),
+
+G('Staffetta con i bicchieri','movimento','20 min','6-16','Bicchieri di plastica e due secchi',
+['Due squadre in fila, un secchio pieno all\'inizio e uno vuoto in fondo.','Ognuno corre con un bicchiere pieno, lo svuota nel secchio e torna.','Dopo tre minuti vince chi ha più acqua nel secchio.'],
+'Versione cattiva: il bicchiere si porta in equilibrio sulla testa.'),
+
+G('Guerra di palloncini d\'acqua','movimento','20 min','6-20','Palloncini riempiti d\'acqua',
+['Si riempiono cinquanta palloncini e si dividono in due basi.','Chi viene colpito conta fino a dieci fermo, poi rientra.','Vince la squadra che finisce per ultima i munizioni.'],
+'Regola sacra: mai in faccia e mai sui nonni. Raccogliete tutti i pezzi alla fine.'),
+
+G('Sedie musicali','movimento','15 min','5-15','Sedie e musica',
+['Sedie in cerchio, una in meno dei giocatori.','Musica accesa: si gira. Musica spenta: tutti seduti.','Chi resta in piedi esce e si toglie una sedia.'],
+'Versione piscina: invece delle sedie, materassini o mattonelle del bordo.'),
+
+G('Percorso a ostacoli a tempo','movimento','30 min','4-14','Sedie, secchi, corde, teli',
+['Si costruisce un percorso con quello che c\'è: slalom tra le sedie, salto nel cerchio, tuffo finale.','Uno alla volta, cronometro alla mano.','Tre tentativi a testa, vale il tempo migliore. Classifica appesa in cucina.'],
+'Ogni giorno si aggiunge un ostacolo nuovo: entro venerdì è diventato Ninja Warrior.'),
+
+G('Tiro alla fune','movimento','15 min','8-20','Una corda robusta e un asciugamano',
+['Due squadre bilanciate, nastro a metà corda e asciugamano a terra come linea.','Al tre si tira. Vince chi porta il nastro oltre la propria linea.','Al meglio delle tre.'],
+'Sull\'erba bagnata o sulla sabbia si scivola: divertente, ma occhio alle mani.'),
+
+G('Palla prigioniera in piscina','movimento','30 min','6-16','Una palla morbida',
+['Due squadre, ognuna in metà piscina.','Chi viene colpito passa dietro la linea avversaria come prigioniero, e può liberarsi colpendo a sua volta.','Vince chi resta con più giocatori dopo dieci minuti.'],
+'In acqua i tiri rallentano: possono giocare tranquillamente anche i più piccoli.'),
+
+G('Pallanuoto casalinga','movimento','30 min','6-14','Una palla e due bacinelle come porte',
+['Due bacinelle galleggianti agli angoli opposti come porte.','Non si può camminare col fondo se si è adulti, i bambini sì.','Partita a otto gol.'],
+'Portiere a rotazione ogni due minuti così tutti stanno un po\' fermi.'),
+
+G('Gara di tuffi con giuria','movimento','25 min','4-14','Cartelli coi voti',
+['Tre tuffi a testa: uno classico, uno buffo, uno a tema estratto a sorte.','Giuria di tre persone con i cartelli dei voti, da 1 a 10.','Si somma, si scarta il voto più alto e il più basso.'],
+'Categoria bomba: si vota solo il volume dello spruzzo.'),
+
+G('Recupera gli oggetti dal fondo','movimento','20 min','3-12','Oggetti che affondano',
+['Si lanciano dieci oggetti sul fondo della piscina, in zona bassa.','Al via si recuperano, un oggetto per immersione.','Vince chi ne raccoglie di più. Chi non se la sente fa il lanciatore.'],
+'A squadre e a staffetta: si parte solo quando il compagno tocca il bordo.'),
+
+G('Corsa nei sacchi con le federe','movimento','15 min','4-14','Federe dei cuscini',
+['Ognuno entra in una federa e la tiene su con le mani.','Si salta fino alla linea e si torna.','Chi cade riparte da dove è caduto.'],
+'A coppie con tre gambe legate da un asciugamano, se le federe non bastano.'),
+
+G('Limbo con la scopa','movimento','20 min','5-16','Un manico di scopa e musica',
+['Due persone reggono il manico, gli altri passano sotto piegandosi all\'indietro.','Ogni giro si abbassa di dieci centimetri.','Chi tocca il manico o cade è eliminato.'],
+'In piscina, con l\'asta appena sopra l\'acqua: si passa anche di lato.'),
+
+G('Statue nell\'acqua','movimento','15 min','5-15','Niente',
+['Come un due tre stella, ma in piscina o in acqua bassa.','Quando chi conta si gira, bisogna restare immobili: le onde tradiscono tutti.','Chi si muove torna indietro di due passi.'],
+'Chi conta può fare finta di girarsi: metà del divertimento è lì.'),
+
+G('Lancio nei bicchieri','movimento','20 min','4-12','Bicchieri di plastica e palline',
+['Piramide di bicchieri pieni d\'acqua a un capo del tavolo.','A turno si lancia la pallina: se entra, chi difende beve un sorso d\'acqua e toglie il bicchiere.','Vince chi svuota per primo il campo avversario.'],
+'Solo acqua e succhi: così giocano anche i ragazzi e finisce bene per tutti.')
+
+];
+/* 20 lezioni di acquagym — liv: soft | brucia | fun
+   es = [nome, come si fa, secondi consigliati] */
+const A = (n, liv, dur, att, play, es) => ({ n, liv, dur, att, play, es: es.map(([e, d, s]) => ({ e, d, s })) });
+
+window.ACQUAGYM = [
+
+/* ---------- SOFT · MATTUTINO ---------- */
+
+A('Risveglio in acqua','soft','25 min','Nessuno','Bossa nova e jazz leggero',[
+['Camminata avanti','Acqua all\'altezza del petto, passi lunghi, braccia che spingono l\'acqua indietro.',60],
+['Camminata all\'indietro','Stessi passi ma al contrario, sguardo avanti, schiena dritta.',45],
+['Cerchi con le braccia','Braccia tese sotto il pelo dell\'acqua, cerchi ampi avanti e poi indietro.',45],
+['Ginocchia al petto','Fermi sul posto, alza un ginocchio alla volta portandolo verso il petto.',45],
+['Torsioni del busto','Piedi larghi e piantati, ruota il busto a destra e sinistra lasciando che le braccia seguano.',45],
+['Calci laterali','Gamba tesa che si apre di lato e torna, aiutandoti con le braccia per stare in equilibrio.',45],
+['Spinte sul posto','Mani a coppa, spingi l\'acqua avanti e indietro come se remassi.',45],
+['Respirazione lunga','In piedi, inspira alzando le braccia fuori dall\'acqua, espira riabbassandole lentamente.',60]
+]),
+
+A('Mobilità e respirazione','soft','25 min','Nessuno','Chill acustico, volume basso',[
+['Passi sul posto','Riscaldamento dolce, talloni che toccano il fondo a ogni passo.',60],
+['Spalle su e giù','Solleva le spalle verso le orecchie e rilasciale, senti l\'acqua che frena il movimento.',40],
+['Collo dolce','Inclina la testa a destra e sinistra, molto lentamente, senza mai forzare.',40],
+['Apertura del petto','Braccia dietro la schiena, mani unite, apri il torace guardando in alto.',45],
+['Anca in cerchio','Un ginocchio sollevato che disegna cerchi larghi, poi cambia gamba.',50],
+['Caviglie','Sollevati sulle punte e torna giù, poi ruota le caviglie una per volta.',45],
+['Allungo laterale','Braccio teso sopra la testa, inclinati di lato scivolando lungo la coscia.',50],
+['Galleggiamento sulla schiena','Se te la senti, lasciati andare a pelo d\'acqua per un minuto. Solo con qualcuno vicino.',60]
+]),
+
+A('Camminata e postura','soft','30 min','Nessuno','Swing e classici italiani',[
+['Camminata normale','Due giri di vasca, sentendo il piede che rulla dal tallone alla punta.',60],
+['Camminata sulle punte','Stesso percorso, in punta di piedi, addome attivo.',45],
+['Camminata sui talloni','Punte sollevate, passi corti, si lavora tutta la parte anteriore della gamba.',45],
+['Passo incrociato','Cammina di lato incrociando una gamba davanti all\'altra.',50],
+['Camminata con spinta','Braccia che spingono l\'acqua all\'indietro a ogni passo, come se remassi camminando.',60],
+['Affondi lenti','Passo lungo avanti, ginocchio piegato, torna su spingendo col tallone.',50],
+['Equilibrio su una gamba','Dieci secondi per gamba, occhi aperti. Poi prova a chiuderli.',50],
+['Allungamento finale','Gamba tesa appoggiata al bordo, busto avanti, respira.',60]
+]),
+
+A('Schiena leggera','soft','30 min','Un noodle (tubo)','Ambient e piano',[
+['Camminata di riscaldamento','Due minuti tranquilli, respirando profondamente.',90],
+['Scivolamento al bordo','Mani sul bordo, braccia tese, allunga la schiena lasciando galleggiare le gambe.',60],
+['Rotazioni del bacino','Noodle sotto le braccia, disegna cerchi larghi col bacino.',50],
+['Ginocchia al petto galleggiando','Con il noodle sotto le ascelle, porta le ginocchia al petto e distendile piano.',50],
+['Pendolo laterale','Gambe unite che oscillano a destra e sinistra come un pendolo.',50],
+['Apertura scapole','Braccia tese avanti sott\'acqua, poi apri largo stringendo le scapole.',45],
+['Camminata con schiena al muro','Schiena appoggiata al bordo, cammina di lato tenendo il contatto.',45],
+['Rilassamento','Appoggiato al noodle, occhi chiusi, respirazione lenta per un minuto.',60]
+]),
+
+A('Gambe e circolazione','soft','30 min','Bordo vasca','Bossa nova',[
+['Camminata veloce','Riscaldamento a passo sostenuto.',75],
+['Talloni ai glutei','Sul posto, porta i talloni dietro verso i glutei alternando.',50],
+['Slancio avanti','Mani al bordo, gamba tesa che va avanti e torna.',45],
+['Slancio laterale','Stessa posizione, gamba che si apre di lato.',45],
+['Slancio indietro','Gamba tesa che va indietro, senza inarcare la schiena.',45],
+['Forbici','Gambe tese davanti che si aprono e chiudono incrociandosi.',50],
+['Pedalata','Schiena al bordo, gambe che pedalano nel vuoto.',60],
+['Punte e talloni','Sollevati sulle punte e torna giù, venti volte, lentamente.',50]
+]),
+
+A('Equilibrio e coordinazione','soft','30 min','Una pallina o un pallone','Playlist anni 60',[
+['Camminata a occhi socchiusi','Piano, sentendo dove sono i piedi.',60],
+['Cicogna','In piedi su una gamba, l\'altra sollevata, dieci secondi per lato.',50],
+['Braccio e gamba opposti','Solleva insieme braccio destro e ginocchio sinistro, poi cambia.',50],
+['Passaggio della palla','In cerchio, passaggi rapidi, chi la fa cadere fa cinque saltelli.',60],
+['Palla sott\'acqua','Spingi il pallone sotto e lascialo risalire controllandolo con le mani.',45],
+['Giro su se stessi','Un giro completo di 360° camminando, poi fermati e trova l\'equilibrio.',45],
+['Camminata su linea','Un piede davanti all\'altro, come su una fune.',50],
+['Stretching in piedi','Allunga polpacci e quadricipiti tenendo il bordo.',60]
+]),
+
+A('Stretching in acqua','soft','25 min','Bordo vasca','Piano solo',[
+['Camminata dolce','Due minuti per scaldare, respirando col naso.',90],
+['Polpacci al bordo','Punta del piede al muro, tallone in basso, spingi il ginocchio avanti.',50],
+['Quadricipite','Afferra la caviglia dietro portando il tallone al gluteo.',50],
+['Ischiocrurali','Tallone appoggiato al bordo, gamba tesa, busto che si avvicina.',50],
+['Adduttori','Gambe larghe, piegati su un lato allungando l\'interno coscia opposto.',50],
+['Schiena','Mani al bordo, sederino indietro, allunga tutta la colonna.',50],
+['Spalle','Braccio disteso davanti al petto, spingilo verso di te con l\'altro.',45],
+['Respirazione finale','Occhi chiusi, cinque respiri lunghissimi. Fine.',60]
+]),
+
+/* ---------- BRUCIA-CALORIE · PRE-APERITIVO ---------- */
+
+A('Aqua HIIT 30/15','brucia','30 min','Nessuno','Dance e house, bpm alto',[
+['Corsa sul posto','Riscaldamento, ginocchia alte, braccia che spingono.',60],
+['Jumping jack in acqua','Salti aprendo e chiudendo gambe e braccia insieme.',30],
+['Ginocchia alte veloci','Il più rapidamente possibile, addome contratto.',30],
+['Sci di fondo','Gambe che scivolano avanti e indietro alternate, braccia opposte.',30],
+['Calci al sedere','Talloni che battono i glutei a ritmo alto.',30],
+['Affondi saltati','Salta cambiando la gamba avanti a ogni salto.',30],
+['Spinta laterale','Salti di lato da sinistra a destra, ampi.',30],
+['Scatto in avanti','Cinque metri di corsa esplosiva, poi torna camminando.',30],
+['Defaticamento','Camminata lenta e respirazione profonda.',90]
+]),
+
+A('Corsa in acqua a intervalli','brucia','30 min','Cintura galleggiante se c\'è','Elettronica ritmata',[
+['Corsa leggera','Tre minuti in acqua alta o media, ritmo comodo.',90],
+['Scatto 20"','Massima intensità per venti secondi.',20],
+['Recupero camminando','Respira e recupera.',40],
+['Scatto 30"','Ancora al massimo, braccia incluse.',30],
+['Recupero','Camminata lenta.',40],
+['Corsa in acqua alta','Se la vasca lo permette, senza toccare il fondo.',60],
+['Scatto finale','Ultimi venti secondi, tutto quello che resta.',20],
+['Defaticamento','Galleggia e respira per due minuti.',90]
+]),
+
+A('Gambe e glutei','brucia','35 min','Bordo vasca','Pop energico',[
+['Corsa sul posto','Riscaldamento di due minuti.',90],
+['Squat in acqua','Piedi larghi, scendi come su una sedia, risali spingendo coi talloni.',45],
+['Squat saltato','Stesso movimento ma risalendo con un salto.',35],
+['Affondo laterale','Passo largo di lato, piega il ginocchio, torna al centro.',45],
+['Slancio glutei','Mani al bordo, gamba tesa che spinge indietro.',45],
+['Calcio laterale','Gamba tesa che si apre di lato, controllata anche al ritorno.',45],
+['Ponte al bordo','Schiena al muro, gambe piegate, spingi il bacino in alto.',45],
+['Camminata sulle punte','Due giri, sentendo bruciare i polpacci.',60],
+['Stretching gambe','Quadricipiti e ischiocrurali al bordo.',90]
+]),
+
+A('Total body con noodle','brucia','35 min','Un noodle a testa','Funk e disco',[
+['Riscaldamento','Camminata veloce con il noodle in mano.',90],
+['Spinta sotto','Noodle davanti con entrambe le mani, spingilo sott\'acqua e risali controllando.',45],
+['Apertura laterale','Noodle sotto le braccia tese, aprilo e chiudilo davanti al petto.',45],
+['Bici seduta','Seduto sul noodle, pedala restando in equilibrio.',60],
+['Forbici sospese','Noodle sotto le ascelle, gambe tese che si aprono e chiudono.',50],
+['Torsioni','Noodle davanti, ruota il busto a destra e sinistra tenendolo sott\'acqua.',45],
+['Rematore','Noodle piegato a U, tira verso il petto e rilascia.',45],
+['Corsa con noodle','Corsa sul posto con il noodle tenuto sopra la testa.',40],
+['Defaticamento','Sdraiato sul noodle, respirazione.',90]
+]),
+
+A('Core e addome','brucia','30 min','Noodle o bordo','Hip hop strumentale',[
+['Riscaldamento','Camminata con torsioni del busto.',90],
+['Ginocchia al petto','Sospeso al bordo, porta entrambe le ginocchia al petto e distendile.',45],
+['Bici','Pedalata in sospensione, addome sempre contratto.',50],
+['Forbici verticali','Gambe tese che salgono e scendono alternate.',45],
+['Torsione con ginocchia','Ginocchia piegate che ruotano a destra e sinistra.',45],
+['Plank al bordo','Mani sul bordo, corpo teso in diagonale, tieni la posizione.',30],
+['Pendolo','Gambe unite che oscillano lateralmente il più ampiamente possibile.',45],
+['Sollevamento gambe','Schiena al muro, gambe tese che salgono a 90° e scendono piano.',45],
+['Allungamento','Braccia al bordo, allunga tutta la fascia addominale.',60]
+]),
+
+A('Braccia e spalle','brucia','30 min','Due bottiglie chiuse o tavolette','Rock leggero',[
+['Riscaldamento','Camminata con grandi cerchi delle braccia.',90],
+['Spinta avanti','Palmi aperti, spingi l\'acqua avanti e riportala indietro con forza.',45],
+['Croci','Braccia tese sotto il pelo dell\'acqua, aprile e chiudile davanti al petto.',45],
+['Curl','Gomiti al fianco, porta gli avambracci verso l\'alto contro la resistenza.',45],
+['Spinta sotto','Tavolette tenute a filo d\'acqua, spingile giù fino ai fianchi.',45],
+['Rematore','Piegati in avanti, tira le braccia indietro stringendo le scapole.',45],
+['Otto orizzontale','Disegna un otto sott\'acqua con le braccia tese, lento e controllato.',50],
+['Spinte alte','Braccia che escono dall\'acqua e rientrano velocemente.',40],
+['Stretching spalle','Braccio davanti al petto, poi dietro la nuca.',60]
+]),
+
+A('Tabata in piscina','brucia','25 min','Nessuno','Qualsiasi cosa a 140 bpm',[
+['Riscaldamento','Corsa leggera e mobilità, tre minuti.',120],
+['Corsa massimale','20 secondi al massimo.',20],
+['Pausa','10 secondi, respira.',10],
+['Jumping jack','20 secondi pieni.',20],
+['Pausa','10 secondi.',10],
+['Squat saltati','20 secondi.',20],
+['Pausa','10 secondi.',10],
+['Sci di fondo','20 secondi, ultimo sforzo del ciclo.',20],
+['Recupero lungo','Un minuto di camminata, poi si ricomincia da capo per altri due cicli.',60],
+['Defaticamento','Galleggia e allunga.',90]
+]),
+
+/* ---------- ACQUA-FUN · RAGAZZI E FAMIGLIA ---------- */
+
+A('Aqua dance','fun','30 min','Cassa bluetooth','Tormentoni dell\'estate',[
+['Riscaldamento ballato','Muoviti liberamente a tempo, senza schema.',90],
+['Passo laterale','Quattro passi a destra, quattro a sinistra, con le braccia.',45],
+['Twist','Ruota il bacino sul posto, ginocchia morbide.',45],
+['Salto a stella','Jumping jack a tempo di musica.',40],
+['Braccia in alto','Su e giù fuori dall\'acqua sul ritornello.',40],
+['Coreografia a specchio','Uno guida, gli altri copiano. Cambio ogni trenta secondi.',60],
+['Girotondo veloce','Tutti in cerchio mano nella mano, si corre a destra e poi a sinistra.',50],
+['Freestyle finale','Ognuno il suo passo, gli altri applaudono.',60]
+]),
+
+A('Staffetta e sfide','fun','30 min','Tavolette e oggetti che affondano','Playlist da stadio',[
+['Riscaldamento','Due vasche a nuoto libero o camminata veloce.',90],
+['Staffetta con tavoletta','Squadre in fila, si porta la tavoletta fino al bordo e si torna.',60],
+['Corsa in acqua bassa','Andata e ritorno, il più veloce possibile.',40],
+['Recupero oggetti','Chi ne prende di più dal fondo in trenta secondi.',30],
+['Trasporto d\'acqua','Bicchiere pieno da un capo all\'altro della vasca senza rovesciarlo.',60],
+['Apnea a squadre','Chi resta sotto più a lungo, sempre con qualcuno che guarda.',30],
+['Tiro al bersaglio','Palla dentro il salvagente galleggiante, tre tentativi a testa.',60],
+['Defaticamento','Galleggiamento e chiacchiere.',90]
+]),
+
+A('Aqua boxe','fun','30 min','Nessuno','Rock e colonne sonore',[
+['Riscaldamento','Corsa sul posto e rotazioni delle spalle.',90],
+['Diretto','Pugni alternati che spingono l\'acqua avanti, guardia alta.',45],
+['Gancio','Braccio che gira lateralmente, busto che accompagna.',45],
+['Montante','Pugno dal basso verso l\'alto, gambe che spingono.',45],
+['Schivate','Piegati sotto il pelo dell\'acqua a destra e sinistra.',45],
+['Calcio frontale','Ginocchio su e gamba che spinge avanti, alternando.',45],
+['Combinazione','Due diretti, un gancio, una schivata. Ripeti a ritmo.',60],
+['Sfogo finale','Trenta secondi di pugni veloci, tutto quello che rimane.',30],
+['Defaticamento','Braccia larghe e respirazione lenta.',60]
+]),
+
+A('Giochi di squadra in acqua','fun','35 min','Una palla','Playlist estiva',[
+['Riscaldamento','Passaggi liberi in cerchio.',90],
+['Palla veloce','In cerchio, il passaggio deve durare meno di un secondo. Chi la fa cadere fa una capriola.',60],
+['Palla prigioniera','Due squadre, chi viene colpito passa dall\'altra parte.',120],
+['Pallanuoto lampo','Partita a cinque gol con le bacinelle come porte.',120],
+['Staffetta a coppie','Si nuota tenendosi per mano, senza mai lasciarsi.',60],
+['Palla sotto le gambe','In fila, la palla passa sopra la testa e sotto le gambe alternandosi.',60],
+['Sfida di equilibrio','In due sul noodle: chi resta su più a lungo.',60],
+['Calma finale','Galleggiamento a stella tutti insieme.',60]
+]),
+
+A('Aqua zumba','fun','30 min','Cassa bluetooth','Latino: salsa, merengue, reggaeton',[
+['Riscaldamento latino','Passi base di merengue sul posto.',90],
+['Passo salsa','Avanti e indietro con il peso che si sposta, ginocchia morbide.',50],
+['Cumbia','Passo laterale trascinato, braccia che accompagnano.',50],
+['Reggaeton','Bacino e spalle, ritmo pieno, si spinge l\'acqua.',50],
+['Salto merengue','Piccoli salti sul posto a doppio tempo.',40],
+['Giro completo','Un giro su se stessi ogni otto tempi.',40],
+['Sequenza intera','Si mettono insieme tutti i passi in una coreografia.',90],
+['Defaticamento ballato','Musica lenta, movimenti ampi, respiro.',60]
+]),
+
+A('Circuito a stazioni','fun','35 min','Noodle, tavolette, palla','Playlist mista di tutti',[
+['Riscaldamento','Camminata veloce e mobilità delle braccia.',90],
+['Stazione 1 · corsa','Corsa sul posto a ginocchia alte.',45],
+['Stazione 2 · noodle','Spingi il noodle sott\'acqua e risali, senza fermarti.',45],
+['Stazione 3 · squat','Squat continui, il più profondo possibile.',45],
+['Stazione 4 · braccia','Spinte avanti e indietro con i palmi aperti.',45],
+['Stazione 5 · addome','Ginocchia al petto sospeso al bordo.',45],
+['Stazione 6 · palla','Passaggi rapidi col compagno, senza far cadere la palla.',45],
+['Giro due','Si ricomincia dalla stazione 1, tutto più veloce.',45],
+['Defaticamento','Allungamento generale al bordo.',90]
+])
+
+];
+
+
+/* =======================================================
+   STATO
+   ======================================================= */
+const GIORNI = ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+const GIORNI_BREVI = ['DOM','LUN','MAR','MER','GIO','VEN','SAB'];
+const MESI = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+const COLORI = ['#1B54C7','#EE5B4E','#17A9BC','#F2C227','#2E8B62','#EE5B4E','#1B54C7'];
+const REPARTI = {V:'Frutta e verdura',P:'Pescheria',C:'Macelleria e salumi',L:'Latticini e uova',D:'Dispensa',B:'Pane e forno',X:'Bevande e altro'};
+const SLOT = {
+  acqua:{et:'Acquagym',ora:'09:30',c:'#17A9BC'},
+  pranzo:{et:'Pranzo',ora:'13:00',c:'#2E8B62'},
+  cena:{et:'Cena',ora:'20:00',c:'#1B54C7'},
+  dolce:{et:'Dolce',ora:'',c:'#EE5B4E'},
+  gioco:{et:'Gioco',ora:'21:30',c:'#F2C227'}
+};
+
+/* =======================================================
+   PROFILO UTENTE (per telefono, salvato in locale)
+   ======================================================= */
+const AVATARS = ['🐬','🦀','🐢','🐳','🦩','🐙','⛵️','🌞','🍉','🥥','🐚','🦭','🩴','🍹','🐠','🦈'];
+const CHIAVE_UTENTE = 'casa-al-mare-utente';
+let avatarScelto = null;
+
+function leggiUtente(){
+  try{
+    const r = localStorage.getItem(CHIAVE_UTENTE);
+    return r ? JSON.parse(r) : null;
+  }catch(e){ return null; }
+}
+function scriviUtente(u){
+  try{ localStorage.setItem(CHIAVE_UTENTE, JSON.stringify(u)); }catch(e){}
+}
+function paroleSaluto(){
+  const h = new Date().getHours();
+  if(h>=5 && h<12) return 'Buongiorno';
+  if(h>=12 && h<18) return 'Buon pomeriggio';
+  if(h>=18 && h<22) return 'Buonasera';
+  return 'Buonanotte';
+}
+function disegnaAvatarScelta(){
+  const box=document.getElementById('avatarScelta');
+  box.innerHTML = AVATARS.map(a=>'<button type="button" class="avatar-opzione" data-a="'+a+'" aria-pressed="false">'+a+'</button>').join('');
+  box.querySelectorAll('.avatar-opzione').forEach(b=>{
+    b.addEventListener('click',()=>{
+      avatarScelto = b.dataset.a;
+      box.querySelectorAll('.avatar-opzione').forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+    });
+  });
+}
+function mostraSchermataUtente(diNuovo){
+  avatarScelto = null;
+  document.getElementById('scuTitolo').textContent = diNuovo ? 'Cambio utente' : 'Chi sei?';
+  document.getElementById('scuIntro').textContent = diNuovo
+    ? 'Scegli il tuo avatar e il tuo nome: da ora l\u2019app su questo telefono ricorderà te.'
+    : 'Scegli un avatar e scrivi il tuo nome: l\u2019app se lo ricorda su questo telefono, così ogni volta che la apri sa già che sei tu.';
+  document.getElementById('scuNome').value='';
+  disegnaAvatarScelta();
+  document.getElementById('schermataUtente').hidden=false;
+  document.getElementById('badgeUtente').hidden=true;
+  setTimeout(()=>document.getElementById('scuNome').focus(),150);
+}
+function confermaUtente(){
+  const nome = document.getElementById('scuNome').value.trim();
+  if(!nome){ document.getElementById('scuNome').focus(); return; }
+  if(!avatarScelto){ avatarScelto = AVATARS[Math.floor(Math.random()*AVATARS.length)]; }
+  const u = {nome, avatar:avatarScelto};
+  scriviUtente(u);
+  document.getElementById('schermataUtente').hidden=true;
+  applicaUtente(u);
+  mostraSplashSaluto(u);
+}
+function applicaUtente(u){
+  document.getElementById('badgeAvatar').textContent = u.avatar;
+  document.getElementById('badgeNome').textContent = u.nome;
+  document.getElementById('badgeUtente').hidden=false;
+}
+function mostraSplashSaluto(u){
+  document.getElementById('splashAvatar').textContent = u.avatar;
+  document.getElementById('splashParola').textContent = paroleSaluto()+',';
+  document.getElementById('splashNome').textContent = u.nome;
+  const el = document.getElementById('splashSaluto');
+  el.classList.add('on');
+  setTimeout(()=>el.classList.remove('on'), 2200);
+}
+document.getElementById('scuEntra').addEventListener('click',confermaUtente);
+document.getElementById('scuNome').addEventListener('keydown',e=>{ if(e.key==='Enter') confermaUtente(); });
+document.getElementById('badgeUtente').addEventListener('click',()=>mostraSchermataUtente(true));
+
+let stato = {
+  inizio: oggiISO(),
+  persone: 12,
+  settimana: [],
+  cuochi: ['','','','','','',''],
+  spesa: {},
+  filtroRicette: 'tutte',
+  cercaRicette: '',
+  filtroGiochi: 'tutti',
+  filtroPiscina: 'tutti'
+};
+let meteoDati = null;
+let meteoStato = 'carico';
+
+function oggiISO(){ const d=new Date(); return isoDi(d); }
+function isoDi(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function dataDelGiorno(i){ const d=new Date(stato.inizio+'T12:00:00'); d.setDate(d.getDate()+i); return d; }
+
+/* =======================================================
+   MEMORIA (window.storage se disponibile)
+   ======================================================= */
+const CHIAVE_DATI_LOCALI = 'casa-al-mare-dati';
+const memoria = {
+  async carica(){
+    try{
+      if(window.storage){
+        const r = await window.storage.get('casa-al-mare');
+        if(r) return JSON.parse(r.value);
+      }
+    }catch(e){}
+    try{
+      const r = localStorage.getItem(CHIAVE_DATI_LOCALI);
+      return r ? JSON.parse(r) : null;
+    }catch(e){ return null; }
+  },
+  async salva(){
+    const pacco = JSON.stringify({
+      inizio:stato.inizio, persone:stato.persone, settimana:stato.settimana,
+      cuochi:stato.cuochi, spesa:stato.spesa
+    });
+    try{ if(window.storage) await window.storage.set('casa-al-mare', pacco); }catch(e){}
+    try{ localStorage.setItem(CHIAVE_DATI_LOCALI, pacco); }catch(e){}
+  }
+};
+
+/* =======================================================
+   GENERAZIONE DELLA SETTIMANA
+   ======================================================= */
+const pool = {
+  acqua: () => ACQUAGYM.map((_,i)=>i),
+  pranzo: () => RICETTE.map((r,i)=>({r,i})).filter(x=>x.r.m==='pranzo').map(x=>x.i),
+  cena: () => RICETTE.map((r,i)=>({r,i})).filter(x=>x.r.m==='cena').map(x=>x.i),
+  dolce: () => RICETTE.map((r,i)=>({r,i})).filter(x=>x.r.m==='dolce').map(x=>x.i),
+  gioco: () => GIOCHI.map((_,i)=>i)
+};
+function mescola(a){ const b=a.slice(); for(let i=b.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]]; } return b; }
+function pesca(tipo,n){
+  let src = mescola(pool[tipo]());
+  const out=[];
+  for(let i=0;i<n;i++) out.push(src[i % src.length]);
+  return out;
+}
+function generaSettimana(){
+  const a=pesca('acqua',7), p=pesca('pranzo',7), c=pesca('cena',7), d=pesca('dolce',7), g=pesca('gioco',7);
+  stato.settimana = [0,1,2,3,4,5,6].map(i=>({acqua:a[i],pranzo:p[i],cena:c[i],dolce:d[i],gioco:g[i]}));
+  // il sabato ci vuole la grigliata
+  const iSab = [0,1,2,3,4,5,6].find(i=>dataDelGiorno(i).getDay()===6);
+  if(iSab!==undefined){
+    const grill = RICETTE.map((r,i)=>({r,i})).filter(x=>x.r.m==='cena'&&x.r.tg.includes('gr')).map(x=>x.i);
+    if(grill.length){
+      const scelta = grill[Math.floor(Math.random()*grill.length)];
+      const gia = stato.settimana.findIndex(gg=>gg.cena===scelta);
+      if(gia>=0 && gia!==iSab){ stato.settimana[gia].cena = stato.settimana[iSab].cena; }
+      stato.settimana[iSab].cena = scelta;
+    }
+  }
+}
+function cambiaSlot(giorno,tipo){
+  const usati = stato.settimana.map(g=>g[tipo]);
+  const liberi = pool[tipo]().filter(i=>!usati.includes(i));
+  const src = liberi.length ? liberi : pool[tipo]().filter(i=>i!==stato.settimana[giorno][tipo]);
+  if(!src.length) return;
+  stato.settimana[giorno][tipo] = src[Math.floor(Math.random()*src.length)];
+  disegnaSettimana(); memoria.salva();
+}
+
+/* =======================================================
+   QUANTITÀ
+   ======================================================= */
+function scala(q,u,n){
+  const t=q*n;
+  if(u==='qb') return 'q.b.';
+  if(u==='g'){ return t>=1000 ? nz(Math.round(t/100)/10)+' kg' : Math.round(t/10)*10+' g'; }
+  if(u==='ml'){ return t>=1000 ? nz(Math.round(t/100)/10)+' l' : Math.round(t/10)*10+' ml'; }
+  if(u==='pz') return Math.ceil(t)+'';
+  return nz(t)+' '+u;
+}
+function nz(x){ return String(x).replace('.',','); }
+
+/* =======================================================
+   ICONE METEO
+   ======================================================= */
+function icona(code,size){
+  const s = size||42;
+  const sole = '<circle cx="18" cy="18" r="8" fill="#F2C227" stroke="#0C2340" stroke-width="2"/><g stroke="#0C2340" stroke-width="2" stroke-linecap="round"><path d="M18 2v5M18 29v5M2 18h5M29 18h5M6.7 6.7l3.5 3.5M25.8 25.8l3.5 3.5M29.3 6.7l-3.5 3.5M10.2 25.8l-3.5 3.5"/></g>';
+  const nuvola = '<path d="M13 34h20a7 7 0 0 0 .6-14A10 10 0 0 0 14 18.5 8 8 0 0 0 13 34z" fill="#FFFDF6" stroke="#0C2340" stroke-width="2" stroke-linejoin="round"/>';
+  const soleMezzo = '<circle cx="14" cy="14" r="6.5" fill="#F2C227" stroke="#0C2340" stroke-width="2"/><g stroke="#0C2340" stroke-width="1.8" stroke-linecap="round"><path d="M14 1.5v4M1.5 14h4M5.2 5.2l2.8 2.8M22.8 5.2L20 8"/></g>';
+  const pioggia = '<g stroke="#1B54C7" stroke-width="2.4" stroke-linecap="round"><path d="M15 37l-2 5M23 37l-2 5M31 37l-2 5"/></g>';
+  const forte = '<g stroke="#1B54C7" stroke-width="2.4" stroke-linecap="round"><path d="M13 37l-3 6M20 37l-3 6M27 37l-3 6M34 37l-3 6"/></g>';
+  const fulmine = '<path d="M23 34l-6 8h5l-2 7 8-10h-5l3-5z" fill="#F2C227" stroke="#0C2340" stroke-width="1.6" stroke-linejoin="round"/>';
+  const nebbia = '<g stroke="#0C2340" stroke-width="2.2" stroke-linecap="round" opacity=".7"><path d="M8 22h28M6 29h32M10 36h24"/></g>';
+  let g;
+  if([0].includes(code)) g = sole;
+  else if([1,2].includes(code)) g = nuvola+soleMezzo;
+  else if([3].includes(code)) g = nuvola;
+  else if([45,48].includes(code)) g = nebbia;
+  else if([51,53,55,56,57,61,63,80,81].includes(code)) g = nuvola+pioggia;
+  else if([65,82].includes(code)) g = nuvola+forte;
+  else if([95,96,99].includes(code)) g = nuvola+fulmine;
+  else if([71,73,75,77,85,86].includes(code)) g = nuvola+nebbia;
+  else g = nuvola;
+  return '<svg viewBox="0 0 44 50" width="'+s+'" height="'+s+'" aria-hidden="true">'+g+'</svg>';
+}
+function descrizioneCielo(c){
+  const m={0:'Sereno pieno',1:'Poco nuvoloso',2:'Nuvole di passaggio',3:'Coperto',45:'Foschia',48:'Nebbia',
+  51:'Pioviggine',53:'Pioviggine',55:'Pioviggine fitta',56:'Pioviggine gelata',57:'Pioviggine gelata',
+  61:'Pioggia leggera',63:'Pioggia',65:'Pioggia forte',66:'Pioggia gelata',67:'Pioggia gelata',
+  71:'Neve',73:'Neve',75:'Neve forte',77:'Nevischio',80:'Rovesci',81:'Rovesci',82:'Rovesci forti',
+  85:'Rovesci di neve',86:'Rovesci di neve',95:'Temporale',96:'Temporale con grandine',99:'Temporale con grandine'};
+  return m[c]||'Variabile';
+}
+function statoMare(onda,vento){
+  let h = onda;
+  if(h==null){ h = vento<8?0.05: vento<15?0.3: vento<25?0.8: vento<35?1.8:2.8; }
+  if(h<0.1) return {t:'Mare calmo',c:'#17A9BC',n:'Sembra una piscina, giornata da materassino.'};
+  if(h<0.5) return {t:'Quasi calmo',c:'#2E8B62',n:'Onduline appena accennate, si sta benissimo.'};
+  if(h<1.25) return {t:'Poco mosso',c:'#F2C227',n:'Onde piccole: divertenti per i ragazzi, occhio ai più piccoli.'};
+  if(h<2.5) return {t:'Mosso',c:'#EE5B4E',n:'Bandiera rossa possibile, meglio la piscina.'};
+  return {t:'Molto mosso',c:'#EE5B4E',n:'Giornata da spiaggia, non da bagno.'};
+}
+function statoVento(v){
+  if(v<8) return {t:'Aria ferma',n:'Vento da pennichella: ombrellone tranquillo, ma si sente il caldo.'};
+  if(v<15) return {t:'Brezza leggera',n:'La condizione perfetta: fresco quanto basta e racchettoni giocabili.'};
+  if(v<25) return {t:'Vento da spiaggia',n:'Teli che si alzano e sabbia che gira: pinza per l\u2019ombrellone.'};
+  if(v<35) return {t:'Vento forte',n:'Ombrellone piantato bene e profondo, o si vola via.'};
+  return {t:'Raffiche','n':'Meglio ripiegare in piscina o all\u2019ombra in giardino.'};
+}
+function statoUV(uv){
+  if(uv<3) return {t:'Basso',c:'#2E8B62',n:'Protezione leggera, nessun problema.'};
+  if(uv<6) return {t:'Moderato',c:'#F2C227',n:'SPF 30, cappellino ai bambini.'};
+  if(uv<8) return {t:'Alto',c:'#EE9B4E',n:'SPF 50 e ombra tra le 12 e le 16.'};
+  if(uv<11) return {t:'Molto alto',c:'#EE5B4E',n:'SPF 50+, maglietta ai bambini, nonni all\u2019ombra nelle ore centrali.'};
+  return {t:'Estremo',c:'#B02020',n:'Spiaggia solo la mattina presto o dopo le 17.'};
+}
+
+/* =======================================================
+   METEO: CARICAMENTO
+   ======================================================= */
+async function caricaMeteo(){
+  meteoStato='carico'; disegnaMeteo();
+  const lat=41.5900, lon=12.5450;
+  const u1='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+
+    '&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,wind_speed_10m_max,precipitation_probability_max'+
+    '&hourly=wind_speed_10m&timezone=Europe%2FRome&forecast_days=10';
+  const u2='https://marine-api.open-meteo.com/v1/marine?latitude='+lat+'&longitude='+lon+
+    '&daily=wave_height_max&timezone=Europe%2FRome&forecast_days=10';
+  try{
+    const [a,b] = await Promise.allSettled([fetch(u1).then(r=>r.json()), fetch(u2).then(r=>r.json())]);
+    if(a.status!=='fulfilled' || !a.value || !a.value.daily) throw new Error('no');
+    const d=a.value.daily, h=a.value.hourly;
+    const onde = (b.status==='fulfilled' && b.value && b.value.daily) ? b.value.daily.wave_height_max : null;
+    meteoDati = d.time.map((giorno,i)=>{
+      let vMatt=null,vPom=null;
+      if(h && h.time){
+        const iM=h.time.indexOf(giorno+'T10:00'), iP=h.time.indexOf(giorno+'T16:00');
+        if(iM>=0) vMatt=h.wind_speed_10m[iM];
+        if(iP>=0) vPom=h.wind_speed_10m[iP];
+      }
+      return {
+        data:giorno, code:d.weather_code[i], max:d.temperature_2m_max[i], min:d.temperature_2m_min[i],
+        uv:d.uv_index_max[i], vento:d.wind_speed_10m_max[i], pioggia:d.precipitation_probability_max[i],
+        onda: onde? onde[i] : null, vMatt, vPom
+      };
+    });
+    meteoStato='ok';
+  }catch(e){ meteoStato='errore'; }
+  disegnaMeteo(); disegnaSettimana();
+}
+function meteoDelGiorno(iso){ return meteoDati ? meteoDati.find(m=>m.data===iso) : null; }
+
+/* =======================================================
+   DISEGNO: SETTIMANA
+   ======================================================= */
+function disegnaSettimana(){
+  const box=document.getElementById('spiaggia');
+  const oggi=oggiISO();
+  box.innerHTML = stato.settimana.map((g,i)=>{
+    const d=dataDelGiorno(i), iso=isoDi(d);
+    const m=meteoDelGiorno(iso);
+    let mini='';
+    if(m){
+      const mare=statoMare(m.onda,m.vento);
+      mini='<div class="meteo-mini">'+icona(m.code,20)+'<b>'+Math.round(m.max)+'°</b><span class="min">'+Math.round(m.min)+'°</span>'+
+        '<span class="pallino" style="background:'+mare.c+'" title="'+mare.t+'"></span></div>';
+    }
+    const a=ACQUAGYM[g.acqua], p=RICETTE[g.pranzo], c=RICETTE[g.cena], dl=RICETTE[g.dolce], gi=GIOCHI[g.gioco];
+    return '<article class="cabina'+(iso===oggi?' oggi':'')+'">'+
+      '<div class="tetto" style="--c:'+COLORI[i]+'"><i class="frangia"></i></div>'+
+      '<div class="targa"><div class="gg">'+GIORNI_BREVI[d.getDay()]+'</div><div class="dd">'+d.getDate()+' '+MESI[d.getMonth()]+'</div></div>'+
+      mini+
+      riga(i,'acqua',a.n,'livello '+nomeLivello(a.liv)+' · '+a.dur)+
+      riga(i,'pranzo',p.n,p.t)+
+      riga(i,'cena',c.n,c.t)+
+      riga(i,'dolce',dl.n,'')+
+      riga(i,'gioco',gi.n,gi.d+' · '+gi.g)+
+      '<div class="turno"><span>ai fornelli</span><input data-cuoco="'+i+'" value="'+esc(stato.cuochi[i]||'')+'" placeholder="scrivi un nome"></div>'+
+      '</article>';
+  }).join('');
+  box.querySelectorAll('.slot').forEach(b=>{
+    b.addEventListener('click',e=>{
+      if(e.target.closest('.cambia')) return;
+      apriDaSlot(+b.dataset.giorno, b.dataset.tipo);
+    });
+  });
+  box.querySelectorAll('.cambia').forEach(b=>{
+    b.addEventListener('click',e=>{ e.stopPropagation(); cambiaSlot(+b.dataset.giorno,b.dataset.tipo); });
+  });
+  box.querySelectorAll('[data-cuoco]').forEach(inp=>{
+    inp.addEventListener('input',()=>{ stato.cuochi[+inp.dataset.cuoco]=inp.value; memoria.salva(); });
+  });
+}
+function riga(giorno,tipo,titolo,nota){
+  const s=SLOT[tipo];
+  return '<button class="slot" style="--sc:'+s.c+'" data-giorno="'+giorno+'" data-tipo="'+tipo+'">'+
+    '<span class="riga1">'+(s.ora?'<span class="ora">'+s.ora+'</span>':'')+'<span class="et">'+s.et+'</span></span>'+
+    '<span class="tit">'+esc(titolo)+'</span>'+
+    (nota?'<span class="nota">'+esc(nota)+'</span>':'')+
+    '<span class="cambia" data-giorno="'+giorno+'" data-tipo="'+tipo+'" title="Cambia" role="button">⟳</span>'+
+    '</button>';
+}
+function nomeLivello(l){ return l==='soft'?'soft':l==='brucia'?'brucia-calorie':'acqua-fun'; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* =======================================================
+   DISEGNO: METEO
+   ======================================================= */
+function disegnaMeteo(){
+  const box=document.getElementById('meteoContenuto');
+  if(meteoStato==='carico'){ box.innerHTML='<div class="vuoto">Carico le previsioni per Ardea…</div>'; return; }
+  if(meteoStato==='errore'){
+    box.innerHTML='<div class="vuoto"><b>Le previsioni non arrivano.</b><br>Succede quando la connessione manca o quando il file è aperto in un\u2019anteprima che blocca internet. Salva il file sul telefono, aprilo dal browser e premi Aggiorna.</div>';
+    return;
+  }
+  box.innerHTML='<div class="meteo-griglia">'+meteoDati.map(m=>{
+    const d=new Date(m.data+'T12:00:00');
+    const mare=statoMare(m.onda,m.vento), uv=statoUV(m.uv);
+    const vp=statoVento(m.vPom!=null?m.vPom:m.vento), vm=statoVento(m.vMatt!=null?m.vMatt:m.vento);
+    return '<div class="giorno">'+
+      '<div class="data">'+GIORNI[d.getDay()]+' '+d.getDate()+'</div>'+
+      '<div class="cielo">'+icona(m.code,42)+'<div><div class="gradi">'+Math.round(m.max)+'° <small>'+Math.round(m.min)+'°</small></div>'+
+      '<div class="desc-cielo">'+descrizioneCielo(m.code)+(m.pioggia>20?' · pioggia '+m.pioggia+'%':'')+'</div></div></div>'+
+      '<div class="indicatore"><span class="k">Mare</span><span class="pallino" style="background:'+mare.c+'"></span><b>'+mare.t+'</b></div>'+
+      '<div style="font-size:11.5px;opacity:.7;padding-left:47px">'+mare.n+'</div>'+
+      '<div class="indicatore"><span class="k">Vento</span><b>'+vp.t+'</b><span style="font-family:var(--mono);font-size:11px;opacity:.6">'+Math.round(m.vPom!=null?m.vPom:m.vento)+' km/h</span></div>'+
+      '<div style="font-size:11.5px;opacity:.7;padding-left:47px">'+vp.n+(vm.t!==vp.t?' Di mattina invece: '+vm.t.toLowerCase()+'.':'')+'</div>'+
+      '<div class="indicatore"><span class="k">Sole</span><span class="uv-badge" style="background:'+uv.c+';color:#fff">UV '+Math.round(m.uv)+'</span><b>'+uv.t+'</b></div>'+
+      '<div style="font-size:11.5px;opacity:.7;padding-left:47px">'+uv.n+'</div>'+
+      '</div>';
+  }).join('')+'</div>';
+}
+
+/* =======================================================
+   DISEGNO: RICETTE
+   ======================================================= */
+const TAG_RICETTE=[['tutte','Tutte'],['sf','Senza forno'],['ve','Pronti in 10\u2032'],['gr','Grigliata & compagnia'],['pu','Piatto unico / da spiaggia'],['vg','Vegetariano'],['pe','Pesce'],['dolce','Dolci']];
+const NOMI_TAG={sf:'Senza forno',ve:'10 minuti',gr:'Grigliata',pu:'Piatto unico',vg:'Veg',pe:'Pesce'};
+function disegnaFiltriRicette(){
+  const f=document.getElementById('filtriRicette');
+  f.innerHTML = TAG_RICETTE.map(([k,l])=>'<button class="chip" data-f="'+k+'" aria-pressed="'+(stato.filtroRicette===k)+'">'+l+'</button>').join('')+
+    '<input class="cerca" id="cercaRicette" placeholder="cerca un piatto…" value="'+esc(stato.cercaRicette)+'">';
+  f.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ stato.filtroRicette=b.dataset.f; disegnaFiltriRicette(); disegnaRicette(); }));
+  const c=document.getElementById('cercaRicette');
+  c.addEventListener('input',()=>{ stato.cercaRicette=c.value; disegnaRicette(); });
+}
+function disegnaRicette(){
+  const q=stato.cercaRicette.trim().toLowerCase();
+  const lista=RICETTE.map((r,i)=>({r,i})).filter(({r})=>{
+    const okF = stato.filtroRicette==='tutte' ? true : (stato.filtroRicette==='dolce' ? r.m==='dolce' : r.tg.includes(stato.filtroRicette));
+    const okQ = !q || r.n.toLowerCase().includes(q) || r.ing.some(x=>x.n.toLowerCase().includes(q));
+    return okF && okQ;
+  });
+  const box=document.getElementById('grigliaRicette');
+  if(!lista.length){ box.innerHTML='<div class="vuoto">Nessun piatto con questi filtri. Prova a togliere la ricerca.</div>'; return; }
+  box.innerHTML=lista.map(({r,i})=>'<button class="scheda" data-r="'+i+'">'+
+    '<h3>'+esc(r.n)+'</h3>'+
+    '<div class="meta">'+(r.m==='dolce'?'Dolce':r.m==='pranzo'?'Pranzo':'Cena')+' · '+esc(r.t)+'</div>'+
+    '<p class="desc">'+esc(r.ing.slice(0,4).map(x=>x.n).join(', '))+'…</p>'+
+    '<div class="tags">'+r.tg.filter(t=>NOMI_TAG[t]).map(t=>'<span class="tag'+(t==='sf'?' b':t==='pe'?' c':t==='gr'?' d':'')+'">'+NOMI_TAG[t]+'</span>').join('')+'</div>'+
+    '</button>').join('');
+  box.querySelectorAll('.scheda').forEach(b=>b.addEventListener('click',()=>apriRicetta(+b.dataset.r)));
+}
+
+/* =======================================================
+   DISEGNO: GIOCHI
+   ======================================================= */
+const CAT_GIOCHI=[['tutti','Tutti'],['spiaggia','Sotto l\u2019ombrellone'],['tavola','Da tavola / dopo cena'],['movimento','Movimento, giardino e piscina']];
+function disegnaFiltriGiochi(){
+  const f=document.getElementById('filtriGiochi');
+  f.querySelectorAll('.chip').forEach(x=>x.remove());
+  const html=CAT_GIOCHI.map(([k,l])=>'<button class="chip" data-f="'+k+'" aria-pressed="'+(stato.filtroGiochi===k)+'">'+l+'</button>').join('');
+  f.insertAdjacentHTML('afterbegin',html);
+  f.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ stato.filtroGiochi=b.dataset.f; disegnaFiltriGiochi(); disegnaGiochi(); }));
+}
+function disegnaGiochi(){
+  const lista=GIOCHI.map((g,i)=>({g,i})).filter(({g})=>stato.filtroGiochi==='tutti'||g.c===stato.filtroGiochi);
+  const box=document.getElementById('grigliaGiochi');
+  box.innerHTML=lista.map(({g,i})=>'<button class="scheda" data-g="'+i+'">'+
+    '<h3>'+esc(g.n)+'</h3>'+
+    '<div class="meta">'+esc(g.d)+' · '+esc(g.g)+' giocatori</div>'+
+    '<p class="desc">'+esc(g.come[0])+'</p>'+
+    '<div class="tags"><span class="tag'+(g.c==='spiaggia'?' b':g.c==='movimento'?' c':'')+'">'+(g.c==='spiaggia'?'Ombrellone':g.c==='tavola'?'Dopo cena':'Movimento')+'</span><span class="tag">'+esc(g.m)+'</span></div>'+
+    '</button>').join('');
+  box.querySelectorAll('.scheda').forEach(b=>b.addEventListener('click',()=>apriGioco(+b.dataset.g)));
+}
+
+/* =======================================================
+   DISEGNO: PISCINA
+   ======================================================= */
+const LIV=[['tutti','Tutte e 20'],['soft','Soft mattutino'],['brucia','Brucia-calorie'],['fun','Acqua-fun']];
+function disegnaFiltriPiscina(){
+  const f=document.getElementById('filtriPiscina');
+  f.innerHTML=LIV.map(([k,l])=>'<button class="chip" data-f="'+k+'" aria-pressed="'+(stato.filtroPiscina===k)+'">'+l+'</button>').join('');
+  f.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ stato.filtroPiscina=b.dataset.f; disegnaFiltriPiscina(); disegnaPiscina(); }));
+}
+function disegnaPiscina(){
+  const lista=ACQUAGYM.map((a,i)=>({a,i})).filter(({a})=>stato.filtroPiscina==='tutti'||a.liv===stato.filtroPiscina);
+  const box=document.getElementById('grigliaPiscina');
+  box.innerHTML=lista.map(({a,i})=>'<button class="scheda" data-a="'+i+'">'+
+    '<h3>'+esc(a.n)+'</h3>'+
+    '<div class="meta">'+esc(a.dur)+' · '+a.es.length+' esercizi</div>'+
+    '<p class="desc">Attrezzi: '+esc(a.att)+'.<br>Musica: '+esc(a.play)+'.</p>'+
+    '<div class="tags"><span class="tag'+(a.liv==='soft'?'':a.liv==='brucia'?' d':' c')+'">'+nomeLivello(a.liv)+'</span></div>'+
+    '</button>').join('');
+  box.querySelectorAll('.scheda').forEach(b=>b.addEventListener('click',()=>apriLezione(+b.dataset.a)));
+}
+
+/* =======================================================
+   PANNELLO
+   ======================================================= */
+const pannello=document.getElementById('pannello'), velo=document.getElementById('velo');
+function apriPannello(kicker,titolo,meta,corpo){
+  document.getElementById('pannelloKicker').textContent=kicker;
+  document.getElementById('pannelloTitolo').textContent=titolo;
+  document.getElementById('pannelloMeta').textContent=meta;
+  document.getElementById('pannelloCorpo').innerHTML=corpo;
+  pannello.classList.add('on'); velo.classList.add('on');
+  document.getElementById('pannelloCorpo').scrollTop=0;
+  document.getElementById('btnChiudi').focus();
+}
+function chiudiPannello(){ pannello.classList.remove('on'); velo.classList.remove('on'); }
+velo.addEventListener('click',chiudiPannello);
+document.getElementById('btnChiudi').addEventListener('click',chiudiPannello);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ chiudiPannello(); fermaTimer(); }});
+
+function apriDaSlot(giorno,tipo){
+  const g=stato.settimana[giorno];
+  if(tipo==='acqua') apriLezione(g.acqua);
+  else if(tipo==='gioco') apriGioco(g.gioco);
+  else apriRicetta(g[tipo]);
+}
+
+function apriRicetta(i){
+  const r=RICETTE[i], n=stato.persone;
+  const ing='<ul class="ingredienti">'+r.ing.map(x=>'<li><span>'+esc(x.n)+'</span><span class="q">'+scala(x.q,x.u,n)+'</span></li>').join('')+'</ul>';
+  const passi='<ol class="passi">'+r.p.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ol>';
+  const opzioni=stato.settimana.map((_,d)=>{ const dd=dataDelGiorno(d); return '<option value="'+d+'">'+GIORNI[dd.getDay()]+' '+dd.getDate()+'</option>'; }).join('');
+  const dove = r.m==='dolce'?'dolce':r.m==='pranzo'?'pranzo':'cena';
+  const assegna='<div class="assegna"><span>Mettila come '+dove+' di</span><select id="selGiorno">'+opzioni+'</select>'+
+    '<button class="btn btn-piccolo btn-limone" id="btnAssegna" data-r="'+i+'" data-tipo="'+dove+'">Inserisci</button></div>';
+  apriPannello('Ricetta · per '+n+' persone', r.n, r.t+'  ·  '+r.tg.filter(t=>NOMI_TAG[t]).map(t=>NOMI_TAG[t]).join(' · '),
+    '<h4>Ingredienti per '+n+'</h4>'+ing+'<h4>Come si fa</h4>'+passi+assegna);
+  const b=document.getElementById('btnAssegna');
+  if(b) b.addEventListener('click',()=>{
+    const d=+document.getElementById('selGiorno').value;
+    stato.settimana[d][b.dataset.tipo]=+b.dataset.r;
+    disegnaSettimana(); memoria.salva(); chiudiPannello(); vaiA('settimana');
+  });
+}
+
+function apriGioco(i){
+  const g=GIOCHI[i];
+  const come='<ol class="passi">'+g.come.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ol>';
+  apriPannello('Gioco · '+(g.c==='spiaggia'?'sotto l\u2019ombrellone':g.c==='tavola'?'dopo cena':'movimento'),
+    g.n, g.d+'  ·  '+g.g+' giocatori',
+    '<h4>Serve</h4><p>'+esc(g.m)+'</p><h4>Come si jgioca</h4>'.replace('jgioca','gioca')+come+
+    '<h4>Variante</h4><div class="nota-box">'+esc(g.v)+'</div>');
+}
+
+function apriLezione(i){
+  const a=ACQUAGYM[i];
+  const tot=a.es.reduce((s,e)=>s+e.s,0);
+  const lista='<ul class="esercizi">'+a.es.map(e=>'<li><span class="sec">'+e.s+'"</span><div><b>'+esc(e.e)+'</b><span>'+esc(e.d)+'</span></div></li>').join('')+'</ul>';
+  apriPannello('Acquagym · '+nomeLivello(a.liv), a.n, a.dur+'  ·  '+a.es.length+' esercizi  ·  '+Math.round(tot/60)+' min di lavoro',
+    '<div class="nota-box"><b>Attrezzi:</b> '+esc(a.att)+'<br><b>Musica consigliata:</b> '+esc(a.play)+'</div>'+
+    '<h4>La sequenza</h4>'+lista+
+    '<div class="azioni"><button class="btn btn-limone" id="btnAvvia" data-a="'+i+'">Avvia la lezione col timer</button></div>'+
+    '<p style="font-size:12.5px;opacity:.7;margin-top:14px">Il timer passa da solo all\u2019esercizio successivo con 15 secondi di pausa in mezzo. Tenete una bottiglia d\u2019acqua a bordo vasca e saltate senza problemi quello che non vi va.</p>');
+  document.getElementById('btnAvvia').addEventListener('click',()=>{ chiudiPannello(); avviaTimer(i); });
+}
+
+/* =======================================================
+   LISTA DELLA SPESA
+   ======================================================= */
+function apriSpesa(){
+  const n=stato.persone;
+  const somma={};
+  stato.settimana.forEach(g=>{
+    [g.pranzo,g.cena,g.dolce].forEach(ri=>{
+      RICETTE[ri].ing.forEach(x=>{
+        if(x.u==='qb') return;
+        const k=x.n+'|'+x.u+'|'+x.r;
+        somma[k]=(somma[k]||0)+x.q;
+      });
+    });
+  });
+  const perReparto={};
+  Object.keys(somma).forEach(k=>{
+    const [nome,u,rep]=k.split('|');
+    (perReparto[rep]=perReparto[rep]||[]).push({nome,q:scala(somma[k],u,n),k});
+  });
+  const base=[
+    {nome:'acqua da bere',q:Math.ceil(n*2*7)+' l',k:'base|acqua'},
+    {nome:'pane fresco',q:scala(90,'g',n*7),k:'base|pane'},
+    {nome:'frutta di stagione',q:scala(250,'g',n*7),k:'base|frutta'},
+    {nome:'caffè, latte e biscotti',q:'per 7 colazioni',k:'base|colazione'},
+    {nome:'olio, sale, aceto, zucchero',q:'controlla la scorta',k:'base|dispensa'},
+    {nome:'ghiaccio e bibite',q:'a piacere',k:'base|ghiaccio'},
+    {nome:'gelato per una sera',q:scala(120,'g',n),k:'base|gelato'}
+  ];
+  let html='<p style="margin-top:0">Tutto quello che serve per i 7 pranzi, le 7 cene e i dolci del planogramma, moltiplicato per '+n+' persone.</p>';
+  Object.keys(REPARTI).forEach(rep=>{
+    if(!perReparto[rep]) return;
+    html+='<div class="reparto">'+REPARTI[rep]+'</div>'+
+      perReparto[rep].sort((a,b)=>a.nome.localeCompare(b.nome)).map(x=>rigaSpesa(x)).join('');
+  });
+  html+='<div class="reparto">Sempre in casa</div>'+base.map(x=>rigaSpesa(x)).join('');
+  html+='<div class="azioni"><button class="btn btn-limone" id="btnCopiaSpesa">Copia la lista</button><button class="btn" id="btnResetSpesa">Togli tutte le spunte</button></div>';
+  apriPannello('Lista della spesa','Che cosa comprare','settimana del '+dataLunga(0)+' · '+n+' persone',html);
+  aggiornaEventiSpesa();
+}
+function rigaSpesa(x){
+  const on=!!stato.spesa[x.k];
+  return '<div class="spesa-riga'+(on?' fatto':'')+'"><input type="checkbox" id="sp'+btoa(unescape(encodeURIComponent(x.k))).replace(/=/g,'')+'" data-k="'+esc(x.k)+'"'+(on?' checked':'')+'>'+
+    '<label for="sp'+btoa(unescape(encodeURIComponent(x.k))).replace(/=/g,'')+'">'+esc(x.nome)+'</label><span class="q">'+esc(x.q)+'</span></div>';
+}
+function aggiornaEventiSpesa(){
+  document.querySelectorAll('.spesa-riga input').forEach(c=>{
+    c.addEventListener('change',()=>{
+      stato.spesa[c.dataset.k]=c.checked;
+      c.closest('.spesa-riga').classList.toggle('fatto',c.checked);
+      memoria.salva();
+    });
+  });
+  const cp=document.getElementById('btnCopiaSpesa');
+  if(cp) cp.addEventListener('click',()=>{
+    let t='LISTA DELLA SPESA · '+stato.persone+' persone\n\n';
+    document.querySelectorAll('#pannelloCorpo .reparto').forEach(r=>{
+      t+=r.textContent.toUpperCase()+'\n';
+      let el=r.nextElementSibling;
+      while(el && el.classList.contains('spesa-riga')){
+        t+='• '+el.querySelector('label').textContent+' — '+el.querySelector('.q').textContent+'\n';
+        el=el.nextElementSibling;
+      }
+      t+='\n';
+    });
+    copia(t,cp);
+  });
+  const rs=document.getElementById('btnResetSpesa');
+  if(rs) rs.addEventListener('click',()=>{ stato.spesa={}; memoria.salva(); apriSpesa(); });
+}
+function dataLunga(i){ const d=dataDelGiorno(i); return d.getDate()+' '+MESI[d.getMonth()]; }
+
+/* =======================================================
+   TIMER ACQUAGYM
+   ======================================================= */
+let seq=[], idx=0, restante=0, tick=null, inPausa=false, audioCtx=null;
+const elTimer=document.getElementById('timer');
+function avviaTimer(iLez){
+  const a=ACQUAGYM[iLez];
+  seq=[{tipo:'via',nome:'Si comincia',desc:a.n,sec:10}];
+  a.es.forEach((e,k)=>{
+    seq.push({tipo:'lavoro',nome:e.e,desc:e.d,sec:e.s});
+    if(k<a.es.length-1) seq.push({tipo:'riposo',nome:'Pausa',desc:'Respira, bevi un sorso. Poi: '+a.es[k+1].e,sec:15});
+  });
+  seq.push({tipo:'fine',nome:'Finito',desc:'Bravi. Ora l\u2019aperitivo è meritato.',sec:0});
+  idx=0; inPausa=false; elTimer.classList.add('on');
+  document.getElementById('tPausa').textContent='Pausa';
+  vaiAPasso(0);
+  clearInterval(tick);
+  tick=setInterval(()=>{
+    if(inPausa) return;
+    restante--;
+    if(restante<=0){ vaiAPasso(idx+1); }
+    else { aggiornaTimer(); if(restante<=3) bip(660,90); }
+  },1000);
+}
+function vaiAPasso(i){
+  if(i>=seq.length-1){ mostraFine(); return; }
+  idx=i; restante=seq[idx].sec;
+  elTimer.classList.toggle('riposo',seq[idx].tipo==='riposo');
+  elTimer.classList.toggle('lavoro',seq[idx].tipo==='lavoro');
+  bip(seq[idx].tipo==='lavoro'?880:440,180);
+  aggiornaTimer();
+}
+function aggiornaTimer(){
+  const p=seq[idx];
+  document.getElementById('tFase').textContent = p.tipo==='via'?'Preparati':p.tipo==='riposo'?'Pausa':'Esercizio '+contaLavoro()+' di '+totLavoro();
+  document.getElementById('tConto').textContent = restante;
+  document.getElementById('tNome').textContent = p.nome;
+  document.getElementById('tDesc').textContent = p.desc;
+  const pross = seq[idx+1] && seq[idx+1].tipo!=='fine' ? seq[idx+1] : null;
+  document.getElementById('tProssimo').textContent = pross ? 'Poi: '+(pross.tipo==='riposo'?'pausa':pross.nome) : 'Ultimo esercizio';
+  document.getElementById('tBarra').style.width = Math.round((idx/(seq.length-1))*100)+'%';
+}
+function contaLavoro(){ let c=0; for(let i=0;i<=idx;i++) if(seq[i].tipo==='lavoro') c++; return c||1; }
+function totLavoro(){ return seq.filter(s=>s.tipo==='lavoro').length; }
+function mostraFine(){
+  clearInterval(tick);
+  document.getElementById('tFase').textContent='Lezione finita';
+  document.getElementById('tConto').textContent='✓';
+  document.getElementById('tNome').textContent='Bravi tutti';
+  document.getElementById('tDesc').textContent='Bevete acqua e allungate le gambe al bordo prima di uscire.';
+  document.getElementById('tProssimo').textContent='';
+  document.getElementById('tBarra').style.width='100%';
+  bip(1046,400);
+}
+function fermaTimer(){ clearInterval(tick); elTimer.classList.remove('on'); }
+function bip(freq,ms){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+    o.frequency.value=freq; o.type='sine'; o.connect(g); g.connect(audioCtx.destination);
+    g.gain.setValueAtTime(.0001,audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.25,audioCtx.currentTime+.01);
+    g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+ms/1000);
+    o.start(); o.stop(audioCtx.currentTime+ms/1000+.02);
+  }catch(e){}
+}
+document.getElementById('tPausa').addEventListener('click',e=>{ inPausa=!inPausa; e.target.textContent=inPausa?'Riprendi':'Pausa'; });
+document.getElementById('tSalta').addEventListener('click',()=>vaiAPasso(idx+1));
+document.getElementById('tStop').addEventListener('click',fermaTimer);
+
+/* =======================================================
+   COPIA PER WHATSAPP
+   ======================================================= */
+function testoSettimana(){
+  let t='CASA AL MARE · settimana del '+dataLunga(0)+'\nSiamo in '+stato.persone+'.\n\n';
+  stato.settimana.forEach((g,i)=>{
+    const d=dataDelGiorno(i);
+    t+=GIORNI[d.getDay()].toUpperCase()+' '+d.getDate()+' '+MESI[d.getMonth()]+'\n';
+    t+='Acquagym 9:30 — '+ACQUAGYM[g.acqua].n+'\n';
+    t+='Pranzo — '+RICETTE[g.pranzo].n+'\n';
+    t+='Cena — '+RICETTE[g.cena].n+'\n';
+    t+='Dolce — '+RICETTE[g.dolce].n+'\n';
+    t+='Gioco della sera — '+GIOCHI[g.gioco].n+'\n';
+    if(stato.cuochi[i]) t+='Ai fornelli: '+stato.cuochi[i]+'\n';
+    t+='\n';
+  });
+  return t;
+}
+function copia(testo,btn){
+  const vecchio=btn.textContent;
+  const ok=()=>{ btn.textContent='Copiato'; setTimeout(()=>btn.textContent=vecchio,1600); };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(testo).then(ok).catch(()=>fallback());
+  } else fallback();
+  function fallback(){
+    const ta=document.createElement('textarea');
+    ta.value=testo; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); ok(); }catch(e){ btn.textContent='Copia a mano'; }
+    document.body.removeChild(ta);
+  }
+}
+
+/* =======================================================
+   NAVIGAZIONE E AVVIO
+   ======================================================= */
+function vaiA(vista){
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected', String(t.dataset.vista===vista)));
+  ['settimana','meteo','ricette','giochi','piscina'].forEach(v=>{
+    document.getElementById('v-'+v).hidden = (v!==vista);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>vaiA(t.dataset.vista)));
+document.getElementById('btnRimescola').addEventListener('click',()=>{ generaSettimana(); disegnaSettimana(); memoria.salva(); });
+document.getElementById('btnSpesa').addEventListener('click',apriSpesa);
+document.getElementById('btnStampa').addEventListener('click',()=>{ vaiA('settimana'); setTimeout(()=>window.print(),250); });
+document.getElementById('btnCopia').addEventListener('click',e=>copia(testoSettimana(),e.target));
+document.getElementById('btnMeteo').addEventListener('click',caricaMeteo);
+document.getElementById('btnCasuale').addEventListener('click',()=>{
+  const lista=GIOCHI.map((g,i)=>({g,i})).filter(({g})=>stato.filtroGiochi==='tutti'||g.c===stato.filtroGiochi);
+  apriGioco(lista[Math.floor(Math.random()*lista.length)].i);
+});
+const inpData=document.getElementById('dataInizio'), inpPers=document.getElementById('persone');
+inpData.addEventListener('change',()=>{ stato.inizio=inpData.value||oggiISO(); disegnaSettimana(); memoria.salva(); });
+inpPers.addEventListener('input',()=>{
+  const v=parseInt(inpPers.value,10);
+  if(v>=2&&v<=40){ stato.persone=v; memoria.salva(); }
+});
+
+async function avviaApp(){
+  const salvato=await memoria.carica();
+  if(salvato){
+    stato.inizio=salvato.inizio||stato.inizio;
+    stato.persone=salvato.persone||stato.persone;
+    stato.cuochi=salvato.cuochi||stato.cuochi;
+    stato.spesa=salvato.spesa||{};
+    stato.settimana=(salvato.settimana&&salvato.settimana.length===7)?salvato.settimana:[];
+  }
+  if(!stato.settimana.length) generaSettimana();
+  inpData.value=stato.inizio; inpPers.value=stato.persone;
+  disegnaSettimana();
+  disegnaFiltriRicette(); disegnaRicette();
+  disegnaFiltriGiochi(); disegnaGiochi();
+  disegnaFiltriPiscina(); disegnaPiscina();
+  caricaMeteo();
+}
+
+(function avvio(){
+  const utente = leggiUtente();
+  if(utente){
+    applicaUtente(utente);
+    mostraSplashSaluto(utente);
+  } else {
+    mostraSchermataUtente(false);
+  }
+  avviaApp();
+})();
+</script>
+</body>
+</html>
