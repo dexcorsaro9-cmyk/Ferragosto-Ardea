@@ -87,18 +87,26 @@ h1 em{font-style:normal;color:var(--limone)}
 .btn-fantasma{background:transparent;color:var(--carta);border-color:rgba(255,253,246,.5);box-shadow:none}
 .btn-piccolo{padding:4px 10px;font-size:12px;border-width:1.5px}
 
-/* ---------- NAVIGAZIONE ---------- */
-nav.sezioni{background:var(--ink);border-top:1px solid rgba(255,253,246,.15)}
+/* ---------- NAVIGAZIONE (tab bar in basso) ---------- */
+nav.sezioni{
+  background:var(--ink);
+  border-top:1px solid rgba(255,253,246,.15);
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  box-shadow:0 -2px 10px rgba(0,0,0,.25);
+}
 .sezioni-inner{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 .sezioni-inner::-webkit-scrollbar{display:none}
 .tab{
   background:transparent;border:0;color:rgba(255,253,246,.65);
-  font-family:var(--display);text-transform:uppercase;font-size:13px;letter-spacing:.03em;
-  padding:13px 16px;white-space:nowrap;border-bottom:4px solid transparent;
+  font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;
+  padding:11px 8px 10px;white-space:normal;line-height:1.15;
+  border-top:4px solid transparent;
+  flex:1 1 0;min-width:0;text-align:center;font-size:11.5px;
 }
-.tab[aria-selected=true]{color:var(--carta);border-bottom-color:var(--limone)}
+.tab[aria-selected=true]{color:var(--carta);border-top-color:var(--limone)}
 
-main{padding:24px 20px 80px}
+main{padding:24px 20px calc(84px + env(safe-area-inset-bottom,0px))}
 .titoletto{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.6;margin:0 0 10px}
 h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transform:uppercase;margin:0 0 4px;letter-spacing:-.01em}
 .intro{margin:0 0 18px;max-width:62ch;opacity:.8}
@@ -278,10 +286,11 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 }
 
 @media (max-width:640px){
-  main{padding:18px 14px 70px}
+  main{padding:18px 14px calc(78px + env(safe-area-inset-bottom,0px))}
   .tenda-inner{padding:14px 14px 16px}
   .pannello{border-left:0;border-top:3px solid var(--ink);top:auto;height:92vh;border-radius:16px 16px 0 0;transform:translateY(101%)}
   .pannello.on{transform:none}
+  .tab{font-size:10.5px;padding:10px 4px 9px}
 }
 
 @media print{
