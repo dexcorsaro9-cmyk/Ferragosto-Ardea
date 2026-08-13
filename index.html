@@ -100,11 +100,14 @@ nav.sezioni{
 .tab{
   background:transparent;border:0;color:rgba(255,253,246,.65);
   font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;
-  padding:11px 8px 10px;white-space:normal;line-height:1.15;
+  padding:9px 4px 8px;white-space:normal;line-height:1.15;
   border-top:4px solid transparent;
-  flex:1 1 0;min-width:0;text-align:center;font-size:11.5px;
+  flex:1 1 0;min-width:0;text-align:center;font-size:10.5px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
 }
+.tab-emoji{font-size:19px;line-height:1;filter:grayscale(55%);opacity:.75;transition:filter .15s ease,opacity .15s ease}
 .tab[aria-selected=true]{color:var(--carta);border-top-color:var(--limone)}
+.tab[aria-selected=true] .tab-emoji{filter:none;opacity:1}
 
 main{padding:24px 20px calc(84px + env(safe-area-inset-bottom,0px))}
 .titoletto{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.6;margin:0 0 10px}
@@ -159,7 +162,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 
 .griglia{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
 .scheda{
-  background:var(--carta);border:2px solid var(--ink);border-radius:10px;padding:14px;
+  background:var(--carta);border:2px solid var(--ink);border-left-width:6px;border-left-color:var(--sc,var(--ink));border-radius:10px;padding:14px;
   text-align:left;box-shadow:0 3px 0 rgba(12,35,64,.15);display:flex;flex-direction:column;gap:7px;
   transition:transform .12s ease;
 }
@@ -290,7 +293,8 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
   .tenda-inner{padding:14px 14px 16px}
   .pannello{border-left:0;border-top:3px solid var(--ink);top:auto;height:92vh;border-radius:16px 16px 0 0;transform:translateY(101%)}
   .pannello.on{transform:none}
-  .tab{font-size:10.5px;padding:10px 4px 9px}
+  .tab{font-size:9.5px;padding:8px 3px 7px}
+  .tab-emoji{font-size:17px}
 }
 
 @media print{
@@ -314,15 +318,15 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
     <div class="wrap">
       <div class="marchio">
         <h1>Casa al <em>Mare</em></h1>
-        <div class="sottotitolo">Tor San Lorenzo · Ardea</div>
+        <div class="sottotitolo">🌊 Tor San Lorenzo · Ardea</div>
       </div>
       <div class="comandi">
         <div class="campo"><label for="dataInizio">Si parte il</label><input type="date" id="dataInizio"></div>
         <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
-        <button class="btn btn-limone" id="btnRimescola">Rimescola la settimana</button>
-        <button class="btn" id="btnSpesa">Lista della spesa</button>
-        <button class="btn btn-fantasma" id="btnCopia">Copia per WhatsApp</button>
-        <button class="btn btn-fantasma" id="btnStampa">Stampa</button>
+        <button class="btn btn-limone" id="btnRimescola">🔀 Rimescola la settimana</button>
+        <button class="btn" id="btnSpesa">🛒 Lista della spesa</button>
+        <button class="btn btn-fantasma" id="btnCopia">💬 Copia per WhatsApp</button>
+        <button class="btn btn-fantasma" id="btnStampa">🖨️ Stampa</button>
         <button class="badge-utente" id="badgeUtente" hidden>
           <span class="badge-avatar" id="badgeAvatar"></span>
           <span class="badge-nome" id="badgeNome"></span>
@@ -361,24 +365,24 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 
 <nav class="sezioni">
   <div class="wrap sezioni-inner" role="tablist">
-    <button class="tab" role="tab" data-vista="settimana" aria-selected="true">Settimana</button>
-    <button class="tab" role="tab" data-vista="meteo" aria-selected="false">Meteo 10 giorni</button>
-    <button class="tab" role="tab" data-vista="ricette" aria-selected="false">50 ricette</button>
-    <button class="tab" role="tab" data-vista="giochi" aria-selected="false">50 giochi</button>
-    <button class="tab" role="tab" data-vista="piscina" aria-selected="false">20 acquagym</button>
+    <button class="tab" role="tab" data-vista="settimana" aria-selected="true"><span class="tab-emoji">📅</span><span class="tab-testo">Settimana</span></button>
+    <button class="tab" role="tab" data-vista="meteo" aria-selected="false"><span class="tab-emoji">☀️</span><span class="tab-testo">Meteo</span></button>
+    <button class="tab" role="tab" data-vista="ricette" aria-selected="false"><span class="tab-emoji">🥗</span><span class="tab-testo">Ricette</span></button>
+    <button class="tab" role="tab" data-vista="giochi" aria-selected="false"><span class="tab-emoji">🎲</span><span class="tab-testo">Giochi</span></button>
+    <button class="tab" role="tab" data-vista="piscina" aria-selected="false"><span class="tab-emoji">🏊</span><span class="tab-testo">Piscina</span></button>
   </div>
 </nav>
 
 <main class="wrap">
 
   <section id="v-settimana">
-    <h2 class="sezione">Il planogramma</h2>
+    <h2 class="sezione">📅 Il planogramma</h2>
     <p class="intro">Ogni cabina è un giorno: acquagym in piscina la mattina, pranzo, cena, dolce e il gioco della sera. Tocca una riga per aprire la scheda, usa <b>⟳</b> per cambiarla, scrivi chi sta ai fornelli.</p>
     <div class="spiaggia" id="spiaggia"></div>
   </section>
 
   <section id="v-meteo" hidden>
-    <h2 class="sezione">Meteo dei prossimi 10 giorni</h2>
+    <h2 class="sezione">☀️ Meteo dei prossimi 10 giorni</h2>
     <div class="meteo-testata">
       <p class="intro" style="margin:0">Previsioni per la costa di Ardea, con due indicatori che servono davvero: com'è il mare e quanto tira il vento nel pomeriggio.</p>
       <button class="btn btn-piccolo" id="btnMeteo">Aggiorna</button>
@@ -387,23 +391,23 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
   </section>
 
   <section id="v-ricette" hidden>
-    <h2 class="sezione">Ricette estive</h2>
+    <h2 class="sezione">🥗 Ricette estive</h2>
     <p class="intro">Cinquanta piatti pensati per una casa piena di gente. Le quantità si adattano da sole al numero di persone che hai impostato in alto.</p>
     <div class="filtri" id="filtriRicette"></div>
     <div class="griglia" id="grigliaRicette"></div>
   </section>
 
   <section id="v-giochi" hidden>
-    <h2 class="sezione">Giochi da fare tutti insieme</h2>
+    <h2 class="sezione">🎲 Giochi da fare tutti insieme</h2>
     <p class="intro">Cinquanta giochi che chiedono pochissimi oggetti: quasi tutto si fa con foglietti, una palla o niente del tutto.</p>
     <div class="filtri" id="filtriGiochi">
-      <button class="btn btn-corallo" id="btnCasuale">Cosa giochiamo stasera?</button>
+      <button class="btn btn-corallo" id="btnCasuale">🎲 Cosa giochiamo stasera?</button>
     </div>
     <div class="griglia" id="grigliaGiochi"></div>
   </section>
 
   <section id="v-piscina" hidden>
-    <h2 class="sezione">Acquagym in piscina</h2>
+    <h2 class="sezione">🏊 Acquagym in piscina</h2>
     <p class="intro">Venti lezioni a rotazione, su tre intensità. Ogni scheda ha il timer integrato: parte da sola da un esercizio all'altro, così nessuno deve stare a guardare l'orologio.</p>
     <div class="filtri" id="filtriPiscina"></div>
     <div class="griglia" id="grigliaPiscina"></div>
@@ -1136,13 +1140,13 @@ const GIORNI = ['domenica','lunedì','martedì','mercoledì','giovedì','venerd�
 const GIORNI_BREVI = ['DOM','LUN','MAR','MER','GIO','VEN','SAB'];
 const MESI = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
 const COLORI = ['#1B54C7','#EE5B4E','#17A9BC','#F2C227','#2E8B62','#EE5B4E','#1B54C7'];
-const REPARTI = {V:'Frutta e verdura',P:'Pescheria',C:'Macelleria e salumi',L:'Latticini e uova',D:'Dispensa',B:'Pane e forno',X:'Bevande e altro'};
+const REPARTI = {V:'🥦 Frutta e verdura',P:'🐟 Pescheria',C:'🥩 Macelleria e salumi',L:'🧀 Latticini e uova',D:'🥫 Dispensa',B:'🍞 Pane e forno',X:'🥤 Bevande e altro'};
 const SLOT = {
-  acqua:{et:'Acquagym',ora:'09:30',c:'#17A9BC'},
-  pranzo:{et:'Pranzo',ora:'13:00',c:'#2E8B62'},
-  cena:{et:'Cena',ora:'20:00',c:'#1B54C7'},
-  dolce:{et:'Dolce',ora:'',c:'#EE5B4E'},
-  gioco:{et:'Gioco',ora:'21:30',c:'#F2C227'}
+  acqua:{et:'🏊 Acquagym',ora:'09:30',c:'#17A9BC'},
+  pranzo:{et:'🍽️ Pranzo',ora:'13:00',c:'#2E8B62'},
+  cena:{et:'🌙 Cena',ora:'20:00',c:'#1B54C7'},
+  dolce:{et:'🍰 Dolce',ora:'',c:'#EE5B4E'},
+  gioco:{et:'🎲 Gioco',ora:'21:30',c:'#F2C227'}
 };
 
 /* =======================================================
@@ -1457,7 +1461,7 @@ function riga(giorno,tipo,titolo,nota){
     '<span class="cambia" data-giorno="'+giorno+'" data-tipo="'+tipo+'" title="Cambia" role="button">⟳</span>'+
     '</button>';
 }
-function nomeLivello(l){ return l==='soft'?'soft':l==='brucia'?'brucia-calorie':'acqua-fun'; }
+function nomeLivello(l){ return l==='soft'?'🌊 soft':l==='brucia'?'🔥 brucia-calorie':'🎉 acqua-fun'; }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 /* =======================================================
@@ -1465,9 +1469,9 @@ function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
    ======================================================= */
 function disegnaMeteo(){
   const box=document.getElementById('meteoContenuto');
-  if(meteoStato==='carico'){ box.innerHTML='<div class="vuoto">Carico le previsioni per Ardea…</div>'; return; }
+  if(meteoStato==='carico'){ box.innerHTML='<div class="vuoto">☀️ Carico le previsioni per Ardea…</div>'; return; }
   if(meteoStato==='errore'){
-    box.innerHTML='<div class="vuoto"><b>Le previsioni non arrivano.</b><br>Succede quando la connessione manca o quando il file è aperto in un\u2019anteprima che blocca internet. Salva il file sul telefono, aprilo dal browser e premi Aggiorna.</div>';
+    box.innerHTML='<div class="vuoto">🌦️ <b>Le previsioni non arrivano.</b><br>Succede quando la connessione manca o quando il file è aperto in un\u2019anteprima che blocca internet. Salva il file sul telefono, aprilo dal browser e premi Aggiorna.</div>';
     return;
   }
   box.innerHTML='<div class="meteo-griglia">'+meteoDati.map(m=>{
@@ -1491,8 +1495,8 @@ function disegnaMeteo(){
 /* =======================================================
    DISEGNO: RICETTE
    ======================================================= */
-const TAG_RICETTE=[['tutte','Tutte'],['sf','Senza forno'],['ve','Pronti in 10\u2032'],['gr','Grigliata & compagnia'],['pu','Piatto unico / da spiaggia'],['vg','Vegetariano'],['pe','Pesce'],['dolce','Dolci']];
-const NOMI_TAG={sf:'Senza forno',ve:'10 minuti',gr:'Grigliata',pu:'Piatto unico',vg:'Veg',pe:'Pesce'};
+const TAG_RICETTE=[['tutte','🍴 Tutte'],['sf','❄️ Senza forno'],['ve','⏱️ Pronti in 10\u2032'],['gr','🔥 Grigliata & compagnia'],['pu','🏖️ Piatto unico / da spiaggia'],['vg','🥦 Vegetariano'],['pe','🐟 Pesce'],['dolce','🍰 Dolci']];
+const NOMI_TAG={sf:'❄️ Senza forno',ve:'⏱️ 10 minuti',gr:'🔥 Grigliata',pu:'🏖️ Piatto unico',vg:'🥦 Veg',pe:'🐟 Pesce'};
 function disegnaFiltriRicette(){
   const f=document.getElementById('filtriRicette');
   f.innerHTML = TAG_RICETTE.map(([k,l])=>'<button class="chip" data-f="'+k+'" aria-pressed="'+(stato.filtroRicette===k)+'">'+l+'</button>').join('')+
@@ -1509,10 +1513,10 @@ function disegnaRicette(){
     return okF && okQ;
   });
   const box=document.getElementById('grigliaRicette');
-  if(!lista.length){ box.innerHTML='<div class="vuoto">Nessun piatto con questi filtri. Prova a togliere la ricerca.</div>'; return; }
-  box.innerHTML=lista.map(({r,i})=>'<button class="scheda" data-r="'+i+'">'+
+  if(!lista.length){ box.innerHTML='<div class="vuoto">🔍 Nessun piatto con questi filtri. Prova a togliere la ricerca.</div>'; return; }
+  box.innerHTML=lista.map(({r,i})=>'<button class="scheda" style="--sc:'+(r.m==='dolce'?'#EE5B4E':r.m==='pranzo'?'#2E8B62':'#1B54C7')+'" data-r="'+i+'">'+
     '<h3>'+esc(r.n)+'</h3>'+
-    '<div class="meta">'+(r.m==='dolce'?'Dolce':r.m==='pranzo'?'Pranzo':'Cena')+' · '+esc(r.t)+'</div>'+
+    '<div class="meta">'+(r.m==='dolce'?'🍰 Dolce':r.m==='pranzo'?'🍽️ Pranzo':'🌙 Cena')+' · '+esc(r.t)+'</div>'+
     '<p class="desc">'+esc(r.ing.slice(0,4).map(x=>x.n).join(', '))+'…</p>'+
     '<div class="tags">'+r.tg.filter(t=>NOMI_TAG[t]).map(t=>'<span class="tag'+(t==='sf'?' b':t==='pe'?' c':t==='gr'?' d':'')+'">'+NOMI_TAG[t]+'</span>').join('')+'</div>'+
     '</button>').join('');
@@ -1522,7 +1526,7 @@ function disegnaRicette(){
 /* =======================================================
    DISEGNO: GIOCHI
    ======================================================= */
-const CAT_GIOCHI=[['tutti','Tutti'],['spiaggia','Sotto l\u2019ombrellone'],['tavola','Da tavola / dopo cena'],['movimento','Movimento, giardino e piscina']];
+const CAT_GIOCHI=[['tutti','🎯 Tutti'],['spiaggia','🏖️ Sotto l\u2019ombrellone'],['tavola','🍽️ Da tavola / dopo cena'],['movimento','🏃 Movimento, giardino e piscina']];
 function disegnaFiltriGiochi(){
   const f=document.getElementById('filtriGiochi');
   f.querySelectorAll('.chip').forEach(x=>x.remove());
@@ -1533,11 +1537,11 @@ function disegnaFiltriGiochi(){
 function disegnaGiochi(){
   const lista=GIOCHI.map((g,i)=>({g,i})).filter(({g})=>stato.filtroGiochi==='tutti'||g.c===stato.filtroGiochi);
   const box=document.getElementById('grigliaGiochi');
-  box.innerHTML=lista.map(({g,i})=>'<button class="scheda" data-g="'+i+'">'+
+  box.innerHTML=lista.map(({g,i})=>'<button class="scheda" style="--sc:'+(g.c==='spiaggia'?'#17A9BC':g.c==='tavola'?'#F2C227':'#2E8B62')+'" data-g="'+i+'">'+
     '<h3>'+esc(g.n)+'</h3>'+
     '<div class="meta">'+esc(g.d)+' · '+esc(g.g)+' giocatori</div>'+
     '<p class="desc">'+esc(g.come[0])+'</p>'+
-    '<div class="tags"><span class="tag'+(g.c==='spiaggia'?' b':g.c==='movimento'?' c':'')+'">'+(g.c==='spiaggia'?'Ombrellone':g.c==='tavola'?'Dopo cena':'Movimento')+'</span><span class="tag">'+esc(g.m)+'</span></div>'+
+    '<div class="tags"><span class="tag'+(g.c==='spiaggia'?' b':g.c==='movimento'?' c':'')+'">'+(g.c==='spiaggia'?'🏖️ Ombrellone':g.c==='tavola'?'🍽️ Dopo cena':'🏃 Movimento')+'</span><span class="tag">'+esc(g.m)+'</span></div>'+
     '</button>').join('');
   box.querySelectorAll('.scheda').forEach(b=>b.addEventListener('click',()=>apriGioco(+b.dataset.g)));
 }
@@ -1545,7 +1549,7 @@ function disegnaGiochi(){
 /* =======================================================
    DISEGNO: PISCINA
    ======================================================= */
-const LIV=[['tutti','Tutte e 20'],['soft','Soft mattutino'],['brucia','Brucia-calorie'],['fun','Acqua-fun']];
+const LIV=[['tutti','🎯 Tutte e 20'],['soft','🌊 Soft mattutino'],['brucia','🔥 Brucia-calorie'],['fun','🎉 Acqua-fun']];
 function disegnaFiltriPiscina(){
   const f=document.getElementById('filtriPiscina');
   f.innerHTML=LIV.map(([k,l])=>'<button class="chip" data-f="'+k+'" aria-pressed="'+(stato.filtroPiscina===k)+'">'+l+'</button>').join('');
@@ -1554,7 +1558,7 @@ function disegnaFiltriPiscina(){
 function disegnaPiscina(){
   const lista=ACQUAGYM.map((a,i)=>({a,i})).filter(({a})=>stato.filtroPiscina==='tutti'||a.liv===stato.filtroPiscina);
   const box=document.getElementById('grigliaPiscina');
-  box.innerHTML=lista.map(({a,i})=>'<button class="scheda" data-a="'+i+'">'+
+  box.innerHTML=lista.map(({a,i})=>'<button class="scheda" style="--sc:'+(a.liv==='soft'?'#17A9BC':a.liv==='brucia'?'#EE5B4E':'#F2C227')+'" data-a="'+i+'">'+
     '<h3>'+esc(a.n)+'</h3>'+
     '<div class="meta">'+esc(a.dur)+' · '+a.es.length+' esercizi</div>'+
     '<p class="desc">Attrezzi: '+esc(a.att)+'.<br>Musica: '+esc(a.play)+'.</p>'+
@@ -1596,8 +1600,8 @@ function apriRicetta(i){
   const dove = r.m==='dolce'?'dolce':r.m==='pranzo'?'pranzo':'cena';
   const assegna='<div class="assegna"><span>Mettila come '+dove+' di</span><select id="selGiorno">'+opzioni+'</select>'+
     '<button class="btn btn-piccolo btn-limone" id="btnAssegna" data-r="'+i+'" data-tipo="'+dove+'">Inserisci</button></div>';
-  apriPannello('Ricetta · per '+n+' persone', r.n, r.t+'  ·  '+r.tg.filter(t=>NOMI_TAG[t]).map(t=>NOMI_TAG[t]).join(' · '),
-    '<h4>Ingredienti per '+n+'</h4>'+ing+'<h4>Come si fa</h4>'+passi+assegna);
+  apriPannello('🍽️ Ricetta · per '+n+' persone', r.n, r.t+'  ·  '+r.tg.filter(t=>NOMI_TAG[t]).map(t=>NOMI_TAG[t]).join(' · '),
+    '<h4>🛒 Ingredienti per '+n+'</h4>'+ing+'<h4>👩\u200d🍳 Come si fa</h4>'+passi+assegna);
   const b=document.getElementById('btnAssegna');
   if(b) b.addEventListener('click',()=>{
     const d=+document.getElementById('selGiorno').value;
@@ -1609,20 +1613,20 @@ function apriRicetta(i){
 function apriGioco(i){
   const g=GIOCHI[i];
   const come='<ol class="passi">'+g.come.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ol>';
-  apriPannello('Gioco · '+(g.c==='spiaggia'?'sotto l\u2019ombrellone':g.c==='tavola'?'dopo cena':'movimento'),
+  apriPannello('🎲 Gioco · '+(g.c==='spiaggia'?'🏖️ sotto l\u2019ombrellone':g.c==='tavola'?'🍽️ dopo cena':'🏃 movimento'),
     g.n, g.d+'  ·  '+g.g+' giocatori',
-    '<h4>Serve</h4><p>'+esc(g.m)+'</p><h4>Come si jgioca</h4>'.replace('jgioca','gioca')+come+
-    '<h4>Variante</h4><div class="nota-box">'+esc(g.v)+'</div>');
+    '<h4>🎒 Serve</h4><p>'+esc(g.m)+'</p><h4>📋 Come si gioca</h4>'+come+
+    '<h4>✨ Variante</h4><div class="nota-box">'+esc(g.v)+'</div>');
 }
 
 function apriLezione(i){
   const a=ACQUAGYM[i];
   const tot=a.es.reduce((s,e)=>s+e.s,0);
   const lista='<ul class="esercizi">'+a.es.map(e=>'<li><span class="sec">'+e.s+'"</span><div><b>'+esc(e.e)+'</b><span>'+esc(e.d)+'</span></div></li>').join('')+'</ul>';
-  apriPannello('Acquagym · '+nomeLivello(a.liv), a.n, a.dur+'  ·  '+a.es.length+' esercizi  ·  '+Math.round(tot/60)+' min di lavoro',
-    '<div class="nota-box"><b>Attrezzi:</b> '+esc(a.att)+'<br><b>Musica consigliata:</b> '+esc(a.play)+'</div>'+
-    '<h4>La sequenza</h4>'+lista+
-    '<div class="azioni"><button class="btn btn-limone" id="btnAvvia" data-a="'+i+'">Avvia la lezione col timer</button></div>'+
+  apriPannello('🏊 Acquagym · '+nomeLivello(a.liv), a.n, a.dur+'  ·  '+a.es.length+' esercizi  ·  '+Math.round(tot/60)+' min di lavoro',
+    '<div class="nota-box"><b>🎒 Attrezzi:</b> '+esc(a.att)+'<br><b>🎵 Musica consigliata:</b> '+esc(a.play)+'</div>'+
+    '<h4>📋 La sequenza</h4>'+lista+
+    '<div class="azioni"><button class="btn btn-limone" id="btnAvvia" data-a="'+i+'">▶️ Avvia la lezione col timer</button></div>'+
     '<p style="font-size:12.5px;opacity:.7;margin-top:14px">Il timer passa da solo all\u2019esercizio successivo con 15 secondi di pausa in mezzo. Tenete una bottiglia d\u2019acqua a bordo vasca e saltate senza problemi quello che non vi va.</p>');
   document.getElementById('btnAvvia').addEventListener('click',()=>{ chiudiPannello(); avviaTimer(i); });
 }
@@ -1662,9 +1666,9 @@ function apriSpesa(){
     html+='<div class="reparto">'+REPARTI[rep]+'</div>'+
       perReparto[rep].sort((a,b)=>a.nome.localeCompare(b.nome)).map(x=>rigaSpesa(x)).join('');
   });
-  html+='<div class="reparto">Sempre in casa</div>'+base.map(x=>rigaSpesa(x)).join('');
-  html+='<div class="azioni"><button class="btn btn-limone" id="btnCopiaSpesa">Copia la lista</button><button class="btn" id="btnResetSpesa">Togli tutte le spunte</button></div>';
-  apriPannello('Lista della spesa','Che cosa comprare','settimana del '+dataLunga(0)+' · '+n+' persone',html);
+  html+='<div class="reparto">🏠 Sempre in casa</div>'+base.map(x=>rigaSpesa(x)).join('');
+  html+='<div class="azioni"><button class="btn btn-limone" id="btnCopiaSpesa">💬 Copia la lista</button><button class="btn" id="btnResetSpesa">🔄 Togli tutte le spunte</button></div>';
+  apriPannello('🛒 Lista della spesa','Che cosa comprare','settimana del '+dataLunga(0)+' · '+n+' persone',html);
   aggiornaEventiSpesa();
 }
 function rigaSpesa(x){
