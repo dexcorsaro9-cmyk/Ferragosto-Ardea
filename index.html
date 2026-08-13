@@ -56,7 +56,7 @@ button{cursor:pointer}
   background:var(--ink);
   color:var(--carta);
   margin:0;
-  padding:18px 20px 20px;
+  padding:calc(env(safe-area-inset-top, 0px) + 18px) 20px 20px;
 }
 .wrap{max-width:1420px;margin:0 auto}
 .marchio{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 16px}
@@ -337,13 +337,22 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 #bootSplash .bs-testo{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,253,246,.5)}
 #bootSplash.nascondi{opacity:0;pointer-events:none}
 
-/* ---------- BADGE UTENTE ---------- */
-.badge-utente{display:flex;align-items:center;gap:8px;background:rgba(255,253,246,.12);border:1.5px solid rgba(255,253,246,.4);border-radius:999px;padding:4px 12px 4px 5px;margin-left:auto;color:var(--carta)}
-.badge-avatar{width:26px;height:26px;border-radius:50%;background:var(--limone);display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
-.badge-nome{font-weight:800;font-size:13px}
-.badge-cambia{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;opacity:.55}
-.badge-utente:hover .badge-cambia{opacity:.9}
+/* ---------- HEADER NUOVO ---------- */
+.marchio{display:none}
+.hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);margin-bottom:14px;opacity:.9}
+.hdr-titolo em{font-style:normal;color:var(--limone)}
+.hdr-corpo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hdr-utente{display:flex;align-items:center;gap:12px;background:rgba(255,253,246,.1);border:1.5px solid rgba(255,253,246,.3);border-radius:16px;padding:8px 14px 8px 8px;color:var(--carta);transition:background .15s;cursor:pointer}
+.hdr-utente:hover{background:rgba(255,253,246,.18)}
+.hdr-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--limone);flex:none;background:var(--limone)}
+.hdr-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.hdr-saluto-box{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.hdr-saluto{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
+.hdr-nome{font-family:var(--display);font-size:17px;text-transform:uppercase;line-height:1}
+.hdr-destra{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
 .pallino-sync{font-family:var(--mono);font-size:10.5px;color:rgba(255,253,246,.6);white-space:nowrap;align-self:center}
+/* ---------- BADGE UTENTE (legacy, non usato) ---------- */
+.badge-nome{font-weight:800;font-size:13px}
 
 /* ---------- INSTALLA L'APP ---------- */
 .btn-installa{background:var(--limone);border:2px solid var(--ink);color:var(--ink);border-radius:999px;padding:7px 15px;font-weight:800;font-size:13px;box-shadow:var(--ombra);display:flex;align-items:center;gap:6px}
@@ -360,10 +369,13 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .scu-tenda i{flex:1;background:var(--corallo)}
 .scu-tenda i:nth-child(even){background:var(--carta)}
 .scu-corpo{padding:22px 24px 26px}
-.avatar-scelta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 18px}
-.avatar-opzione{aspect-ratio:1;border-radius:50%;border:2.5px solid var(--riga);background:var(--fondo);font-size:26px;display:flex;align-items:center;justify-content:center;transition:transform .12s ease,border-color .12s ease}
-.avatar-opzione:hover{transform:translateY(-2px)}
-.avatar-opzione[aria-pressed=true]{border-color:var(--ink);background:var(--limone);box-shadow:0 3px 0 rgba(12,35,64,.25)}
+.avatar-scelta{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0 18px}
+.avatar-anteprima{width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid var(--ink);box-shadow:0 4px 0 rgba(12,35,64,.2);flex:none;background:var(--fondo)}
+.avatar-anteprima img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;opacity:.6;text-align:center;margin-top:6px;max-width:130px;line-height:1.3}
+.avatar-preview-box{display:flex;flex-direction:column;align-items:center}
+.avatar-freccia{width:40px;height:40px;border-radius:50%;border:2.5px solid var(--ink);background:var(--carta);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;flex:none;transition:background .12s,transform .1s;box-shadow:0 3px 0 rgba(12,35,64,.18)}
+.avatar-freccia:hover{background:var(--limone);transform:translateY(-1px)}
 .scu-campo{margin-bottom:18px}
 .scu-campo label{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:6px}
 .scu-campo input{width:100%;border:2px solid var(--ink);border-radius:8px;padding:10px 12px;font-size:16px;font-weight:800}
@@ -373,15 +385,16 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 /* ---------- SPLASH DI SALUTO ---------- */
 .splash-saluto{position:fixed;inset:0;z-index:95;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;pointer-events:none;transition:opacity .4s ease}
 .splash-saluto.on{opacity:1;pointer-events:auto}
-.splash-avatar{width:96px;height:96px;border-radius:50%;background:var(--limone);display:flex;align-items:center;justify-content:center;font-size:52px;box-shadow:0 5px 0 rgba(0,0,0,.25)}
+.splash-avatar{width:96px;height:96px;border-radius:50%;background:var(--limone);display:flex;align-items:center;justify-content:center;font-size:52px;box-shadow:0 5px 0 rgba(0,0,0,.25);overflow:hidden}
+.splash-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 .splash-testo{text-align:center;color:var(--carta)}
 .splash-saluto-parola{font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,6vw,38px)}
 .splash-nome{font-family:var(--mono);font-size:15px;opacity:.75;margin-top:2px}
 
-@media (max-width:640px){
-  .avatar-scelta{grid-template-columns:repeat(4,1fr)}
-  .badge-nome{display:none}
-  .badge-utente{padding:4px 10px 4px 4px}
+@media (max-width:480px){
+  .hdr-destra{margin-left:0}
+  .hdr-nome{font-size:15px}
+  .hdr-avatar{width:40px;height:40px}
 }
 
 @media (max-width:640px){
@@ -417,24 +430,20 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 <div class="tenda">
   <div class="tenda-inner">
     <div class="wrap">
-      <div class="marchio">
-        <h1>Casa al <em>Mare</em></h1>
-        <div class="sottotitolo">🌊 Ardea</div>
-      </div>
-      <div class="comandi">
-        <div class="campo"><label for="dataInizio">Si parte il</label><input type="date" id="dataInizio"></div>
-        <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
-        <span class="pallino-sync" id="statoSync">🔄 Sincronizzo…</span>
-        <button class="btn btn-limone" id="btnRimescola">🔀 Rimescola la settimana</button>
-        <button class="btn" id="btnSpesa">🛒 Lista della spesa</button>
-        <button class="btn btn-fantasma" id="btnCopia">💬 Copia per WhatsApp</button>
-        <button class="btn btn-fantasma" id="btnStampa">🖨️ Stampa</button>
-        <button class="btn-installa" id="btnInstalla" hidden>📲 Installa l’app</button>
-        <button class="badge-utente" id="badgeUtente" hidden>
-          <span class="badge-avatar" id="badgeAvatar"></span>
-          <span class="badge-nome" id="badgeNome"></span>
-          <span class="badge-cambia">cambia</span>
+      <div class="hdr-titolo">🌊 Casa al Mare — Ardea</div>
+      <div class="hdr-corpo">
+        <button class="hdr-utente" id="badgeUtente" hidden>
+          <span class="hdr-avatar" id="badgeAvatar"></span>
+          <div class="hdr-saluto-box">
+            <span class="hdr-saluto" id="hdrSaluto"></span>
+            <span class="hdr-nome" id="badgeNome"></span>
+          </div>
         </button>
+        <div class="hdr-destra">
+          <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
+          <span class="pallino-sync" id="statoSync">🔄 Sincronizzo…</span>
+          <button class="btn btn-limone" id="btnSpesa">🛒 Lista della spesa</button>
+        </div>
       </div>
     </div>
   </div>
@@ -552,7 +561,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
     <div id="burracoGioco" hidden></div>
   </section>
 
-  <div class="piede">Le previsioni arrivano da Open-Meteo e si aggiornano da sole. Tutto il resto vive dentro questo file: puoi salvarlo, mandarlo su WhatsApp e aprirlo anche senza connessione.</div>
+
 </main>
 
 <div class="coriandoli" id="coriandoli"></div>
@@ -1293,9 +1302,30 @@ const SLOT = {
 /* =======================================================
    PROFILO UTENTE (per telefono, salvato in locale)
    ======================================================= */
-const AVATARS = ['🐬','🦀','🐢','🐳','🦩','🐙','⛵️','🌞','🍉','🥥','🐚','🦭','🩴','🍹','🐠','🦈'];
+const AVATARS = [
+  "icons/il re della grigliata.png",
+  "icons/il tatuato del materassino.png",
+  "icons/l'eroe del fenicottero rosa - Copia.png",
+  "icons/l'istrione del gelato sciolto - Copia.png",
+  "icons/la collezionista di conchiglie.png",
+  "icons/la dominatrice del burraco.png",
+  "icons/la principessa dell'ombra.png",
+  "icons/la regina dell'acquagym - Copia.png",
+  "icons/la regina dell'aperitivo - Copia.png",
+  "icons/la signora dei cappelli - Copia.png",
+  "icons/lo psycho surfer - Copia.png",
+  "icons/lo schiavo dell'ombrellone - Copia.png",
+  "icons/pazza di ghiaccioli - Copia.png",
+  "icons/re dell'anguria - Copia.png",
+  "icons/re della protezione 50+ - Copia.png"
+];
 const CHIAVE_UTENTE = 'casa-al-mare-utente';
 let avatarScelto = null;
+let avatarIndex = 0;
+
+function nomeAvatar(path){
+  return path.replace('icons/','').replace(' - Copia','').replace('.png','');
+}
 
 function leggiUtente(){
   try{
@@ -1313,14 +1343,29 @@ function paroleSaluto(){
   if(h>=18 && h<22) return 'Buonasera';
   return 'Buonanotte';
 }
-function disegnaAvatarScelta(){
-  const box=document.getElementById('avatarScelta');
-  box.innerHTML = AVATARS.map(a=>'<button type="button" class="avatar-opzione" data-a="'+a+'" aria-pressed="false">'+a+'</button>').join('');
-  box.querySelectorAll('.avatar-opzione').forEach(b=>{
-    b.addEventListener('click',()=>{
-      avatarScelto = b.dataset.a;
-      box.querySelectorAll('.avatar-opzione').forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
-    });
+function disegnaAvatarScelta(currentAvatar){
+  avatarIndex = currentAvatar ? Math.max(0, AVATARS.indexOf(currentAvatar)) : 0;
+  avatarScelto = AVATARS[avatarIndex];
+  const box = document.getElementById('avatarScelta');
+  box.innerHTML =
+    '<button type="button" class="avatar-freccia" id="avPrev">&#8249;</button>'+
+    '<div class="avatar-preview-box">'+
+      '<div class="avatar-anteprima"><img id="avImg" src="'+AVATARS[avatarIndex]+'" alt="avatar"></div>'+
+      '<div class="avatar-label" id="avLabel">'+nomeAvatar(AVATARS[avatarIndex])+'</div>'+
+    '</div>'+
+    '<button type="button" class="avatar-freccia" id="avNext">&#8250;</button>';
+  function aggiornaCarosello(){
+    document.getElementById('avImg').src = AVATARS[avatarIndex];
+    document.getElementById('avLabel').textContent = nomeAvatar(AVATARS[avatarIndex]);
+    avatarScelto = AVATARS[avatarIndex];
+  }
+  document.getElementById('avPrev').addEventListener('click',()=>{
+    avatarIndex = (avatarIndex - 1 + AVATARS.length) % AVATARS.length;
+    aggiornaCarosello();
+  });
+  document.getElementById('avNext').addEventListener('click',()=>{
+    avatarIndex = (avatarIndex + 1) % AVATARS.length;
+    aggiornaCarosello();
   });
 }
 function mostraSchermataUtente(diNuovo){
@@ -1330,7 +1375,8 @@ function mostraSchermataUtente(diNuovo){
     ? 'Scegli il tuo avatar e il tuo nome: da ora l\u2019app su questo telefono ricorderà te.'
     : 'Scegli un avatar e scrivi il tuo nome: l\u2019app se lo ricorda su questo telefono, così ogni volta che la apri sa già che sei tu.';
   document.getElementById('scuNome').value='';
-  disegnaAvatarScelta();
+  const u = leggiUtente();
+  disegnaAvatarScelta(diNuovo && u ? u.avatar : null);
   document.getElementById('schermataUtente').hidden=false;
   document.getElementById('badgeUtente').hidden=true;
   setTimeout(()=>document.getElementById('scuNome').focus(),150);
@@ -1346,12 +1392,15 @@ function confermaUtente(){
   mostraSplashSaluto(u);
 }
 function applicaUtente(u){
-  document.getElementById('badgeAvatar').textContent = u.avatar;
+  const badge = document.getElementById('badgeAvatar');
+  badge.innerHTML = '<img src="'+u.avatar+'" alt="avatar">';
   document.getElementById('badgeNome').textContent = u.nome;
+  const sal = document.getElementById('hdrSaluto');
+  if(sal) sal.textContent = paroleSaluto();
   document.getElementById('badgeUtente').hidden=false;
 }
 function mostraSplashSaluto(u){
-  document.getElementById('splashAvatar').textContent = u.avatar;
+  document.getElementById('splashAvatar').innerHTML = '<img src="'+u.avatar+'" alt="avatar">';
   document.getElementById('splashParola').textContent = paroleSaluto()+',';
   document.getElementById('splashNome').textContent = u.nome;
   const el = document.getElementById('splashSaluto');
@@ -1362,45 +1411,6 @@ document.getElementById('scuEntra').addEventListener('click',confermaUtente);
 document.getElementById('scuNome').addEventListener('keydown',e=>{ if(e.key==='Enter') confermaUtente(); });
 document.getElementById('badgeUtente').addEventListener('click',()=>mostraSchermataUtente(true));
 
-/* =======================================================
-   INSTALLA L'APP SULLA HOME
-   ======================================================= */
-const btnInstalla = document.getElementById('btnInstalla');
-const isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) && !window.MSStream;
-const giaInstallata = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-let promptInstallazione = null;
-
-if(!giaInstallata){
-  if(isIos){
-    btnInstalla.hidden = false;
-  } else {
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      promptInstallazione = e;
-      btnInstalla.hidden = false;
-    });
-    window.addEventListener('appinstalled', () => { btnInstalla.hidden = true; });
-  }
-}
-
-btnInstalla.addEventListener('click', async () => {
-  if(isIos){
-    apriPannello('📲 Installa l\u2019app', 'Aggiungila alla schermata Home', 'Un\u2019icona tutta sua, si apre a schermo intero come un\u2019app vera',
-      '<ol class="passi-installa">'+
-      '<li><span class="icona-passo">⬆️</span>Tocca il tasto <b>Condividi</b> in basso al centro di Safari (il quadrato con la freccia verso l\u2019alto).</li>'+
-      '<li><span class="icona-passo">➕</span>Scorri il menu e tocca <b>Aggiungi a Home</b>.</li>'+
-      '<li><span class="icona-passo">✅</span>Tocca <b>Aggiungi</b> in alto a destra: l\u2019icona compare sulla schermata Home, pronta per essere aperta come un\u2019app.</li>'+
-      '</ol>'+
-      '<div class="nota-box">Funziona solo da Safari (non da Chrome su iPhone) ed è disponibile su questo indirizzo online — se hai scaricato il file, apri prima il link del sito.</div>');
-    return;
-  }
-  if(promptInstallazione){
-    btnInstalla.hidden = true;
-    promptInstallazione.prompt();
-    await promptInstallazione.userChoice;
-    promptInstallazione = null;
-  }
-});
 
 if('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')){
   window.addEventListener('load', () => {
@@ -1929,7 +1939,7 @@ function apriSpesa(){
       perReparto[rep].sort((a,b)=>a.nome.localeCompare(b.nome)).map(x=>rigaSpesa(x)).join('');
   });
   html+='<div class="reparto">🏠 Sempre in casa</div>'+base.map(x=>rigaSpesa(x)).join('');
-  html+='<div class="azioni"><button class="btn btn-limone" id="btnCopiaSpesa">💬 Copia la lista</button><button class="btn" id="btnResetSpesa">🔄 Togli tutte le spunte</button></div>';
+  html+='<div class="azioni"><button class="btn btn-limone" id="btnCopiaSpesa">💬 Copia la lista</button><button class="btn" id="btnCopiaSettimana">💬 Copia la settimana</button><button class="btn" id="btnResetSpesa">🔄 Togli tutte le spunte</button></div>';
   apriPannello('🛒 Lista della spesa','Che cosa comprare','settimana del '+dataLunga(0)+' · '+n+' persone',html);
   aggiornaEventiSpesa();
 }
@@ -1960,6 +1970,8 @@ function aggiornaEventiSpesa(){
     });
     copia(t,cp);
   });
+  const cs=document.getElementById('btnCopiaSettimana');
+  if(cs) cs.addEventListener('click',e=>copia(testoSettimana(),e.target));
   const rs=document.getElementById('btnResetSpesa');
   if(rs) rs.addEventListener('click',()=>{ stato.spesa={}; memoria.salva(); apriSpesa(); });
 }
@@ -2361,17 +2373,13 @@ function vaiA(vista){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>vaiA(t.dataset.vista)));
-document.getElementById('btnRimescola').addEventListener('click',()=>{ generaSettimana(); disegnaSettimana(); memoria.salva(); });
 document.getElementById('btnSpesa').addEventListener('click',apriSpesa);
-document.getElementById('btnStampa').addEventListener('click',()=>{ vaiA('settimana'); setTimeout(()=>window.print(),250); });
-document.getElementById('btnCopia').addEventListener('click',e=>copia(testoSettimana(),e.target));
 document.getElementById('btnMeteo').addEventListener('click',caricaMeteo);
 document.getElementById('btnCasuale').addEventListener('click',()=>{
   const lista=GIOCHI.map((g,i)=>({g,i})).filter(({g})=>stato.filtroGiochi==='tutti'||g.c===stato.filtroGiochi);
   apriGioco(lista[Math.floor(Math.random()*lista.length)].i);
 });
-const inpData=document.getElementById('dataInizio'), inpPers=document.getElementById('persone');
-inpData.addEventListener('change',()=>{ stato.inizio=inpData.value||oggiISO(); disegnaSettimana(); memoria.salva(); });
+const inpPers=document.getElementById('persone');
 inpPers.addEventListener('input',()=>{
   const v=parseInt(inpPers.value,10);
   if(v>=2&&v<=40){ stato.persone=v; memoria.salva(); }
