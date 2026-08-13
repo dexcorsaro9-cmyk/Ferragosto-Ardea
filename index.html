@@ -258,6 +258,79 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 
 .piede{max-width:1420px;margin:40px auto 0;padding:16px 20px 0;border-top:1px dashed var(--riga);font-size:12px;opacity:.6}
 
+/* ---------- BURRACO ---------- */
+.banner-burraco{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--ink);color:var(--carta);border:2px solid var(--ink);border-radius:12px;padding:14px 16px;margin-bottom:18px;box-shadow:0 3px 0 rgba(12,35,64,.25)}
+.bb-emoji{font-size:30px;flex:none}
+.bb-testo{display:flex;flex-direction:column;gap:2px;flex:1}
+.bb-testo b{font-family:var(--display);text-transform:uppercase;font-size:15px;letter-spacing:.01em}
+.bb-testo span{font-size:12px;opacity:.7}
+.bb-freccia{font-size:20px;opacity:.6;flex:none}
+.link-indietro{background:transparent;border:0;color:var(--cobalto);font-weight:800;font-size:13px;padding:0 0 14px;font-family:var(--testo)}
+
+.bur-setup-carta{background:var(--carta);border:2px solid var(--ink);border-radius:12px;padding:20px;max-width:480px;box-shadow:0 3px 0 rgba(12,35,64,.15);display:flex;flex-direction:column;gap:16px}
+.bur-campo label{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin-bottom:6px}
+.bur-campo input[type=text],.bur-campo input[type=number]{width:100%;border:2px solid var(--ink);border-radius:8px;padding:10px 12px;font-size:15px;font-weight:700}
+.chip-riga{display:flex;gap:8px;flex-wrap:wrap}
+.btn-grande{width:100%;padding:13px;font-size:15px}
+
+.bur-punteggi{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.bur-punteggio-carta{background:var(--carta);border:2px solid var(--ink);border-radius:12px;padding:14px;box-shadow:0 3px 0 rgba(12,35,64,.15)}
+.bur-punteggio-carta.squadra-a{border-left:6px solid #1B54C7}
+.bur-punteggio-carta.squadra-b{border-left:6px solid #EE5B4E}
+.bur-punteggio-carta .nome{font-family:var(--display);text-transform:uppercase;font-size:13px;line-height:1.2;margin-bottom:2px;overflow-wrap:break-word}
+.bur-punteggio-carta .totale{font-family:var(--mono);font-weight:700;font-size:26px;line-height:1.1}
+.bur-barra{height:10px;background:var(--riga);border-radius:99px;overflow:hidden;margin-top:8px}
+.bur-barra i{display:block;height:100%;border-radius:99px;transition:width .4s ease}
+.squadra-a .bur-barra i{background:#1B54C7}
+.squadra-b .bur-barra i{background:#EE5B4E}
+.bur-mancano{font-family:var(--mono);font-size:10.5px;opacity:.55;margin-top:4px}
+
+.bur-mano-carta{background:var(--carta);border:2px solid var(--ink);border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 3px 0 rgba(12,35,64,.15)}
+.bur-mano-titolo{font-family:var(--display);text-transform:uppercase;font-size:14px;margin:0 0 14px}
+.bur-input-squadre{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.bur-input-squadre{grid-template-columns:1fr}}
+.bur-colonna{border:1.5px dashed var(--riga);border-radius:10px;padding:12px}
+.bur-colonna h4{font-family:var(--display);text-transform:uppercase;font-size:12.5px;margin:0 0 10px;text-align:center}
+.bur-riga-input{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px dashed var(--riga);font-size:12.5px}
+.bur-riga-input:last-of-type{border-bottom:0}
+.bur-toggle{display:flex;gap:4px}
+.bur-toggle button{border:1.5px solid var(--ink);background:var(--carta);border-radius:6px;padding:4px 10px;font-size:11.5px;font-weight:800}
+.bur-toggle button[aria-pressed=true]{background:var(--ink);color:var(--carta)}
+.bur-stepper{display:flex;align-items:center;gap:8px}
+.bur-stepper button{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--ink);background:var(--carta);font-weight:800;font-size:14px;line-height:1;padding:0}
+.bur-stepper .val{font-family:var(--mono);font-weight:700;min-width:16px;text-align:center}
+.bur-num{width:64px;border:1.5px solid var(--ink);border-radius:6px;padding:4px 6px;font-family:var(--mono);font-weight:700;text-align:right}
+.bur-mano-totale{text-align:center;font-family:var(--mono);font-size:13px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--riga)}
+.bur-mano-totale b{font-size:16px}
+.bur-azioni-mano{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.bur-azioni-mano .btn{flex:1}
+
+.bur-storico summary{cursor:pointer;font-family:var(--display);text-transform:uppercase;font-size:13px;padding:10px 0;list-style:none}
+.bur-storico summary::-webkit-details-marker{display:none}
+.bur-storico summary::before{content:'▸ ';color:var(--cobalto)}
+.bur-storico[open] summary::before{content:'▾ '}
+.tabella-storico{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+.tabella-storico th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.05em;opacity:.6;text-align:right;padding:6px 4px;border-bottom:2px solid var(--ink)}
+.tabella-storico th:first-child,.tabella-storico td:first-child{text-align:left}
+.tabella-storico td{text-align:right;padding:7px 4px;border-bottom:1px dashed var(--riga);font-family:var(--mono)}
+.tabella-storico td.azioni-riga{white-space:nowrap}
+.tabella-storico button{background:transparent;border:0;font-size:14px;padding:2px 4px}
+.bur-nuova-partita{margin-top:18px}
+
+.coriandoli{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
+.coriandolo{position:absolute;top:-20px;width:10px;height:16px;opacity:0;animation:cadeCoriandolo 2.6s ease-in forwards}
+@keyframes cadeCoriandolo{
+  0%{opacity:1;transform:translateY(0) rotate(0deg)}
+  100%{opacity:1;transform:translateY(110vh) rotate(600deg)}
+}
+.overlay-vittoria{position:fixed;inset:0;z-index:190;background:rgba(12,35,64,.92);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.overlay-vittoria.on{opacity:1;pointer-events:auto}
+.vittoria-carta{background:var(--carta);border:3px solid var(--ink);border-radius:16px;padding:32px 26px;text-align:center;max-width:360px;box-shadow:0 10px 0 rgba(0,0,0,.3)}
+.vittoria-carta .emoji-grande{font-size:56px;line-height:1}
+.vittoria-carta h3{font-family:var(--display);text-transform:uppercase;font-size:22px;margin:10px 0 4px}
+.vittoria-carta p{margin:0 0 20px;opacity:.75}
+.vittoria-carta .azioni{display:flex;gap:10px;flex-direction:column;border:0;padding:0;margin:0}
+
 /* ---------- SPLASH DI AVVIO ---------- */
 #bootSplash{position:fixed;inset:0;z-index:999;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity .5s ease;opacity:1}
 #bootSplash img{width:min(50vw,208px);height:auto;border-radius:22%;box-shadow:0 14px 34px rgba(0,0,0,.4)}
@@ -430,6 +503,11 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
   <section id="v-giochi" hidden>
     <h2 class="sezione">🎲 Giochi da fare tutti insieme</h2>
     <p class="intro">Cinquanta giochi che chiedono pochissimi oggetti: quasi tutto si fa con foglietti, una palla o niente del tutto.</p>
+    <button class="banner-burraco" id="btnApriBurraco">
+      <span class="bb-emoji">🎴</span>
+      <span class="bb-testo"><b>Segnapunti Burraco</b><span>Punteggi automatici, mano per mano, zero errori da spritz</span></span>
+      <span class="bb-freccia">→</span>
+    </button>
     <div class="filtri" id="filtriGiochi">
       <button class="btn btn-corallo" id="btnCasuale">🎲 Cosa giochiamo stasera?</button>
     </div>
@@ -443,8 +521,41 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
     <div class="griglia" id="grigliaPiscina"></div>
   </section>
 
+  <section id="v-burraco" hidden>
+    <button class="link-indietro" id="btnBurracoIndietro">← Torna ai giochi</button>
+    <h2 class="sezione">🎴 Segnapunti Burraco</h2>
+
+    <div id="burracoSetup">
+      <p class="intro">Inserisci i nomi delle due coppie (o dei due giocatori) e il punteggio obiettivo. Il resto lo calcola l'app, mano per mano.</p>
+      <div class="bur-setup-carta">
+        <div class="bur-campo">
+          <label for="burNomeA">🔵 Coppia / Giocatore A</label>
+          <input type="text" id="burNomeA" placeholder="es. Marco &amp; Luisa" maxlength="24">
+        </div>
+        <div class="bur-campo">
+          <label for="burNomeB">🔴 Coppia / Giocatore B</label>
+          <input type="text" id="burNomeB" placeholder="es. Sara &amp; Paolo" maxlength="24">
+        </div>
+        <div class="bur-campo">
+          <label>Punteggio per vincere</label>
+          <div class="chip-riga" id="burObiettivoChip">
+            <button class="chip" data-ob="1005" aria-pressed="false">1005</button>
+            <button class="chip" data-ob="2005" aria-pressed="true">2005</button>
+            <button class="chip" data-ob="altro" aria-pressed="false">Altro</button>
+          </div>
+          <input type="number" id="burObiettivoAltro" placeholder="Punteggio personalizzato" hidden style="margin-top:8px">
+        </div>
+        <button class="btn btn-limone btn-grande" id="btnBurracoInizia">🎴 Comincia la partita</button>
+      </div>
+    </div>
+
+    <div id="burracoGioco" hidden></div>
+  </section>
+
   <div class="piede">Le previsioni arrivano da Open-Meteo e si aggiornano da sole. Tutto il resto vive dentro questo file: puoi salvarlo, mandarlo su WhatsApp e aprirlo anche senza connessione.</div>
 </main>
+
+<div class="coriandoli" id="coriandoli"></div>
 
 <div class="velo" id="velo"></div>
 <aside class="pannello" id="pannello" role="dialog" aria-modal="true" aria-labelledby="pannelloTitolo">
@@ -1958,11 +2069,293 @@ function copia(testo,btn){
 }
 
 /* =======================================================
+   BURRACO — segnapunti
+   ======================================================= */
+const CHIAVE_BURRACO = 'casa-al-mare-burraco';
+let burraco = null; // partita in corso, null finché non si preme "comincia"
+let burracoObiettivoScelto = 2005;
+let burracoModificaIndice = null; // indice della mano in modifica, o null
+
+function nuovaBurracoVuota(){
+  return { nomeA:'Squadra A', nomeB:'Squadra B', obiettivo:2005, mani:[], totA:0, totB:0 };
+}
+function caricaBurraco(){
+  try{
+    const r = localStorage.getItem(CHIAVE_BURRACO);
+    return r ? JSON.parse(r) : null;
+  }catch(e){ return null; }
+}
+function salvaBurraco(){
+  try{ localStorage.setItem(CHIAVE_BURRACO, JSON.stringify(burraco)); }catch(e){}
+}
+
+function apriBurraco(){
+  vaiA('burraco');
+  burraco = caricaBurraco();
+  if(burraco && burraco.mani){
+    document.getElementById('burracoSetup').hidden = true;
+    document.getElementById('burracoGioco').hidden = false;
+    disegnaBurracoGioco();
+  } else {
+    document.getElementById('burracoSetup').hidden = false;
+    document.getElementById('burracoGioco').hidden = true;
+  }
+}
+document.getElementById('btnApriBurraco').addEventListener('click', apriBurraco);
+document.getElementById('btnBurracoIndietro').addEventListener('click', ()=>vaiA('giochi'));
+
+document.querySelectorAll('#burObiettivoChip .chip').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('#burObiettivoChip .chip').forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+    burracoObiettivoScelto = b.dataset.ob;
+    document.getElementById('burObiettivoAltro').hidden = (b.dataset.ob !== 'altro');
+  });
+});
+
+document.getElementById('btnBurracoInizia').addEventListener('click', ()=>{
+  const nomeA = document.getElementById('burNomeA').value.trim() || 'Squadra A';
+  const nomeB = document.getElementById('burNomeB').value.trim() || 'Squadra B';
+  let obiettivo = burracoObiettivoScelto === 'altro'
+    ? parseInt(document.getElementById('burObiettivoAltro').value, 10)
+    : parseInt(burracoObiettivoScelto, 10);
+  if(!obiettivo || obiettivo < 100) obiettivo = 2005;
+  burraco = { nomeA, nomeB, obiettivo, mani: [], totA: 0, totB: 0 };
+  salvaBurraco();
+  document.getElementById('burracoSetup').hidden = true;
+  document.getElementById('burracoGioco').hidden = false;
+  disegnaBurracoGioco();
+});
+
+// valori correnti del form della mano in inserimento (non ancora registrata)
+function burFormVuoto(){
+  return { mazzetto:false, chiusura:false, puliti:0, impuri:0, semipuliti:0, cartePunti:0, carteMano:0 };
+}
+let burFormA = burFormVuoto();
+let burFormB = burFormVuoto();
+
+function calcolaTotaleMano(f){
+  return (f.mazzetto?-100:0) + (f.chiusura?100:0) + f.puliti*200 + f.impuri*100 + f.semipuliti*150 + (+f.cartePunti||0) - (+f.carteMano||0);
+}
+
+function coloreBarraGiocatore(tot, obiettivo){
+  const pct = Math.max(0, Math.min(100, Math.round((tot/obiettivo)*100)));
+  return pct;
+}
+
+function disegnaBurracoGioco(){
+  const box = document.getElementById('burracoGioco');
+  const pctA = coloreBarraGiocatore(burraco.totA, burraco.obiettivo);
+  const pctB = coloreBarraGiocatore(burraco.totB, burraco.obiettivo);
+
+  box.innerHTML =
+    '<div class="bur-punteggi">' +
+      '<div class="bur-punteggio-carta squadra-a"><div class="nome">🔵 '+esc(burraco.nomeA)+'</div><div class="totale">'+burraco.totA+'</div>'+
+        '<div class="bur-barra"><i style="width:'+pctA+'%"></i></div>'+
+        '<div class="bur-mancano">'+(burraco.totA>=burraco.obiettivo?'obiettivo raggiunto':'mancano '+(burraco.obiettivo-burraco.totA)+' punti')+'</div></div>'+
+      '<div class="bur-punteggio-carta squadra-b"><div class="nome">🔴 '+esc(burraco.nomeB)+'</div><div class="totale">'+burraco.totB+'</div>'+
+        '<div class="bur-barra"><i style="width:'+pctB+'%"></i></div>'+
+        '<div class="bur-mancano">'+(burraco.totB>=burraco.obiettivo?'obiettivo raggiunto':'mancano '+(burraco.obiettivo-burraco.totB)+' punti')+'</div></div>'+
+    '</div>' +
+    '<div class="bur-mano-carta">' +
+      '<h3 class="bur-mano-titolo">'+(burracoModificaIndice!==null ? '✏️ Correggi mano '+(burracoModificaIndice+1) : '📝 Mano '+(burraco.mani.length+1))+'</h3>' +
+      '<div class="bur-input-squadre">' +
+        colonnaBurraco('A', burraco.nomeA, burFormA) +
+        colonnaBurraco('B', burraco.nomeB, burFormB) +
+      '</div>' +
+      '<div class="bur-azioni-mano">' +
+        '<button class="btn" id="btnBurNuovaSmazzata">🔄 Nuova smazzata</button>' +
+        '<button class="btn btn-limone" id="btnBurRegistra">'+(burracoModificaIndice!==null ? '✅ Salva correzione' : '✅ Registra la mano')+'</button>' +
+      '</div>' +
+    '</div>' +
+    (burraco.mani.length ? '<details class="bur-storico"><summary>📋 Storico mani ('+burraco.mani.length+')</summary>'+tabellaStoricoBurraco()+'</details>' : '') +
+    '<button class="btn btn-fantasma bur-nuova-partita" id="btnBurNuovaPartita" style="color:var(--ink);border-color:var(--ink)">🆕 Nuova partita</button>';
+
+  cablaEventiBurraco();
+}
+
+function colonnaBurraco(lettera, nome, f){
+  return '<div class="bur-colonna" data-sq="'+lettera+'">' +
+    '<h4>'+esc(nome)+'</h4>' +
+    '<div class="bur-riga-input"><span>Mazzetto preso?</span><div class="bur-toggle" data-campo="mazzetto">' +
+      '<button data-v="1" aria-pressed="'+(f.mazzetto===true)+'">Sì −100</button>' +
+      '<button data-v="0" aria-pressed="'+(f.mazzetto===false)+'">No</button></div></div>' +
+    '<div class="bur-riga-input"><span>Chiusura?</span><div class="bur-toggle" data-campo="chiusura">' +
+      '<button data-v="1" aria-pressed="'+(f.chiusura===true)+'">Sì +100</button>' +
+      '<button data-v="0" aria-pressed="'+(f.chiusura===false)+'">No</button></div></div>' +
+    steppaBurraco('puliti','Burrachi puliti (200)',f.puliti) +
+    steppaBurraco('impuri','Burrachi impuri (100)',f.impuri) +
+    steppaBurraco('semipuliti','Semi-puliti (150)',f.semipuliti) +
+    '<div class="bur-riga-input"><span>Punti carte a terra</span><input type="number" class="bur-num" data-campo="cartePunti" min="0" value="'+(f.cartePunti||'')+'" placeholder="0"></div>' +
+    '<div class="bur-riga-input"><span>Carte rimaste in mano</span><input type="number" class="bur-num" data-campo="carteMano" min="0" value="'+(f.carteMano||'')+'" placeholder="0"></div>' +
+    '<div class="bur-mano-totale">Totale mano: <b>'+calcolaTotaleMano(f)+'</b></div>' +
+  '</div>';
+}
+function steppaBurraco(campo, etichetta, val){
+  return '<div class="bur-riga-input"><span>'+etichetta+'</span><div class="bur-stepper" data-campo="'+campo+'">' +
+    '<button data-d="-1">−</button><span class="val">'+val+'</span><button data-d="1">+</button></div></div>';
+}
+
+function tabellaStoricoBurraco(){
+  let righe = '';
+  burraco.mani.forEach((m, i) => {
+    righe += '<tr><td>Mano '+(i+1)+'</td>' +
+      '<td>'+(m.a.totale>=0?'+':'')+m.a.totale+'</td>' +
+      '<td>'+(m.b.totale>=0?'+':'')+m.b.totale+'</td>' +
+      '<td>'+m.progA+'</td><td>'+m.progB+'</td>' +
+      '<td class="azioni-riga"><button data-mod="'+i+'" title="Correggi">✏️</button><button data-del="'+i+'" title="Elimina">🗑️</button></td></tr>';
+  });
+  return '<table class="tabella-storico"><thead><tr><th>Mano</th><th>🔵 punti</th><th>🔴 punti</th><th>🔵 tot.</th><th>🔴 tot.</th><th></th></tr></thead><tbody>'+righe+'</tbody></table>';
+}
+
+function cablaEventiBurraco(){
+  document.querySelectorAll('#burracoGioco .bur-toggle').forEach(t=>{
+    t.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const colonna = t.closest('.bur-colonna').dataset.sq;
+        const f = colonna==='A' ? burFormA : burFormB;
+        f[t.dataset.campo] = btn.dataset.v === '1';
+        disegnaBurracoGioco();
+      });
+    });
+  });
+  document.querySelectorAll('#burracoGioco .bur-stepper').forEach(s=>{
+    s.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const colonna = s.closest('.bur-colonna').dataset.sq;
+        const f = colonna==='A' ? burFormA : burFormB;
+        const d = +btn.dataset.d;
+        f[s.dataset.campo] = Math.max(0, (f[s.dataset.campo]||0) + d);
+        disegnaBurracoGioco();
+      });
+    });
+  });
+  document.querySelectorAll('#burracoGioco .bur-num').forEach(inp=>{
+    inp.addEventListener('input', ()=>{
+      const colonna = inp.closest('.bur-colonna').dataset.sq;
+      const f = colonna==='A' ? burFormA : burFormB;
+      f[inp.dataset.campo] = inp.value === '' ? 0 : Math.max(0, +inp.value);
+      const totaleEl = inp.closest('.bur-colonna').querySelector('.bur-mano-totale b');
+      if(totaleEl) totaleEl.textContent = calcolaTotaleMano(f);
+    });
+  });
+
+  document.getElementById('btnBurNuovaSmazzata').addEventListener('click', ()=>{
+    burFormA = burFormVuoto(); burFormB = burFormVuoto(); burracoModificaIndice = null;
+    disegnaBurracoGioco();
+  });
+
+  document.getElementById('btnBurRegistra').addEventListener('click', registraManoBurraco);
+
+  document.querySelectorAll('#burracoGioco [data-mod]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const i = +b.dataset.mod;
+      const m = burraco.mani[i];
+      burFormA = {...m.a}; burFormB = {...m.b};
+      burracoModificaIndice = i;
+      disegnaBurracoGioco();
+      document.querySelector('.bur-mano-carta').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  document.querySelectorAll('#burracoGioco [data-del]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const i = +b.dataset.del;
+      burraco.mani.splice(i,1);
+      ricalcolaTotaliBurraco();
+      salvaBurraco();
+      disegnaBurracoGioco();
+    });
+  });
+
+  const btnNuova = document.getElementById('btnBurNuovaPartita');
+  if(btnNuova) btnNuova.addEventListener('click', ()=>{
+    if(confirm('Iniziare una nuova partita? Il punteggio attuale andrà perso.')){
+      localStorage.removeItem(CHIAVE_BURRACO);
+      burraco = null; burFormA = burFormVuoto(); burFormB = burFormVuoto(); burracoModificaIndice = null;
+      document.getElementById('burNomeA').value=''; document.getElementById('burNomeB').value='';
+      document.getElementById('burracoSetup').hidden = false;
+      document.getElementById('burracoGioco').hidden = true;
+    }
+  });
+}
+
+function ricalcolaTotaliBurraco(){
+  let a=0,b=0;
+  burraco.mani.forEach(m=>{ a+=m.a.totale; b+=m.b.totale; m.progA=a; m.progB=b; });
+  burraco.totA=a; burraco.totB=b;
+}
+
+function registraManoBurraco(){
+  const totA = calcolaTotaleMano(burFormA);
+  const totB = calcolaTotaleMano(burFormB);
+  const mano = { a:{...burFormA, totale:totA}, b:{...burFormB, totale:totB}, progA:0, progB:0 };
+
+  if(burracoModificaIndice !== null){
+    burraco.mani[burracoModificaIndice] = mano;
+  } else {
+    burraco.mani.push(mano);
+  }
+  ricalcolaTotaliBurraco();
+  salvaBurraco();
+
+  burFormA = burFormVuoto(); burFormB = burFormVuoto();
+  const eraModifica = burracoModificaIndice !== null;
+  burracoModificaIndice = null;
+  disegnaBurracoGioco();
+
+  if(!eraModifica){
+    if(burraco.totA >= burraco.obiettivo && burraco.totA >= burraco.totB) mostraVittoriaBurraco(burraco.nomeA, burraco.totA);
+    else if(burraco.totB >= burraco.obiettivo) mostraVittoriaBurraco(burraco.nomeB, burraco.totB);
+  }
+}
+
+function mostraVittoriaBurraco(nome, punti){
+  let overlay = document.getElementById('overlayVittoria');
+  if(!overlay){
+    overlay = document.createElement('div');
+    overlay.id = 'overlayVittoria';
+    overlay.className = 'overlay-vittoria';
+    document.body.appendChild(overlay);
+  }
+  overlay.innerHTML = '<div class="vittoria-carta"><div class="emoji-grande">🏆</div>' +
+    '<h3>'+esc(nome)+' ha vinto!</h3><p>'+punti+' punti</p>' +
+    '<div class="azioni"><button class="btn btn-limone btn-grande" id="btnVittoriaContinua">Continua a giocare</button>' +
+    '<button class="btn btn-grande" id="btnVittoriaChiudi">Chiudi</button></div></div>';
+  overlay.classList.add('on');
+  document.getElementById('btnVittoriaContinua').addEventListener('click', ()=>overlay.classList.remove('on'));
+  document.getElementById('btnVittoriaChiudi').addEventListener('click', ()=>overlay.classList.remove('on'));
+  lanciaCoriandoli();
+  suonoVittoria();
+}
+
+function lanciaCoriandoli(){
+  const box = document.getElementById('coriandoli');
+  const colori = ['#F2C227','#EE5B4E','#17A9BC','#2E8B62','#1B54C7'];
+  for(let i=0;i<70;i++){
+    const c = document.createElement('div');
+    c.className = 'coriandolo';
+    c.style.left = Math.random()*100+'vw';
+    c.style.background = colori[Math.floor(Math.random()*colori.length)];
+    c.style.animationDelay = (Math.random()*0.6)+'s';
+    c.style.animationDuration = (2+Math.random()*1.2)+'s';
+    box.appendChild(c);
+    setTimeout(()=>c.remove(), 4200);
+  }
+}
+function suonoVittoria(){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    [523,659,784,1046].forEach((freq,i)=>{
+      setTimeout(()=>bip(freq, 220), i*130);
+    });
+  }catch(e){}
+}
+
+/* =======================================================
    NAVIGAZIONE E AVVIO
    ======================================================= */
 function vaiA(vista){
   document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected', String(t.dataset.vista===vista)));
-  ['settimana','meteo','ricette','giochi','piscina'].forEach(v=>{
+  ['settimana','meteo','ricette','giochi','piscina','burraco'].forEach(v=>{
     document.getElementById('v-'+v).hidden = (v!==vista);
   });
   window.scrollTo({top:0,behavior:'smooth'});
