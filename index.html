@@ -375,8 +375,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
 .hdr-titolo{font-family:var(--display);font-size:clamp(18px,4vw,26px);text-transform:uppercase;letter-spacing:.02em;color:var(--carta);opacity:.9;margin:0 0 10px;display:block}
 .hdr-titolo em{font-style:normal;color:var(--limone)}
 /* riga 2: badge utente full-width */
-.hdr-utente{display:flex;align-items:center;gap:12px;width:100%;background:rgba(255,253,246,.1);border:1.5px solid rgba(255,253,246,.3);border-radius:16px;padding:8px 14px 8px 8px;color:var(--carta);transition:background .15s;cursor:pointer;box-sizing:border-box;margin-bottom:10px}
-.hdr-utente:hover{background:rgba(255,253,246,.18)}
+.hdr-utente{display:flex;align-items:center;gap:12px;width:100%;background:rgba(255,253,246,.1);border:1.5px solid rgba(255,253,246,.3);border-radius:16px;padding:8px 14px 8px 8px;color:var(--carta);box-sizing:border-box;margin-bottom:10px}
 .hdr-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--limone);flex:none;background:var(--limone)}
 .hdr-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .hdr-saluto-box{display:flex;flex-direction:column;align-items:flex-start;gap:1px;flex:1;min-width:0}
@@ -473,7 +472,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
   <div class="tenda-inner">
     <div class="wrap">
       <div class="hdr-titolo">🌊 Casa al Mare — Ardea</div>
-      <button class="hdr-utente" id="badgeUtente" hidden>
+      <div class="hdr-utente" id="badgeUtente" hidden>
         <span class="hdr-avatar" id="badgeAvatar"></span>
         <div class="hdr-saluto-box">
           <span class="hdr-saluto" id="hdrSaluto"></span>
@@ -485,7 +484,7 @@ h2.sezione{font-family:var(--display);font-size:clamp(20px,3vw,28px);text-transf
             <span class="hdr-luogo" id="hdrLuogo">📍 Ardea, Italia</span>
           </div>
         </div>
-      </button>
+      </div>
       <div class="hdr-comandi">
         <div class="campo"><label for="persone">Siamo in</label><input type="number" id="persone" min="2" max="40" value="12"></div>
         <span class="pallino-sync" id="statoSync">🔄 Sincronizzo…</span>
@@ -1835,7 +1834,6 @@ function mostraSplashSaluto(u){
 }
 document.getElementById('scuEntra').addEventListener('click',confermaUtente);
 document.getElementById('scuNome').addEventListener('keydown',e=>{ if(e.key==='Enter') confermaUtente(); });
-document.getElementById('badgeUtente').addEventListener('click',()=>mostraSchermataUtente(true));
 
 
 if('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')){
